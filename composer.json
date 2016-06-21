@@ -1,0 +1,31 @@
+{
+    "name": "jonnitto/plyr",
+    "type": "typo3-flow-plugin",
+    "version": "0.0.1",
+    "license": "MIT",
+    "description": "Plyr.io for Neos.io",
+    "keywords": ["flow", "neos", "video", "youtube", "vimeo", "audio"],
+    "authors": [
+        {
+            "name": "Jon Uhlmann",
+            "email": "me@jonnitto.ch",
+            "homepage": "https://twitter.com/jonnitto",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "typo3/neos": "2.*"
+    },
+    "autoload": {
+        "psr-0": {
+            "Jonnitto\\Plyr": "Classes"
+        }
+    },
+    "extra": {
+        "marketplace-account": "me@jonnitto.ch",
+        "installer-name": "Jonnitto.Plyr",
+        "neos": {
+            "package-key": "Jonnitto.Plyr"
+        }
+    }
+}
