@@ -17,7 +17,7 @@
     "private:less": "copyfiles -f node_modules/plyr/src/**/*.less Resources/Private/Less",
     "private:scss": "copyfiles -f node_modules/plyr/src/**/*.scss Resources/Private/Scss",
     "private:sprite": "copyfiles -f node_modules/plyr/src/**/*.svg Resources/Private/Sprite",
-    "private:js": "copyfiles -f node_modules/plyr/src/**/*.js Resources/Private/Js",
+    "private:js": "copyfiles -f node_modules/plyr/src/**/*.js Resources/Private/Js && replace ';\\(function' '// jshint -W033, -W083\n;(function' Resources/Private/Js/*",
     "private": "npm run private:less && npm run private:scss && npm run private:sprite && npm run private:js",
     "postprivate": "condappend .neos-plyr Resources/Private/Less/plyr.less '.neos-plyr{width:100%}.jonnitto-plyr-container{margin-bottom:1em}' && condappend .neos-plyr Resources/Private/Scss/plyr.scss '.neos-plyr{width:100%}.jonnitto-plyr-container{margin-bottom:1em}'",
     "public": "copyfiles -f node_modules/plyr/dist/* Resources/Public/",

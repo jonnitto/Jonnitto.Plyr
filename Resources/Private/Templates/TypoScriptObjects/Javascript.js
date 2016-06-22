@@ -1,6 +1,7 @@
-(function() {
+// jshint ignore:start
+(function(){
 	var o={
-		i18n: {
+		i18n:{
 			<f:for each="{i18n}" as="key" iteration="iteration">
 				{key}:'<f:translate package="Jonnitto.Plyr" id="{key}" />'<f:if condition="{iteration.isLast}"><f:else>,</f:else></f:if>
 			</f:for>
@@ -43,16 +44,10 @@
 		</f:then>
 		<f:else>o.fullscreen={enabled:false};</f:else>
 	</f:if>
-	var callPlyr = function() {
-		plyr.setup('.neos-plyr', o);
-	};
-	if (document.querySelector('.neos-backend')) {
-		var events = ['PageLoaded','ContentModuleLoaded'];
-		var length = events.length;
-		while (length--) {
-			var name = events[length];
-			document.addEventListener('Neos.' + name, callPlyr);
-		}
+	var p=function(){plyr.setup('.neos-plyr',o)};p();
+	if(document.querySelector('.neos-backend')){
+		var e = ['PageLoaded','ContentModuleLoaded'];
+		var l = e.length;
+		while(l--){document.addEventListener('Neos.' + e[l],p);}
 	}
-	callPlyr();
 })();

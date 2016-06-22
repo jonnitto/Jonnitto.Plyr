@@ -12,7 +12,7 @@ prototype(Jonnitto.Plyr:Javascript) < prototype(TYPO3.TypoScript:Array) {
 			templatePath = 'resource://Jonnitto.Plyr/Private/Templates/TypoScriptObjects/Javascript.js'
 			options = ${settings.options}
 			i18n = ${['restart','rewind','play','pause','forward','buffered','currentTime','duration','volume','toggleMute','toggleCaptions','toggleFullscreen']}
-			@process.clean = ${String.pregReplace(String.pregReplace(String.pregReplace(String.pregReplace(value, '/[\s]+/', ' '), '/[\s]+({|}|=|\+|;)[\s]+/', '$1'), '/(\',|;)[\s]+/', '$1'), '/;}/', '}')}
+			@process.clean = ${String.pregReplace(String.pregReplace(String.pregReplace(String.pregReplace(String.pregReplace(value, '/\/\/ jshint ignore:start\n/', ''), '/[\s]+/', ' '), '/[\s]+({|}|=|\+|;)[\s]+/', '$1'), '/(\',|;)[\s]+/', '$1'), '/;}/', '}')}
 		}
 	}
 

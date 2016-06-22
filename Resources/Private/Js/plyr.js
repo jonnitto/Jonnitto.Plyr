@@ -7,6 +7,7 @@
 // Credits: http://paypal.github.io/accessible-html5-video-player/
 // ==========================================================================
 
+// jshint -W033, -W083
 ;(function(root, factory) {
     'use strict';
     /*global define,module*/
