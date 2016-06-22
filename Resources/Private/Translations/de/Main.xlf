@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+	<file original="" product-name="Jonnitto.Plyr" source-language="de" datatype="plaintext">
+		<body>
+			<trans-unit id="restart" xml:space="preserve">
+				<source>Neu starten</source>
+			</trans-unit>
+			<trans-unit id="rewind" xml:space="preserve">
+				<source>Um {seektime} Sekunden zurückspulen</source>
+			</trans-unit>
+			<trans-unit id="play" xml:space="preserve">
+				<source>Play</source>
+			</trans-unit>
+			<trans-unit id="pause" xml:space="preserve">
+				<source>Pause</source>
+			</trans-unit>
+			<trans-unit id="forward" xml:space="preserve">
+				<source>Um {seektime} Sekunden vorspulen</source>
+			</trans-unit>
+			<trans-unit id="buffered" xml:space="preserve">
+				<source>buffered</source>
+			</trans-unit>
+			<trans-unit id="currentTime" xml:space="preserve">
+				<source>Aktuelle Zeit</source>
+			</trans-unit>
+			<trans-unit id="duration" xml:space="preserve">
+				<source>Dauer</source>
+			</trans-unit>
+			<trans-unit id="volume" xml:space="preserve">
+				<source>Lautstärke</source>
+			</trans-unit>
+			<trans-unit id="toggleMute" xml:space="preserve">
+				<source>Ton ein-/ausschalten</source>
+			</trans-unit>
+			<trans-unit id="toggleCaptions" xml:space="preserve">
+				<source>Untertitel ein-/ausblenden</source>
+			</trans-unit>
+			<trans-unit id="toggleFullscreen" xml:space="preserve">
+				<source>Vollbild ein-/ausschalten</source>
+			</trans-unit>
+			<trans-unit id="backendAlert.audio" xml:space="preserve">
+				<source>Bitte Audiodateien im Inspektor hinzufügen</source>
+			</trans-unit>
+			<trans-unit id="backendAlert.video" xml:space="preserve">
+				<source>Bitte Videodateien im Inspektor hinzufügen</source>
+			</trans-unit>
+			<trans-unit id="backendAlert.youtube" xml:space="preserve">
+				<source>Bitte YouTube ID im Inspektor hinzufügen</source>
+			</trans-unit>
+			<trans-unit id="backendAlert.vimeo" xml:space="preserve">
+				<source>Bitte Vimeo ID im Inspektor hinzufügen</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

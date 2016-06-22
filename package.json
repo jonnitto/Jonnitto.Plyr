@@ -7,8 +7,11 @@
     "url": "git://github.com/jonnitto/Jonnitto.Plyr.git"
   },
   "devDependencies": {
+    "conditional-file-append": "^1.0.0",
     "copyfiles": "^0.2.1",
-    "plyr": "latest"
+    "plyr": "^1.8",
+    "rename-files": "0.0.2",
+    "replace": "^0.3.0"
   },
   "scripts": {
     "private:less": "copyfiles -f node_modules/plyr/src/**/*.less Resources/Private/Less",
@@ -17,7 +20,11 @@
     "private:js": "copyfiles -f node_modules/plyr/src/**/*.js Resources/Private/Js",
     "private": "npm run private:less && npm run private:scss && npm run private:sprite && npm run private:js",
     "public": "copyfiles -f node_modules/plyr/dist/* Resources/Public/",
-    "build": "npm run private && npm run public",
-    "start": "npm run build"
+    "rename": "rename-files Resources/Public/ '[\\w]+.(js|css)' 'Main.$1' && rename-files Resources/Public/ '[\\w]+.svg' 'Sprite.svg'",
+    "replace": "replace 'https://cdn.plyr.io/[\\d\\.]+/[\\w]+.svg' '/_Resources/Static/Packages/Jonnitto.Plyr/Sprite.svg' Resources/* -r --exclude=\"*.svg\"",
+    "append": "condappend .neos-plyr Resources/Private/Less/plyr.less '.neos-plyr{width:100%}.jonnitto-plyr-container{margin-bottom:1em}' && condappend .neos-plyr Resources/Private/Scss/plyr.scss '.neos-plyr{width:100%}.jonnitto-plyr-container{margin-bottom:1em}' && condappend .neos-plyr Resources/Public/Main.css '.neos-plyr{width:100%}.jonnitto-plyr-container{margin-bottom:1em}'",
+    "build": "npm run private && npm run public && npm run rename && npm run replace && npm run append",
+    "start": "npm run build",
+    "install": "npm run build"
   }
 }

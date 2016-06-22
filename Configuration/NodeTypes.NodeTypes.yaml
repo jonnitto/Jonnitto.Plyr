@@ -1,0 +1,44 @@
+'Jonnitto.Plyr:Audio':
+  superTypes:
+    'Jonnitto.Plyr:FileMixin': TRUE
+  ui:
+    label: i18n
+    icon: icon-music
+    inspector:
+      groups:
+        settings:
+          icon: icon-music
+
+'Jonnitto.Plyr:Video':
+  superTypes:
+    'Jonnitto.Plyr:FileMixin': TRUE
+    'Jonnitto.Plyr:ImageMixin': TRUE
+  ui:
+    label: i18n
+    icon: icon-film
+    inspector:
+      groups:
+        settings:
+          icon: icon-film
+
+'Jonnitto.Plyr:YouTube':
+  superTypes:
+    'Jonnitto.Plyr:IdMixin': TRUE
+  ui:
+    label: YouTube
+    icon: icon-youtube
+    inspector:
+      groups:
+        settings:
+          icon: icon-youtube
+
+'Jonnitto.Plyr:Vimeo':
+  superTypes:
+    'Jonnitto.Plyr:IdMixin': TRUE
+  ui:
+    label: Vimeo
+    icon: icon-vimeo
+    inspector:
+      groups:
+        settings:
+          icon: icon-vimeo

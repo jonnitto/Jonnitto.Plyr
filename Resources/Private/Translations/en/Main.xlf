@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+	<file original="" product-name="Jonnitto.Plyr" source-language="en" datatype="plaintext">
+		<body>
+			<trans-unit id="restart" xml:space="preserve">
+				<source>Restart</source>
+			</trans-unit>
+			<trans-unit id="rewind" xml:space="preserve">
+				<source>Rewind {seektime} secs</source>
+			</trans-unit>
+			<trans-unit id="play" xml:space="preserve">
+				<source>Play</source>
+			</trans-unit>
+			<trans-unit id="pause" xml:space="preserve">
+				<source>Pause</source>
+			</trans-unit>
+			<trans-unit id="forward" xml:space="preserve">
+				<source>Forward {seektime} secs</source>
+			</trans-unit>
+			<trans-unit id="buffered" xml:space="preserve">
+				<source>buffered</source>
+			</trans-unit>
+			<trans-unit id="currentTime" xml:space="preserve">
+				<source>Current time</source>
+			</trans-unit>
+			<trans-unit id="duration" xml:space="preserve">
+				<source>Duration</source>
+			</trans-unit>
+			<trans-unit id="volume" xml:space="preserve">
+				<source>Volume</source>
+			</trans-unit>
+			<trans-unit id="toggleMute" xml:space="preserve">
+				<source>Toggle Mute</source>
+			</trans-unit>
+			<trans-unit id="toggleCaptions" xml:space="preserve">
+				<source>Toggle Captions</source>
+			</trans-unit>
+			<trans-unit id="toggleFullscreen" xml:space="preserve">
+				<source>Toggle Fullscreen</source>
+			</trans-unit>
+			<trans-unit id="backendAlert.audio" xml:space="preserve">
+				<source>Please add some audio files in the inspector</source>
+			</trans-unit>
+			<trans-unit id="backendAlert.video" xml:space="preserve">
+				<source>Please add some video files in the inspector</source>
+			</trans-unit>
+			<trans-unit id="backendAlert.youtube" xml:space="preserve">
+				<source>Please add a YouTube ID in the inspector</source>
+			</trans-unit>
+			<trans-unit id="backendAlert.vimeo" xml:space="preserve">
+				<source>Please add a Vimeo ID in the inspector</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

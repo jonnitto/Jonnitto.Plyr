@@ -1,0 +1,8 @@
+<f:if condition="{render}">
+	<div{attributes -> f:format.raw()}>
+		<f:render partial="BackendAlert" arguments="{condition:backendAlert}" />
+		<video{videoAttributes -> f:format.raw()}>
+			{video -> f:format.raw()}
+		</video>
+	</div>
+</f:if>

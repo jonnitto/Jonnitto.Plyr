@@ -1,0 +1,36 @@
+prototype(Jonnitto.Plyr:Video) {
+	attributes.class = TYPO3.TypoScript:RawArray {
+		container = 'jonnitto-plyr-container'
+	}
+
+	videoAttributes = TYPO3.TypoScript:Attributes {
+		controls = true
+		class = TYPO3.TypoScript:RawArray {
+			player = 'neos-plyr'
+		}
+		poster = ImageUri {
+			asset = ${q(node).property('image')}
+			maximumWidth = 1920
+			@if.hasPicture = ${q(node).property('image') ? true : false}
+		}
+	}
+
+	video = TYPO3.TypoScript:Array {
+		mp4 = Jonnitto.Plyr:FileCollection {
+			fileextension = 'mp4'
+		}
+		webm = Jonnitto.Plyr:FileCollection {
+			fileextension = 'webm'
+		}
+
+		// Captions: Title as Label Captions as language
+		vtt = Jonnitto.Plyr:FileCollection {
+			fileextension = 'vtt'
+			itemRenderer.isRightFile.renderer  {
+				@process.wrap = ${'<track kind="captions" label="' + asset.title + '" src="' + value + '" srclang="'+ asset.caption + '"{f:if(condition:iteration.isFirst,then:\' default\')}>'}
+			}
+		}
+	}
+	render = ${this.video || node.context.inBackend}
+	backendAlert = ${this.video ? false : Translation.translateById('backendAlert.video', 'Jonnitto.Plyr')}
+}

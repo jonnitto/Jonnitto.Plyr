@@ -1,0 +1,2 @@
+include: Prototypes/**/*.ts2
+include: NodeTypes/**/*.ts2

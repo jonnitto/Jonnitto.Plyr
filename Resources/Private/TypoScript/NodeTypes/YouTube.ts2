@@ -1,0 +1,19 @@
+prototype(Jonnitto.Plyr:YouTube) {
+	attributes.class = TYPO3.TypoScript:RawArray {
+		container = 'jonnitto-plyr-container'
+	}
+
+	@context.id = ${q(node).property('id')}
+
+
+	videoAttributes = TYPO3.TypoScript:Attributes {
+		class = TYPO3.TypoScript:RawArray {
+			player = 'neos-plyr'
+		}
+		data-type = 'youtube'
+		data-video-id = ${id}
+	}
+
+	render = ${id || node.context.inBackend}
+	backendAlert = ${id ? false : Translation.translateById('backendAlert.youtube', 'Jonnitto.Plyr')}
+}

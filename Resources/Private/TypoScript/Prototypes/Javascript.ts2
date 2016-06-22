@@ -1,0 +1,24 @@
+prototype(Jonnitto.Plyr:Javascript) < prototype(TYPO3.TypoScript:Array) {
+	@context.settings = ${Configuration.setting('Jonnitto.Plyr')}
+	library = TYPO3.TypoScript:Tag {
+		tagName = 'script'
+		attributes.src = TYPO3.TypoScript:ResourceUri {
+			path = 'resource://Jonnitto.Plyr/Public/Main.js'
+		}
+	}
+	call = TYPO3.TypoScript:Tag {
+		tagName = 'script'
+		content = TYPO3.TypoScript:Template {
+			templatePath = 'resource://Jonnitto.Plyr/Private/Templates/TypoScriptObjects/Javascript.js'
+			options = ${settings.options}
+			i18n = ${['restart','rewind','play','pause','forward','buffered','currentTime','duration','volume','toggleMute','toggleCaptions','toggleFullscreen']}
+			@process.clean {
+				expression = ${String.pregReplace(value, '%(?>[^\S ]\s*| \s{2,})(?=[^<]*+(?:<(?!/?(?:textarea|pre)\b)[^<]*+)*+(?:<(?>textarea|pre)\b| \z))%Six', ' ')}
+				@position = 'end'
+			}
+		}
+	}
+
+	@position = 'end'
+	@if.include = ${(settings.alwaysInclude || q(node).children(settings.selector.collection).find(settings.selector.content).is()) && settings.includeJavascript}
+}

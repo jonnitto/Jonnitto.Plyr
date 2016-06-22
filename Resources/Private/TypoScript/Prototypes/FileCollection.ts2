@@ -1,0 +1,17 @@
+prototype(Jonnitto.Plyr:FileCollection) < prototype(TYPO3.TypoScript:Collection) {
+	fileextension= 'fileextension'
+	@context.fileextension = ${this.fileextension}
+	@context.type = ${this.fileextension == 'mp3' || this.fileextension == 'ogg' ? 'audio' : 'video'}
+	collection = ${q(node).property('files')}
+	itemName = 'asset'
+	iterationName = 'iteration'
+	itemRenderer = TYPO3.TypoScript:Case {
+		isRightFile {
+			condition = ${asset.resource.fileextension == fileextension}
+			renderer = TYPO3.TypoScript:ResourceUri {
+				resource = ${asset.resource}
+				@process.wrap = ${'<source src="' + value + '" type="' + type + '/' + fileextension + '">'}
+			}
+		}
+	}
+}

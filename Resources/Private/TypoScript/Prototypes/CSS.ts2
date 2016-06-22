@@ -1,0 +1,12 @@
+prototype(Jonnitto.Plyr:CSS) <  prototype(TYPO3.TypoScript:Tag) {
+	@context.settings = ${Configuration.setting('Jonnitto.Plyr')}
+	tagName = 'link'
+	attributes {
+		rel = 'stylesheet'
+		href = TYPO3.TypoScript:ResourceUri {
+			path = 'resource://Jonnitto.Plyr/Public/Main.css'
+		}
+	}
+	@position = 'end'
+	@if.include = ${(settings.alwaysInclude || q(node).children(settings.selector.collection).find(settings.selector.content).is()) && settings.includeCSS}
+}

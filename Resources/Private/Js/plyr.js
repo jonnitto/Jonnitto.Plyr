@@ -44,7 +44,7 @@
         displayDuration:        true,
         loadSprite:             true,
         iconPrefix:             'plyr',
-        iconUrl:                'https://cdn.plyr.io/1.8.2/plyr.svg',
+        iconUrl:                '/_Resources/Static/Packages/Jonnitto.Plyr/Sprite.svg',
         clickToPlay:            true,
         hideControls:           true,
         showPosterOnEnd:        false,

@@ -1,0 +1,23 @@
+prototype(Jonnitto.Plyr:Audio) {
+	attributes.class = TYPO3.TypoScript:RawArray {
+		container = 'jonnitto-plyr-container'
+	}
+
+	audioAttributes = TYPO3.TypoScript:Attributes {
+		controls = true
+		class = TYPO3.TypoScript:RawArray {
+			player = 'neos-plyr'
+		}
+	}
+
+	audio = TYPO3.TypoScript:Array {
+		mp3 = Jonnitto.Plyr:FileCollection {
+			fileextension = 'mp3'
+		}
+		ogg = Jonnitto.Plyr:FileCollection {
+			fileextension = 'ogg'
+		}
+	}
+	render = ${this.audio || node.context.inBackend}
+	backendAlert = ${this.audio ? false : Translation.translateById('backendAlert.audio', 'Jonnitto.Plyr')}
+}
