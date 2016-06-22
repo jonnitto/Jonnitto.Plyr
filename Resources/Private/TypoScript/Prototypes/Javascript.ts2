@@ -12,10 +12,7 @@ prototype(Jonnitto.Plyr:Javascript) < prototype(TYPO3.TypoScript:Array) {
 			templatePath = 'resource://Jonnitto.Plyr/Private/Templates/TypoScriptObjects/Javascript.js'
 			options = ${settings.options}
 			i18n = ${['restart','rewind','play','pause','forward','buffered','currentTime','duration','volume','toggleMute','toggleCaptions','toggleFullscreen']}
-			@process.clean {
-				expression = ${String.pregReplace(value, '%(?>[^\S ]\s*| \s{2,})(?=[^<]*+(?:<(?!/?(?:textarea|pre)\b)[^<]*+)*+(?:<(?>textarea|pre)\b| \z))%Six', ' ')}
-				@position = 'end'
-			}
+			@process.clean = ${String.pregReplace(String.pregReplace(String.pregReplace(String.pregReplace(value, '/[\s]+/', ' '), '/[\s]+({|}|=|\+|;)[\s]+/', '$1'), '/(\',|;)[\s]+/', '$1'), '/;}/', '}')}
 		}
 	}
 
