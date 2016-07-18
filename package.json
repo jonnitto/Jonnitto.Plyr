@@ -25,6 +25,7 @@
     "build": "npm run private && npm run public",
     "postbuild": "replace 'https://cdn.plyr.io/[\\d\\.]+/[\\w]+.svg' '/_Resources/Static/Packages/Jonnitto.Plyr/Sprite.svg' Resources/* -r --exclude=\"*.svg\"",
     "start": "npm run build",
-    "install": "npm run build"
+    "install": "npm run build",
+    "postupdate": "npm run build"
   }
 }

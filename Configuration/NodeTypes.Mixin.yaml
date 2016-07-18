@@ -3,6 +3,7 @@
   superTypes:
     'TYPO3.Neos:Content': TRUE
   ui:
+    group: multimedia
     inspector:
       groups:
         settings:

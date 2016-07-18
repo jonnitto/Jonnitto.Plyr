@@ -7,6 +7,11 @@ TYPO3:
       translation:
         autoInclude:
           'Jonnitto.Plyr': ['NodeTypes/*']
+    nodeTypes:
+      groups:
+        multimedia:
+          position: 200
+          label: 'Jonnitto.Plyr:NodeTypes.Groups:multimedia'
 
 Jonnitto:
   Plyr:
