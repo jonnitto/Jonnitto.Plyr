@@ -1,7 +1,7 @@
 'Jonnitto.Plyr:Content':
-  abstract: TRUE
+  abstract: true
   superTypes:
-    'TYPO3.Neos:Content': TRUE
+    'TYPO3.Neos:Content': true
   ui:
     group: multimedia
     inspector:
@@ -12,46 +12,46 @@
           icon: icon-cog
 
 'Jonnitto.Plyr:FileMixin':
-  abstract: TRUE
+  abstract: true
   superTypes:
-    'Jonnitto.Plyr:Content': TRUE
+    'Jonnitto.Plyr:Content': true
   properties:
     files:
       type: 'array<TYPO3\Media\Domain\Model\Asset>'
       validation:
-        'TYPO3.Neos/Validation/NotEmptyValidator': TRUE
+        'TYPO3.Neos/Validation/NotEmptyValidator': true
       ui:
         label: i18n
-        reloadIfChanged: TRUE
+        reloadIfChanged: true
         inspector:
           group: settings
           position: 100
 
 
 'Jonnitto.Plyr:IdMixin':
-  abstract: TRUE
+  abstract: true
   superTypes:
-    'Jonnitto.Plyr:Content': TRUE
+    'Jonnitto.Plyr:Content': true
   properties:
     id:
       type: string
       defaultValue: ''
       ui:
         label: i18n
-        reloadIfChanged: TRUE
-        inlineEditable: FALSE
+        reloadIfChanged: true
+        inlineEditable: false
         inspector:
           group: settings
           position: 100
 
 'Jonnitto.Plyr:ImageMixin':
-  abstract: TRUE
+  abstract: true
   properties:
     image:
       type: TYPO3\Media\Domain\Model\ImageInterface
       ui:
         label: i18n
-        reloadIfChanged: TRUE
+        reloadIfChanged: true
         inspector:
           group: settings
           position: 200
