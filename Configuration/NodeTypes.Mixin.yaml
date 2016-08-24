@@ -35,7 +35,6 @@
   properties:
     id:
       type: string
-      defaultValue: ''
       ui:
         label: i18n
         reloadIfChanged: true
