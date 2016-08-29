@@ -9,19 +9,18 @@ prototype(Plyr:Javascript) < prototype(TS:Array) {
 	}
 	call = TS:Tag {
 		tagName = 'script'
-		content = TS:Template {
-			templatePath = 'resource://Jonnitto.Plyr/Private/Templates/TypoScriptObjects/Javascript.js'
-			options = ${settings.options}
-			i18n = ${['restart','rewind','play','pause','forward','buffered','currentTime','duration','volume','toggleMute','toggleCaptions','toggleFullscreen']}
-			@process.clean = ${String.pregReplace(String.pregReplace(String.pregReplace(String.pregReplace(String.pregReplace(value, '/\/\/ jshint ignore:start\n/', ''), '/[\s]+/', ' '), '/[\s]+({|}|=|\+|;)[\s]+/', '$1'), '/(\',|;)[\s]+/', '$1'), '/;}/', '}')}
+		content = TS:Array {
+			options = TS:Template {
+				templatePath = 'resource://Jonnitto.Plyr/Private/Templates/TypoScriptObjects/Javascript.js'
+				options = ${settings.options}
+				i18n = ${['restart','rewind','play','pause','forward','buffered','currentTime','duration','volume','toggleMute','toggleCaptions','toggleFullscreen']}
+				@process.clean = ${String.pregReplace(String.pregReplace(String.pregReplace(String.pregReplace(String.pregReplace(value, '/\/\/ jshint ignore:start\n/', ''), '/[\s]+/', ' '), '/[\s]+({|}|=|\+|;)[\s]+/', '$1'), '/(\',|;)[\s]+/', '$1'), '/;}/', '}')}
+			}
+			backend = TS:Template {
+				templatePath = 'resource://Jonnitto.Plyr/Private/Templates/TypoScriptObjects/Backend.js'
+				@if.inBackend = ${node.context.inBackend}
+			}
 		}
-	}
-	backend = TS:Tag {
-		tagName = 'script'
-		attributes.src = TS:ResourceUri {
-			path = 'resource://Jonnitto.Plyr/Public/Backend.js'
-		}
-		@if.inBackend = ${node.context.inBackend}
 	}
 
 	@position = 'end'
