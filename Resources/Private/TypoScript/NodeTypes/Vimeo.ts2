@@ -1,13 +1,13 @@
-prototype(Jonnitto.Plyr:Vimeo) {
-	attributes.class = TYPO3.TypoScript:RawArray {
+prototype(Plyr:Vimeo) {
+	attributes.class = TS:RawArray {
 		container = 'jonnitto-plyr-container'
 	}
 
 	@context.id = ${q(node).property('id')}
 
 
-	videoAttributes = TYPO3.TypoScript:Attributes {
-		class = TYPO3.TypoScript:RawArray {
+	videoAttributes = TS:Attributes {
+		class = TS:RawArray {
 			player = 'neos-plyr'
 		}
 		data-type = 'vimeo'

@@ -1,0 +1,16 @@
+prototype(Plyr:IncludeCase) <  prototype(TS:Case) {
+	@context.settings = ${Configuration.setting('Jonnitto.Plyr')}
+
+	alwaysInclude {
+		condition = ${settings.alwaysInclude}
+		renderer = true
+	}
+	hasLightbox {
+		condition = ${q(node).children(settings.selector.collection).find(settings.selector.content).is()}
+		renderer = true
+	}
+	default {
+		condition = true
+		renderer = false
+	}
+}

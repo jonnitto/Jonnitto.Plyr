@@ -1,20 +1,20 @@
-prototype(Jonnitto.Plyr:Audio) {
-	attributes.class = TYPO3.TypoScript:RawArray {
+prototype(Plyr:Audio) {
+	attributes.class = TS:RawArray {
 		container = 'jonnitto-plyr-container'
 	}
 
-	audioAttributes = TYPO3.TypoScript:Attributes {
+	audioAttributes = TS:Attributes {
 		controls = true
-		class = TYPO3.TypoScript:RawArray {
+		class = TS:RawArray {
 			player = 'neos-plyr'
 		}
 	}
 
-	audio = TYPO3.TypoScript:Array {
-		mp3 = Jonnitto.Plyr:FileCollection {
+	audio = TS:Array {
+		mp3 = Plyr:FileCollection {
 			fileextension = 'mp3'
 		}
-		ogg = Jonnitto.Plyr:FileCollection {
+		ogg = Plyr:FileCollection {
 			fileextension = 'ogg'
 		}
 	}

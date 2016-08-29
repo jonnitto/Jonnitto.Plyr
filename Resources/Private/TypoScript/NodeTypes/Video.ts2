@@ -1,11 +1,11 @@
-prototype(Jonnitto.Plyr:Video) {
-	attributes.class = TYPO3.TypoScript:RawArray {
+prototype(Plyr:Video) {
+	attributes.class = TS:RawArray {
 		container = 'jonnitto-plyr-container'
 	}
 
-	videoAttributes = TYPO3.TypoScript:Attributes {
+	videoAttributes = TS:Attributes {
 		controls = true
-		class = TYPO3.TypoScript:RawArray {
+		class = TS:RawArray {
 			player = 'neos-plyr'
 		}
 		poster = ImageUri {
@@ -15,16 +15,16 @@ prototype(Jonnitto.Plyr:Video) {
 		}
 	}
 
-	video = TYPO3.TypoScript:Array {
-		mp4 = Jonnitto.Plyr:FileCollection {
+	video = TS:Array {
+		mp4 = Plyr:FileCollection {
 			fileextension = 'mp4'
 		}
-		webm = Jonnitto.Plyr:FileCollection {
+		webm = Plyr:FileCollection {
 			fileextension = 'webm'
 		}
 
 		// Captions: Title as Label Captions as language
-		vtt = Jonnitto.Plyr:FileCollection {
+		vtt = Plyr:FileCollection {
 			fileextension = 'vtt'
 			itemRenderer.isRightFile.renderer  {
 				@process.wrap = ${'<track kind="captions" label="' + asset.title + '" src="' + value + '" srclang="'+ asset.caption + '"{f:if(condition:iteration.isFirst,then:\' default\')}>'}

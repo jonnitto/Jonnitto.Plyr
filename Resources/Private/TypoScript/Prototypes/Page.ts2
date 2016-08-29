@@ -1,4 +1,4 @@
-prototype(TYPO3.Neos:Page) {
-	head.plyr = Jonnitto.Plyr:CSS
-	body.javascripts.plyr = Jonnitto.Plyr:Javascript
+prototype(Page) {
+	head.plyr = Plyr:CSS
+	body.javascripts.plyr = Plyr:Javascript
 }

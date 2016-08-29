@@ -1,14 +1,14 @@
-prototype(Jonnitto.Plyr:Javascript) < prototype(TYPO3.TypoScript:Array) {
+prototype(Plyr:Javascript) < prototype(TS:Array) {
 	@context.settings = ${Configuration.setting('Jonnitto.Plyr')}
-	library = TYPO3.TypoScript:Tag {
+	library = TS:Tag {
 		tagName = 'script'
-		attributes.src = TYPO3.TypoScript:ResourceUri {
+		attributes.src = TS:ResourceUri {
 			path = 'resource://Jonnitto.Plyr/Public/Main.js'
 		}
 	}
-	call = TYPO3.TypoScript:Tag {
+	call = TS:Tag {
 		tagName = 'script'
-		content = TYPO3.TypoScript:Template {
+		content = TS:Template {
 			templatePath = 'resource://Jonnitto.Plyr/Private/Templates/TypoScriptObjects/Javascript.js'
 			options = ${settings.options}
 			i18n = ${['restart','rewind','play','pause','forward','buffered','currentTime','duration','volume','toggleMute','toggleCaptions','toggleFullscreen']}
