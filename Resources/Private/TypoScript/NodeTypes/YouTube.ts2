@@ -3,8 +3,7 @@ prototype(Plyr:YouTube) {
 		container = 'jonnitto-plyr-container'
 	}
 
-	@context.id = ${q(node).property('id')}
-
+	@context.id = Plyr:ParseID
 
 	videoAttributes = TS:Attributes {
 		class = TS:RawArray {

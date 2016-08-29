@@ -1,6 +1,10 @@
 prototype(Plyr:IncludeCase) <  prototype(TS:Case) {
 	@context.settings = ${Configuration.setting('Jonnitto.Plyr')}
 
+	inBackend {
+		condition = ${node.context.inBackend}
+		renderer = true
+	}
 	alwaysInclude {
 		condition = ${settings.alwaysInclude}
 		renderer = true

@@ -44,10 +44,19 @@
 		</f:then>
 		<f:else>o.fullscreen={enabled:false};</f:else>
 	</f:if>
-	var p=function(){plyr.setup('.neos-plyr',o)};p();
-	if(document.querySelector('.neos-backend')){
-		var e = ['PageLoaded','ContentModuleLoaded'];
-		var l = e.length;
-		while(l--){document.addEventListener('Neos.' + e[l],p);}
+	window.initPlyr = function() {
+		var opt = typeof o == 'object' ? o : {};
+		var players = plyr.get('body');
+		var length = players.length;
+		var timeout = length ? 500 : 0;
+		for (var i = 0; i < length; i++) {
+			try {players[i].destroy()} catch (e) {}
+		}
+		setTimeout(function () {
+			plyr.setup('.neos-plyr', opt);
+		}, timeout);
+	};
+	if (!document.querySelector('.neos-backend')) {
+		initPlyr();
 	}
 })();

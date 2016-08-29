@@ -8,6 +8,8 @@ prototype(Plyr:CSS) <  prototype(TS:Tag) {
 		}
 	}
 	@position = 'end'
-
-	@if.include = ${(settings.alwaysInclude || q(node).children(settings.selector.collection).find(settings.selector.content).is()) && settings.includeCSS}
+	@if {
+		includeCSS = ${settings.includeCSS}
+		includeCase = Plyr:IncludeCase
+	}
 }

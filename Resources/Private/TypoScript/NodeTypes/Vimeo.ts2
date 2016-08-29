@@ -3,15 +3,14 @@ prototype(Plyr:Vimeo) {
 		container = 'jonnitto-plyr-container'
 	}
 
-	@context.id = ${q(node).property('id')}
-
+	@context.id = Plyr:ParseID
 
 	videoAttributes = TS:Attributes {
 		class = TS:RawArray {
 			player = 'neos-plyr'
 		}
 		data-type = 'vimeo'
-		data-video-id = ${id}
+		data-video-id = Plyr:ParseID
 	}
 
 	render = ${id || node.context.inBackend}

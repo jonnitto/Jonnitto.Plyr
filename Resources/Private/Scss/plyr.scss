@@ -40,6 +40,11 @@
       }
     }
 
+    // Focus
+    &:focus {
+        outline: 0;
+    }
+
     // Media elements
     video,
     audio {
@@ -225,6 +230,8 @@
         border-radius: 2px;
         padding: floor($plyr-control-spacing / 3) $plyr-control-spacing;
         background: $plyr-captions-bg;
+        box-decoration-break: clone;
+        line-height: 150%;
     }
     span:empty {
         display: none;
@@ -709,7 +716,6 @@
 
 // Fullscreen
 // --------------------------------------------------------------
-.plyr--fullscreen,
 .plyr--fullscreen-active {
     position: fixed;
     top: 0;
@@ -720,7 +726,7 @@
     width: 100%;
     z-index: 10000000;
     background: #000;
-    border-radius: 0;
+    border-radius: 0 !important;
 
     video {
         height: 100%;

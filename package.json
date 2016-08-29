@@ -9,7 +9,7 @@
   "devDependencies": {
     "conditional-file-append": "^1.0.0",
     "copyfiles": "^0.2.1",
-    "plyr": "^1.8",
+    "plyr": "^2.0",
     "rename-files": "0.0.2",
     "replace": "^0.3.0"
   },

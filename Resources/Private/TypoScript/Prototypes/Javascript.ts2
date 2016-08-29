@@ -5,6 +5,7 @@ prototype(Plyr:Javascript) < prototype(TS:Array) {
 		attributes.src = TS:ResourceUri {
 			path = 'resource://Jonnitto.Plyr/Public/Main.js'
 		}
+		@if.notInBackend = ${node.context.live}
 	}
 	call = TS:Tag {
 		tagName = 'script'
@@ -15,7 +16,17 @@ prototype(Plyr:Javascript) < prototype(TS:Array) {
 			@process.clean = ${String.pregReplace(String.pregReplace(String.pregReplace(String.pregReplace(String.pregReplace(value, '/\/\/ jshint ignore:start\n/', ''), '/[\s]+/', ' '), '/[\s]+({|}|=|\+|;)[\s]+/', '$1'), '/(\',|;)[\s]+/', '$1'), '/;}/', '}')}
 		}
 	}
+	backend = TS:Tag {
+		tagName = 'script'
+		attributes.src = TS:ResourceUri {
+			path = 'resource://Jonnitto.Plyr/Public/Backend.js'
+		}
+		@if.inBackend = ${node.context.inBackend}
+	}
 
 	@position = 'end'
-	@if.include = ${(settings.alwaysInclude || q(node).children(settings.selector.collection).find(settings.selector.content).is()) && settings.includeJavascript}
+	@if {
+		includeJS = ${settings.includeJavascript}
+		includeCase = Plyr:IncludeCase
+	}
 }
