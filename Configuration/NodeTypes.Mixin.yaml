@@ -40,6 +40,7 @@
         reloadIfChanged: true
         inlineEditable: false
         inspector:
+          editor: 'TYPO3.Neos/Inspector/Editors/TextAreaEditor'
           group: settings
           position: 100
 
