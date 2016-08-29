@@ -25,7 +25,7 @@ Jonnitto:
       controls: "['play-large','play','progress','current-time','mute','volume','captions','fullscreen']" # Toggle which control elements you would like to display when using the default controls html. If you specify a html option, this is redundant. The default value is to display everything.
       autoplay: false         # Autoplay the media on load. This is generally advised against on UX grounds. It is also disabled on iOS (an Apple limitation).
       seekTime: 10            # The time, in seconds, to seek when a user hits fast forward or rewind.
-      volume: 5               # A number, between 1 and 10, representing the initial volume of the player.
+      volume: 10              # A number, between 1 and 10, representing the initial volume of the player.
       clickToPlay: true       # Click (or tap) of the video container will toggle pause/play.
       hideControls: true      # Hide video controls automatically after 2s of no mouse or focus movement, on control element blur (tab out), on playback start or entering fullscreen. As soon as the mouse is moved, a control element is focused or playback is paused, the controls reappear instantly.
       showPosterOnEnd: false  # This will restore and *reload* HTML5 video once playback is complete. Note: depending on the browser caching, this may result in the video downloading again (or parts of it). Use with caution.
