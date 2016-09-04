@@ -45,10 +45,10 @@
 				<source>Please add some video files in the inspector</source>
 			</trans-unit>
 			<trans-unit id="backendAlert.youtube" xml:space="preserve">
-				<source>Please add a YouTube ID in the inspector</source>
+				<source>Please add a YouTube ID or url in the inspector</source>
 			</trans-unit>
 			<trans-unit id="backendAlert.vimeo" xml:space="preserve">
-				<source>Please add a Vimeo ID in the inspector</source>
+				<source>Please add a Vimeo ID or url in the inspector</source>
 			</trans-unit>
 		</body>
 	</file>
