@@ -17,6 +17,9 @@ prototype(Plyr:Audio) {
 		ogg = Plyr:FileCollection {
 			fileextension = 'ogg'
 		}
+		wav = Plyr:FileCollection {
+			fileextension = 'wav'
+		}
 	}
 	render = ${this.audio || node.context.inBackend}
 	backendAlert = ${this.audio ? false : Translation.translateById('backendAlert.audio', 'Jonnitto.Plyr')}
