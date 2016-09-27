@@ -1,7 +1,7 @@
 {
     "name": "jonnitto/plyr",
     "type": "typo3-flow-plugin",
-    "version": "0.2.2",
+    "version": "0.2.3",
     "license": "MIT",
     "description": "Plyr.io for Neos.io",
     "keywords": ["flow", "neos", "video", "youtube", "vimeo", "audio"],
