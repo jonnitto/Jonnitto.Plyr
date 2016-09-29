@@ -1,11 +1,11 @@
 prototype(Plyr:Video) {
-	attributes.class = TS:RawArray {
+	attributes.class = Fusion:RawArray {
 		container = 'jonnitto-plyr-container'
 	}
 
-	videoAttributes = TS:Attributes {
+	videoAttributes = Fusion:Attributes {
 		controls = true
-		class = TS:RawArray {
+		class = Fusion:RawArray {
 			player = 'neos-plyr'
 		}
 		poster = ImageUri {
@@ -15,7 +15,7 @@ prototype(Plyr:Video) {
 		}
 	}
 
-	video = TS:Array {
+	video = Fusion:Array {
 		mp4 = Plyr:FileCollection {
 			fileextension = 'mp4'
 		}

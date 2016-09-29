@@ -1,4 +1,4 @@
-prototype(Plyr:ParseID) <  prototype(TS:Case) {
+prototype(Plyr:ParseID) <  prototype(Fusion:Case) {
 	id = ${q(node).property('id')}
 	type = ${q(node).property('_nodeType.name')}
 
@@ -11,7 +11,7 @@ prototype(Plyr:ParseID) <  prototype(TS:Case) {
 
 	isYoutube {
 		condition = ${type == 'Jonnitto.Plyr:YouTube'}
-		renderer = TS:Value {
+		renderer = Fusion:Value {
 			match = ${String.pregMatch(id, '/(?<=(?:v|i)=)[a-zA-Z0-9-]+(?=&)|(?<=(?:v|i)\/)[^&\n]+|(?<=embed\/)[^"&\n]+|(?<=(?:v|i)=)[^&\n]+|(?<=youtu.be\/)[^&\n]+/')}
 			value = ${Type.isArray(this.match) ? this.match[0]: id}
 		}
@@ -19,7 +19,7 @@ prototype(Plyr:ParseID) <  prototype(TS:Case) {
 
 	isVimeo {
 		condition = ${type == 'Jonnitto.Plyr:Vimeo'}
-		renderer = TS:Value {
+		renderer = Fusion:Value {
 			match = ${String.pregMatch(id, '/(?:https?:\/\/)?(?:www\.)?(?:player\.)?vimeo\.com\/(?:[a-z]*\/)*([‌​0-9]{6,11})[?]?.*/')}
 			value = ${Type.isArray(this.match) ? this.match[1]: id}
 		}

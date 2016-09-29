@@ -1,4 +1,4 @@
-prototype(Plyr:FileCollection) < prototype(TS:Collection) {
+prototype(Plyr:FileCollection) < prototype(Fusion:Collection) {
 	fileextension= 'fileextension'
 	@context {
 		fileextension = ${this.fileextension}
@@ -7,10 +7,10 @@ prototype(Plyr:FileCollection) < prototype(TS:Collection) {
 	collection = ${q(node).property('files')}
 	itemName = 'asset'
 	iterationName = 'iteration'
-	itemRenderer = TS:Case {
+	itemRenderer = Fusion:Case {
 		isRightFile {
 			condition = ${asset.resource.fileextension == fileextension}
-			renderer = TS:ResourceUri {
+			renderer = Fusion:ResourceUri {
 				resource = ${asset.resource}
 				@process.wrap = ${'<source src="' + value + '" type="' + type + '/' + fileextension + '">'}
 			}

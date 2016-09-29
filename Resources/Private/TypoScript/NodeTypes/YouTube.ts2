@@ -1,12 +1,12 @@
 prototype(Plyr:YouTube) {
-	attributes.class = TS:RawArray {
+	attributes.class = Fusion:RawArray {
 		container = 'jonnitto-plyr-container'
 	}
 
 	@context.id = Plyr:ParseID
 
-	videoAttributes = TS:Attributes {
-		class = TS:RawArray {
+	videoAttributes = Fusion:Attributes {
+		class = Fusion:RawArray {
 			player = 'neos-plyr'
 		}
 		data-type = 'youtube'

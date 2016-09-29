@@ -1,9 +1,9 @@
-prototype(Plyr:CSS) <  prototype(TS:Tag) {
+prototype(Plyr:CSS) <  prototype(Fusion:Tag) {
 	@context.settings = ${Configuration.setting('Jonnitto.Plyr')}
 	tagName = 'link'
 	attributes {
 		rel = 'stylesheet'
-		href = TS:ResourceUri {
+		href = Fusion:ResourceUri {
 			path = 'resource://Jonnitto.Plyr/Public/Main.css'
 		}
 	}

@@ -1,4 +1,4 @@
-prototype(Plyr:IncludeCase) <  prototype(TS:Case) {
+prototype(Plyr:IncludeCase) <  prototype(Fusion:Case) {
 	@context.settings = ${Configuration.setting('Jonnitto.Plyr')}
 
 	inBackend {

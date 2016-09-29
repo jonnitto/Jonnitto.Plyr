@@ -1,16 +1,16 @@
 prototype(Plyr:Audio) {
-	attributes.class = TS:RawArray {
+	attributes.class = Fusion:RawArray {
 		container = 'jonnitto-plyr-container'
 	}
 
-	audioAttributes = TS:Attributes {
+	audioAttributes = Fusion:Attributes {
 		controls = true
-		class = TS:RawArray {
+		class = Fusion:RawArray {
 			player = 'neos-plyr'
 		}
 	}
 
-	audio = TS:Array {
+	audio = Fusion:Array {
 		mp3 = Plyr:FileCollection {
 			fileextension = 'mp3'
 		}

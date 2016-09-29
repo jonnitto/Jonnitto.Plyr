@@ -1,22 +1,22 @@
-prototype(Plyr:Javascript) < prototype(TS:Array) {
+prototype(Plyr:Javascript) < prototype(Fusion:Array) {
 	@context.settings = ${Configuration.setting('Jonnitto.Plyr')}
-	library = TS:Tag {
+	library = Fusion:Tag {
 		tagName = 'script'
-		attributes.src = TS:ResourceUri {
+		attributes.src = Fusion:ResourceUri {
 			path = 'resource://Jonnitto.Plyr/Public/Main.js'
 		}
 		@if.notInBackend = ${node.context.live}
 	}
-	call = TS:Tag {
+	call = Fusion:Tag {
 		tagName = 'script'
-		content = TS:Array {
-			options = TS:Template {
+		content = Fusion:Array {
+			options = Fusion:Template {
 				templatePath = 'resource://Jonnitto.Plyr/Private/Templates/TypoScriptObjects/Javascript.js'
 				options = ${settings.options}
 				i18n = ${['restart','rewind','play','pause','forward','buffered','currentTime','duration','volume','toggleMute','toggleCaptions','toggleFullscreen']}
 				@process.clean = ${String.pregReplace(String.pregReplace(String.pregReplace(String.pregReplace(String.pregReplace(value, '/\/\/ jshint ignore:start\n/', ''), '/[\s]+/', ' '), '/[\s]+({|}|=|\+|;)[\s]+/', '$1'), '/(\',|;)[\s]+/', '$1'), '/;}/', '}')}
 			}
-			backend = TS:Template {
+			backend = Fusion:Template {
 				templatePath = 'resource://Jonnitto.Plyr/Private/Templates/TypoScriptObjects/Backend.js'
 				@if.inBackend = ${node.context.inBackend}
 			}
