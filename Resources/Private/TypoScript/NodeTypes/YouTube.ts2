@@ -14,5 +14,5 @@ prototype(Plyr:YouTube) {
 	}
 
 	render = ${id || node.context.inBackend}
-	backendAlert = ${id ? false : Translation.translateById('backendAlert.youtube', 'Jonnitto.Plyr')}
+	backendAlert = ${id ? false : Translation.translate('backendAlert.youtube', null, [], null, 'Jonnitto.Plyr')}
 }

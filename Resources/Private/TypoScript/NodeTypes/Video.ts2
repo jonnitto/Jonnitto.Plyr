@@ -35,5 +35,5 @@ prototype(Plyr:Video) {
 		}
 	}
 	render = ${this.video || node.context.inBackend}
-	backendAlert = ${this.video ? false : Translation.translateById('backendAlert.video', 'Jonnitto.Plyr')}
+	backendAlert = ${this.video ? false : Translation.translate('backendAlert.video', null, [], null, 'Jonnitto.Plyr')}
 }

@@ -14,5 +14,5 @@ prototype(Plyr:Vimeo) {
 	}
 
 	render = ${id || node.context.inBackend}
-	backendAlert = ${id ? false : Translation.translateById('backendAlert.vimeo', 'Jonnitto.Plyr')}
+	backendAlert = ${id ? false : Translation.translate('backendAlert.vimeo', null, [], null, 'Jonnitto.Plyr')}
 }

@@ -22,5 +22,5 @@ prototype(Plyr:Audio) {
 		}
 	}
 	render = ${this.audio || node.context.inBackend}
-	backendAlert = ${this.audio ? false : Translation.translateById('backendAlert.audio', 'Jonnitto.Plyr')}
+	backendAlert = ${this.audio ? false : Translation.translate('backendAlert.audio', null, [], null, 'Jonnitto.Plyr')}
 }
