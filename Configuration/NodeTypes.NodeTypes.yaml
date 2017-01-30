@@ -1,7 +1,7 @@
 
 'Jonnitto.Plyr:Audio':
   superTypes:
-    'Jonnitto.Plyr:FileMixin': '1'
+    'Jonnitto.Plyr:FileMixin': true
   ui:
     label: i18n
     icon: icon-music
@@ -11,8 +11,8 @@
           icon: icon-music
 'Jonnitto.Plyr:Video':
   superTypes:
-    'Jonnitto.Plyr:FileMixin': '1'
-    'Jonnitto.Plyr:ImageMixin': '1'
+    'Jonnitto.Plyr:FileMixin': true
+    'Jonnitto.Plyr:ImageMixin': true
   ui:
     label: i18n
     icon: icon-film
@@ -22,7 +22,7 @@
           icon: icon-film
 'Jonnitto.Plyr:YouTube':
   superTypes:
-    'Jonnitto.Plyr:IdMixin': '1'
+    'Jonnitto.Plyr:IdMixin': true
   ui:
     label: YouTube
     icon: icon-youtube
@@ -32,7 +32,7 @@
           icon: icon-youtube
 'Jonnitto.Plyr:Vimeo':
   superTypes:
-    'Jonnitto.Plyr:IdMixin': '1'
+    'Jonnitto.Plyr:IdMixin': true
   ui:
     label: Vimeo
     icon: icon-vimeo

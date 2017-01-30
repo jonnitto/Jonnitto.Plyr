@@ -2,7 +2,7 @@
 'Jonnitto.Plyr:Content':
   abstract: true
   superTypes:
-    'TYPO3.Neos:Content': '1'
+    'TYPO3.Neos:Content': true
   ui:
     group: multimedia
     inspector:
@@ -14,7 +14,7 @@
 'Jonnitto.Plyr:FileMixin':
   abstract: true
   superTypes:
-    'Jonnitto.Plyr:Content': '1'
+    'Jonnitto.Plyr:Content': true
   properties:
     files:
       type: array<TYPO3\Media\Domain\Model\Asset>
@@ -29,7 +29,7 @@
 'Jonnitto.Plyr:IdMixin':
   abstract: true
   superTypes:
-    'Jonnitto.Plyr:Content': '1'
+    'Jonnitto.Plyr:Content': true
   properties:
     id:
       type: string
