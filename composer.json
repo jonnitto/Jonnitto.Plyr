@@ -4,7 +4,14 @@
     "version": "0.2.5",
     "license": "MIT",
     "description": "Plyr.io for Neos.io",
-    "keywords": ["flow", "neos", "video", "youtube", "vimeo", "audio"],
+    "keywords": [
+        "flow",
+        "neos",
+        "video",
+        "youtube",
+        "vimeo",
+        "audio"
+    ],
     "authors": [
         {
             "name": "Jon Uhlmann",
@@ -26,6 +33,9 @@
         "installer-name": "Jonnitto.Plyr",
         "neos": {
             "package-key": "Jonnitto.Plyr"
-        }
+        },
+        "applied-flow-migrations": [
+            "TYPO3.FLOW3-201201261636"
+        ]
     }
 }
