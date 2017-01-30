@@ -1,4 +1,4 @@
-namespace: Fusion = TYPO3.TypoScript
+namespace: Fusion = Neos.Fusion
 namespace: Plyr = Jonnitto.Plyr
 
 include: Prototypes/**/*.ts2
