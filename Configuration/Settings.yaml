@@ -25,9 +25,6 @@ Jonnitto:
         allowAudio: false
 Neos:
   Neos:
-    typoScript:
-      autoInclude:
-        Jonnitto.Plyr: true
     userInterface:
       translation:
         autoInclude:
@@ -38,3 +35,6 @@ Neos:
         multimedia:
           position: 200
           label: 'Jonnitto.Plyr:NodeTypes.Groups:multimedia'
+    fusion:
+      autoInclude:
+        Jonnitto.Plyr: true
