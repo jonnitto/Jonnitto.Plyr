@@ -1,5 +1,5 @@
 namespace: Fusion = Neos.Fusion
 namespace: Plyr = Jonnitto.Plyr
 
-include: Prototypes/**/*.ts2
-include: NodeTypes/**/*.ts2
+include: Prototypes/**/*.fusion
+include: NodeTypes/**/*.fusion

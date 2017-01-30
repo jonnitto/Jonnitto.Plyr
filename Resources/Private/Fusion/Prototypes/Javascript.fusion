@@ -11,13 +11,13 @@ prototype(Plyr:Javascript) < prototype(Fusion:Array) {
 		tagName = 'script'
 		content = Fusion:Array {
 			options = Fusion:Template {
-				templatePath = 'resource://Jonnitto.Plyr/Private/Templates/TypoScriptObjects/Javascript.js'
+				templatePath = 'resource://Jonnitto.Plyr/Private/Templates/FusionObjects/Javascript.js'
 				options = ${settings.options}
 				i18n = ${['restart','rewind','play','pause','forward','buffered','currentTime','duration','volume','toggleMute','toggleCaptions','toggleFullscreen']}
 				@process.clean = ${String.pregReplace(String.pregReplace(String.pregReplace(String.pregReplace(String.pregReplace(value, '/\/\/ jshint ignore:start\n/', ''), '/[\s]+/', ' '), '/[\s]+({|}|=|\+|;)[\s]+/', '$1'), '/(\',|;)[\s]+/', '$1'), '/;}/', '}')}
 			}
 			backend = Fusion:Template {
-				templatePath = 'resource://Jonnitto.Plyr/Private/Templates/TypoScriptObjects/Backend.js'
+				templatePath = 'resource://Jonnitto.Plyr/Private/Templates/FusionObjects/Backend.js'
 				@if.inBackend = ${node.context.inBackend}
 			}
 		}
