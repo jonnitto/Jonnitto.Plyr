@@ -17,7 +17,7 @@
     'Jonnitto.Plyr:Content': true
   properties:
     files:
-      type: array<TYPO3\Media\Domain\Model\Asset>
+      type: array<Neos\Media\Domain\Model\Asset>
       validation:
         TYPO3.Neos/Validation/NotEmptyValidator: true
       ui:
@@ -45,7 +45,7 @@
   abstract: true
   properties:
     image:
-      type: TYPO3\Media\Domain\Model\ImageInterface
+      type: Neos\Media\Domain\Model\ImageInterface
       ui:
         label: i18n
         reloadIfChanged: true
