@@ -8,7 +8,7 @@ Jonnitto:
       collection: '[instanceof Neos.Neos:ContentCollection]'
       content: '[instanceof Jonnitto.Plyr:Content]'
     options:
-      controls: '[''play-large'',''play'',''progress'',''current-time'',''mute'',''volume'',''captions'',''fullscreen'']'
+      controls: ['play-large','play','progress','current-time','mute','volume','captions','fullscreen']
       autoplay: false
       seekTime: 10
       volume: 10

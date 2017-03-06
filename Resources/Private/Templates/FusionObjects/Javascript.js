@@ -7,7 +7,7 @@
 			</f:for>
 		}
 	};
-	<f:if condition="{options.controls} != '['play-large','play','progress','current-time','mute','volume','captions','fullscreen']'">o.controls={options.controls};</f:if>
+	<f:if condition="{controls}">o.controls={controls -> f:format.raw()};</f:if>
 	<f:if condition="{options.autoplay}">o.autoplay=true;</f:if>
 	<f:if condition="{options.seekTime} != 10">o.seekTime={options.seekTime};</f:if>
 	<f:if condition="{options.volume} != 10">o.volume={options.volume};</f:if>

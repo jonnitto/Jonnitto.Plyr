@@ -13,6 +13,16 @@ prototype(Plyr:Javascript) < prototype(Fusion:Array) {
 			options = Fusion:Template {
 				templatePath = 'resource://Jonnitto.Plyr/Private/Templates/FusionObjects/Javascript.js'
 				options = ${settings.options}
+				controls = Fusion:Case {
+					isDefault {
+						condition = ${settings.options.controls == ['play-large','play','progress','current-time','mute','volume','captions','fullscreen'] ? true : false}
+						renderer = false
+					}
+					default {
+						condition = true
+						renderer = ${"['" + Array.join(settings.options.controls, "','") + "']"}
+					}
+				}
 				i18n = ${['restart','rewind','play','pause','forward','buffered','currentTime','duration','volume','toggleMute','toggleCaptions','toggleFullscreen']}
 				@process.clean = ${String.pregReplace(String.pregReplace(String.pregReplace(String.pregReplace(String.pregReplace(value, '/\/\/ jshint ignore:start\n/', ''), '/[\s]+/', ' '), '/[\s]+({|}|=|\+|;)[\s]+/', '$1'), '/(\',|;)[\s]+/', '$1'), '/;}/', '}')}
 			}
