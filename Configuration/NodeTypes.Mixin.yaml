@@ -1,4 +1,3 @@
-
 'Jonnitto.Plyr:Content':
   abstract: true
   superTypes:
@@ -11,6 +10,7 @@
           label: i18n
           position: 20
           icon: icon-cog
+
 'Jonnitto.Plyr:FileMixin':
   abstract: true
   superTypes:
@@ -26,6 +26,7 @@
         inspector:
           group: settings
           position: 100
+
 'Jonnitto.Plyr:IdMixin':
   abstract: true
   superTypes:
@@ -41,6 +42,7 @@
           editor: Neos.Neos/Inspector/Editors/TextAreaEditor
           group: settings
           position: 100
+
 'Jonnitto.Plyr:ImageMixin':
   abstract: true
   properties:

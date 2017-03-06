@@ -1,4 +1,3 @@
-
 'Jonnitto.Plyr:Audio':
   superTypes:
     'Jonnitto.Plyr:FileMixin': true
@@ -9,6 +8,7 @@
       groups:
         settings:
           icon: icon-music
+
 'Jonnitto.Plyr:Video':
   superTypes:
     'Jonnitto.Plyr:FileMixin': true
@@ -20,6 +20,7 @@
       groups:
         settings:
           icon: icon-film
+
 'Jonnitto.Plyr:YouTube':
   superTypes:
     'Jonnitto.Plyr:IdMixin': true
@@ -30,6 +31,7 @@
       groups:
         settings:
           icon: icon-youtube
+
 'Jonnitto.Plyr:Vimeo':
   superTypes:
     'Jonnitto.Plyr:IdMixin': true
