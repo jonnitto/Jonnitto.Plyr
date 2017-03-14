@@ -46,14 +46,14 @@
 	</f:if>
 	window.initPlyr = function() {
 		var opt = typeof o == 'object' ? o : {};
-		var players = plyr.get('body');
+		var players = plyr.get();
 		var length = players.length;
 		var timeout = length ? 500 : 0;
 		for (var i = 0; i < length; i++) {
 			try {players[i].destroy()} catch (e) {}
 		}
 		setTimeout(function () {
-			plyr.setup('.neos-plyr', opt);
+			window.neosPlyr = plyr.setup('.neos-plyr', opt);
 		}, timeout);
 	};
 	if (!document.querySelector('.neos-backend')) {
