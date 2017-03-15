@@ -10,7 +10,7 @@ prototype(Plyr:Vimeo) {
 			player = 'neos-plyr'
 		}
 		data-type = 'vimeo'
-		data-video-id = Plyr:ParseID
+		data-video-id = ${id}
 	}
 
 	render = ${id || node.context.inBackend}
