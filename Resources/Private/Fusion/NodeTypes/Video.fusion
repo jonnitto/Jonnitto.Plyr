@@ -1,4 +1,6 @@
 prototype(Plyr:Video) {
+	templatePath = 'resource://Jonnitto.Plyr/Private/Templates/NodeTypes/Video.html'
+
 	attributes.class = Fusion:RawArray {
 		container = 'jonnitto-plyr-container'
 	}

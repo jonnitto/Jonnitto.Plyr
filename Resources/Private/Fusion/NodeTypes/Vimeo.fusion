@@ -1,4 +1,6 @@
 prototype(Plyr:Vimeo) {
+	templatePath = 'resource://Jonnitto.Plyr/Private/Templates/NodeTypes/Vimeo.html'
+
 	attributes.class = Fusion:RawArray {
 		container = 'jonnitto-plyr-container'
 	}

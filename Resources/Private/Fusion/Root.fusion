@@ -1,5 +1,4 @@
 namespace: Fusion = Neos.Fusion
 namespace: Plyr = Jonnitto.Plyr
 
-include: Prototypes/**/*.fusion
-include: NodeTypes/**/*.fusion
+include: **/*.fusion
