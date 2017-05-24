@@ -2,7 +2,8 @@ prototype(Plyr:Video) {
 	templatePath = 'resource://Jonnitto.Plyr/Private/Templates/NodeTypes/Video.html'
 
 	attributes.class = Fusion:RawArray {
-		container = 'jonnitto-plyr-container'
+		plyrContainer = 'jonnitto-plyr-container'
+		container = ${Configuration.setting('Jonnitto.Plyr.container')}
 	}
 
 	videoAttributes = Fusion:Attributes {

@@ -1,5 +1,6 @@
 Jonnitto:
   Plyr:
+    container: false
     alwaysInclude: false
     includeJavascript: true
     includeCSS: true
@@ -22,6 +23,7 @@ Jonnitto:
         enabled: true
         fallback: true
         allowAudio: false
+
 Neos:
   Neos:
     userInterface:

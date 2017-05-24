@@ -2,7 +2,8 @@ prototype(Plyr:Audio) {
 	templatePath = 'resource://Jonnitto.Plyr/Private/Templates/NodeTypes/Audio.html'
 
 	attributes.class = Fusion:RawArray {
-		container = 'jonnitto-plyr-container'
+		plyrContainer = 'jonnitto-plyr-container'
+		container = ${Configuration.setting('Jonnitto.Plyr.container')}
 	}
 
 	audioAttributes = Fusion:Attributes {
