@@ -5,6 +5,7 @@ Jonnitto:
     includeJavascript: true
     includeCSS: true
     selector:
+      onDocument: false
       collection: '[instanceof Neos.Neos:ContentCollection]'
       content: '[instanceof Jonnitto.Plyr:Content]'
     options:
