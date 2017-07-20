@@ -1,4 +1,4 @@
-prototype(Plyr:YouTube) {
+prototype(Plyr:YouTube) < prototype(Content) {
 	templatePath = 'resource://Jonnitto.Plyr/Private/Templates/NodeTypes/YouTube.html'
 
 	attributes.class = Fusion:RawArray {
