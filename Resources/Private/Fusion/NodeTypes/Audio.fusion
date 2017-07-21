@@ -1,18 +1,4 @@
-prototype(Plyr:Audio) < prototype(Content) {
-	templatePath = 'resource://Jonnitto.Plyr/Private/Templates/NodeTypes/Audio.html'
-
-	attributes.class = Fusion:RawArray {
-		plyrContainer = 'jonnitto-plyr-container'
-		container = ${Configuration.setting('Jonnitto.Plyr.container')}
-	}
-
-	audioAttributes = Fusion:Attributes {
-		controls = true
-		class = Fusion:RawArray {
-			player = 'neos-plyr'
-		}
-	}
-
+prototype(Plyr:Audio) < prototype(Plyr:Tag) {
 	audio = Fusion:Array {
 		mp3 = Plyr:FileCollection {
 			fileextension = 'mp3'
@@ -24,6 +10,27 @@ prototype(Plyr:Audio) < prototype(Content) {
 			fileextension = 'wav'
 		}
 	}
-	render = ${this.audio || node.context.inBackend}
-	backendAlert = ${this.audio ? false : Translation.translate('backendAlert.audio', null, [], null, 'Jonnitto.Plyr')}
+
+	@context.audio = ${this.audio}
+	@if.render = ${this.audio || node.context.inBackend ? true : false}
+
+	content = Fusion:Case {
+		hasAudio {
+			condition = ${audio ? true : false}
+			renderer = Fusion:Tag {
+				tagName = 'audio'
+				attributes = Fusion:Attributes {
+					controls = true
+					class = 'neos-plyr'
+				}
+				content = ${audio}
+			}
+		}
+		default {
+			condition = true
+			renderer = Plyr:Notification {
+				key = 'audio'
+			}
+		}
+	}
 }

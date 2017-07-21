@@ -11,7 +11,7 @@ prototype(Plyr:Javascript) < prototype(Fusion:Array) {
 		tagName = 'script'
 		content = Fusion:Array {
 			options = Fusion:Template {
-				templatePath = 'resource://Jonnitto.Plyr/Private/Templates/FusionObjects/Javascript.js'
+				templatePath = 'resource://Jonnitto.Plyr/Private/Templates/Javascript.js'
 				options = ${settings.options}
 				controls = Fusion:Case {
 					isDefault {
@@ -27,7 +27,7 @@ prototype(Plyr:Javascript) < prototype(Fusion:Array) {
 				@process.clean = ${String.pregReplace(String.pregReplace(String.pregReplace(String.pregReplace(String.pregReplace(value, '/\/\/ jshint ignore:start\n/', ''), '/[\s]+/', ' '), '/[\s]+({|}|=|\+|;)[\s]+/', '$1'), '/(\',|;)[\s]+/', '$1'), '/;}/', '}')}
 			}
 			backend = Fusion:Template {
-				templatePath = 'resource://Jonnitto.Plyr/Private/Templates/FusionObjects/Backend.js'
+				templatePath = 'resource://Jonnitto.Plyr/Private/Templates/Backend.js'
 				@if.inBackend = ${node.context.inBackend}
 			}
 		}

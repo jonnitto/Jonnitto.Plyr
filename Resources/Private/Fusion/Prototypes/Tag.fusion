@@ -1,0 +1,15 @@
+prototype(Plyr:Tag) < prototype(Fusion:Tag) {
+	node = ${node}
+
+	attributes.class = Fusion:RawArray {
+		plyrContainer = 'jonnitto-plyr-container'
+		container = ${Configuration.setting('Jonnitto.Plyr.container')}
+	}
+
+	@process.contentElementWrapping {
+		expression = Neos.Neos:ContentElementWrapping
+		@position = 'end 999999999'
+	}
+
+	@exceptionHandler = 'Neos\\Neos\\Fusion\\ExceptionHandlers\\NodeWrappingHandler'
+}
