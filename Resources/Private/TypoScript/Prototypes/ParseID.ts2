@@ -1,16 +1,12 @@
 prototype(Plyr:ParseID) <  prototype(Fusion:Case) {
 	id = ${q(node).property('id')}
-	type = ${q(node).property('_nodeType.name')}
 
-	@context {
-		id = ${this.id}
-		type = ${this.type}
-	}
+	@context.id = ${this.id}
 
-	@ignoreProperties = ${['id', 'type']}
+	@ignoreProperties = ${['id']}
 
 	isYoutube {
-		condition = ${type == 'Jonnitto.Plyr:YouTube'}
+		condition = ${q(node).is('[instanceof Jonnitto.Plyr:YouTube]')}
 		renderer = Fusion:Value {
 			match = ${String.pregMatch(id, '/(?<=(?:v|i)=)[a-zA-Z0-9-]+(?=&)|(?<=(?:v|i)\/)[^&\n]+|(?<=embed\/)[^"&\n]+|(?<=(?:v|i)=)[^&\n]+|(?<=youtu.be\/)[^&\n]+/')}
 			value = ${Type.isArray(this.match) ? this.match[0]: id}
@@ -18,7 +14,7 @@ prototype(Plyr:ParseID) <  prototype(Fusion:Case) {
 	}
 
 	isVimeo {
-		condition = ${type == 'Jonnitto.Plyr:Vimeo'}
+		condition = ${q(node).is('[instanceof Jonnitto.Plyr:Vimeo]')}
 		renderer = Fusion:Value {
 			match = ${String.pregMatch(id, '/(?:https?:\/\/)?(?:www\.)?(?:player\.)?vimeo\.com\/(?:[a-z]*\/)*([‌​0-9]{6,11})[?]?.*/')}
 			value = ${Type.isArray(this.match) ? this.match[1]: id}

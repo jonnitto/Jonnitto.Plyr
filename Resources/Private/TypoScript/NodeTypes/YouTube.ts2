@@ -1,7 +1,5 @@
 prototype(Plyr:YouTube) < prototype(Plyr:Tag) {
-	id = Plyr:ParseID {
-		type = 'Jonnitto.Plyr:YouTube'
-	}
+	id = Plyr:ParseID
 	@context.id = ${this.id}
 
 	@if.render = ${this.id || node.context.inBackend ? true : false}
