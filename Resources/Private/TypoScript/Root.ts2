@@ -1,5 +1,4 @@
 namespace: Fusion = TYPO3.TypoScript
 namespace: Plyr = Jonnitto.Plyr
 
-include: Prototypes/**/*.ts2
-include: NodeTypes/**/*.ts2
+include: **/*.ts2

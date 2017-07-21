@@ -1,39 +1,42 @@
+Jonnitto:
+  Plyr:
+    container: false
+    alwaysInclude: false
+    includeJavascript: true
+    includeCSS: true
+    selector:
+      onDocument: false
+      collection: '[instanceof TYPO3.Neos:ContentCollection]'
+      content: '[instanceof Jonnitto.Plyr:Content]'
+    options:
+      controls: ['play-large','play','progress','current-time','mute','volume','captions','fullscreen']
+      autoplay: false
+      seekTime: 10
+      volume: 10
+      clickToPlay: true
+      hideControls: true
+      showPosterOnEnd: false
+      tooltips:
+        controls: false
+        seek: true
+      displayDuration: true
+      fullscreen:
+        enabled: true
+        fallback: true
+        allowAudio: false
+
 TYPO3:
   Neos:
-    typoScript:
-      autoInclude:
-        'Jonnitto.Plyr': true
     userInterface:
       translation:
         autoInclude:
-          'Jonnitto.Plyr': ['NodeTypes/*']
+          'Jonnitto.Plyr':
+            - 'NodeTypes/*'
     nodeTypes:
       groups:
         multimedia:
           position: 200
           label: 'Jonnitto.Plyr:NodeTypes.Groups:multimedia'
-
-Jonnitto:
-  Plyr:
-    alwaysInclude: false      # Always include Sources on Pages. Good for Long-Pagers
-    includeJavascript: true   # Include the Javascript on Page
-    includeCSS: true          # Include the CSS on Page
-    selector:
-      collection: '[instanceof TYPO3.Neos:ContentCollection]'
-      content: '[instanceof Jonnitto.Plyr:Content]'
-    options:
-      controls: "['play-large','play','progress','current-time','mute','volume','captions','fullscreen']" # Toggle which control elements you would like to display when using the default controls html. If you specify a html option, this is redundant. The default value is to display everything.
-      autoplay: false         # Autoplay the media on load. This is generally advised against on UX grounds. It is also disabled on iOS (an Apple limitation).
-      seekTime: 10            # The time, in seconds, to seek when a user hits fast forward or rewind.
-      volume: 10              # A number, between 1 and 10, representing the initial volume of the player.
-      clickToPlay: true       # Click (or tap) of the video container will toggle pause/play.
-      hideControls: true      # Hide video controls automatically after 2s of no mouse or focus movement, on control element blur (tab out), on playback start or entering fullscreen. As soon as the mouse is moved, a control element is focused or playback is paused, the controls reappear instantly.
-      showPosterOnEnd: false  # This will restore and *reload* HTML5 video once playback is complete. Note: depending on the browser caching, this may result in the video downloading again (or parts of it). Use with caution.
-      tooltips:
-        controls: false       # Display control labels as tooltips on :hover & :focus (by default, the labels are screen reader only).
-        seek: true            # Display a seek tooltip to indicate on click where the media would seek to.
-      displayDuration: true   # Displays the duration of the media on the "metadataloaded" event (on startup) in the current time display. This will only work if the `preload` attribute is not set to `none` (or is not set at all) and you choose not to display the duration (see controls option).
-      fullscreen:
-        enabled: true         # Toggles if fullscreen should be enabled (if the browser supports it).
-        fallback: true        # Enable a full viewport view for older browsers.
-        allowAudio: false     # Allow audio play to toggle fullscreen. This will be more useful later when posters are supported.
+    typoScript:
+      autoInclude:
+        Jonnitto.Plyr: true

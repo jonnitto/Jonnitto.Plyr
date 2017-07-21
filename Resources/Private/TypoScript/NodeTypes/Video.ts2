@@ -1,19 +1,4 @@
-prototype(Plyr:Video) {
-	attributes.class = Fusion:RawArray {
-		container = 'jonnitto-plyr-container'
-	}
-
-	videoAttributes = Fusion:Attributes {
-		controls = true
-		class = Fusion:RawArray {
-			player = 'neos-plyr'
-		}
-		poster = ImageUri {
-			asset = ${q(node).property('image')}
-			maximumWidth = 1920
-			@if.hasPicture = ${q(node).property('image') ? true : false}
-		}
-	}
+prototype(Plyr:Video) < prototype(Plyr:Tag) {
 
 	video = Fusion:Array {
 		mp4 = Plyr:FileCollection {
@@ -34,6 +19,32 @@ prototype(Plyr:Video) {
 			}
 		}
 	}
-	render = ${this.video || node.context.inBackend}
-	backendAlert = ${this.video ? false : Translation.translate('backendAlert.video', null, [], null, 'Jonnitto.Plyr')}
+
+	@context.video = ${this.video}
+	@if.render = ${this.video || node.context.inBackend ? true : false}
+
+	content = Fusion:Case {
+		hasAudio {
+			condition = ${video ? true : false}
+			renderer = Fusion:Tag {
+				tagName = 'video'
+				attributes = Fusion:Attributes {
+					controls = true
+					class = 'neos-plyr'
+					poster = ImageUri {
+						asset = ${q(node).property('image')}
+						maximumWidth = 1920
+						@if.hasPicture = ${q(node).property('image') ? true : false}
+					}
+				}
+				content = ${video}
+			}
+		}
+		default {
+			condition = true
+			renderer = Plyr:Notification {
+				key = 'video'
+			}
+		}
+	}
 }

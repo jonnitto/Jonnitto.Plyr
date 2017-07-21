@@ -1,8 +1,0 @@
-<f:if condition="{render}">
-	<div{attributes -> f:format.raw()}>
-		<f:render partial="BackendAlert" arguments="{condition:backendAlert}" />
-		<audio{audioAttributes -> f:format.raw()}>
-			{audio -> f:format.raw()}
-		</audio>
-	</div>
-</f:if>

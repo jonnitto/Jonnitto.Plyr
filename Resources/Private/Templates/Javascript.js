@@ -7,7 +7,7 @@
 			</f:for>
 		}
 	};
-	<f:if condition="{options.controls} != '['play-large','play','progress','current-time','mute','volume','captions','fullscreen']'">o.controls={options.controls};</f:if>
+	<f:if condition="{controls}">o.controls={controls -> f:format.raw()};</f:if>
 	<f:if condition="{options.autoplay}">o.autoplay=true;</f:if>
 	<f:if condition="{options.seekTime} != 10">o.seekTime={options.seekTime};</f:if>
 	<f:if condition="{options.volume} != 10">o.volume={options.volume};</f:if>
@@ -46,14 +46,14 @@
 	</f:if>
 	window.initPlyr = function() {
 		var opt = typeof o == 'object' ? o : {};
-		var players = plyr.get('body');
+		var players = plyr.get();
 		var length = players.length;
 		var timeout = length ? 500 : 0;
 		for (var i = 0; i < length; i++) {
 			try {players[i].destroy()} catch (e) {}
 		}
 		setTimeout(function () {
-			plyr.setup('.neos-plyr', opt);
+			window.neosPlyr = plyr.setup('.neos-plyr', opt);
 		}, timeout);
 	};
 	if (!document.querySelector('.neos-backend')) {

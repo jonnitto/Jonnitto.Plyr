@@ -1,18 +1,27 @@
-prototype(Plyr:YouTube) {
-	attributes.class = Fusion:RawArray {
-		container = 'jonnitto-plyr-container'
+prototype(Plyr:YouTube) < prototype(Plyr:Tag) {
+	id = Plyr:ParseID {
+		type = 'Jonnitto.Plyr:YouTube'
 	}
+	@context.id = ${this.id}
 
-	@context.id = Plyr:ParseID
+	@if.render = ${this.id || node.context.inBackend ? true : false}
 
-	videoAttributes = Fusion:Attributes {
-		class = Fusion:RawArray {
-			player = 'neos-plyr'
+	content = Fusion:Case {
+		hasAudio {
+			condition = ${id ? true : false}
+			renderer = Fusion:Tag {
+				attributes = Fusion:Attributes {
+					class = 'neos-plyr'
+					data-type = 'youtube'
+					data-video-id = ${id}
+				}
+			}
 		}
-		data-type = 'youtube'
-		data-video-id = ${id}
+		default {
+			condition = true
+			renderer = Plyr:Notification {
+				key = 'youtube'
+			}
+		}
 	}
-
-	render = ${id || node.context.inBackend}
-	backendAlert = ${id ? false : Translation.translate('backendAlert.youtube', null, [], null, 'Jonnitto.Plyr')}
 }

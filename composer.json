@@ -1,10 +1,16 @@
 {
     "name": "jonnitto/plyr",
     "type": "typo3-flow-plugin",
-    "version": "0.2.5",
     "license": "MIT",
     "description": "Plyr.io for Neos.io",
-    "keywords": ["flow", "neos", "video", "youtube", "vimeo", "audio"],
+    "keywords": [
+        "flow",
+        "neos",
+        "video",
+        "youtube",
+        "vimeo",
+        "audio"
+    ],
     "authors": [
         {
             "name": "Jon Uhlmann",

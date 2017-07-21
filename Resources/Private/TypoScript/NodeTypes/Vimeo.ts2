@@ -1,18 +1,27 @@
-prototype(Plyr:Vimeo) {
-	attributes.class = Fusion:RawArray {
-		container = 'jonnitto-plyr-container'
+prototype(Plyr:Vimeo) < prototype(Plyr:Tag) {
+	id = Plyr:ParseID {
+		type = 'Jonnitto.Plyr:Vimeo'
 	}
+	@context.id = ${this.id}
 
-	@context.id = Plyr:ParseID
+	@if.render = ${this.id || node.context.inBackend ? true : false}
 
-	videoAttributes = Fusion:Attributes {
-		class = Fusion:RawArray {
-			player = 'neos-plyr'
+	content = Fusion:Case {
+		hasAudio {
+			condition = ${id ? true : false}
+			renderer = Fusion:Tag {
+				attributes = Fusion:Attributes {
+					class = 'neos-plyr'
+					data-type = 'vimeo'
+					data-video-id = ${id}
+				}
+			}
 		}
-		data-type = 'vimeo'
-		data-video-id = Plyr:ParseID
+		default {
+			condition = true
+			renderer = Plyr:Notification {
+				key = 'vimeo'
+			}
+		}
 	}
-
-	render = ${id || node.context.inBackend}
-	backendAlert = ${id ? false : Translation.translate('backendAlert.vimeo', null, [], null, 'Jonnitto.Plyr')}
 }
