@@ -21,6 +21,7 @@ prototype(Plyr:Audio) < prototype(Plyr:Tag) {
 				tagName = 'audio'
 				attributes = Fusion:Attributes {
 					controls = true
+					preload = 'none'
 					class = 'neos-plyr'
 				}
 				content = ${audio}
