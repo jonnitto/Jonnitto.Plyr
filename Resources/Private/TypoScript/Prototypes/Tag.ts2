@@ -11,5 +11,5 @@ prototype(Plyr:Tag) < prototype(Fusion:Tag) {
 		@position = 'end 999999999'
 	}
 
-	@exceptionHandler = 'TYPO3\\Neos\\Fusion\\ExceptionHandlers\\NodeWrappingHandler'
+	@exceptionHandler = 'TYPO3\\Neos\\TypoScript\\ExceptionHandlers\\NodeWrappingHandler'
 }
