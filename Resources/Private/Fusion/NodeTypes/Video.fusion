@@ -24,13 +24,14 @@ prototype(Plyr:Video) < prototype(Plyr:Tag) {
 	@if.render = ${this.video || node.context.inBackend ? true : false}
 
 	content = Fusion:Case {
-		hasAudio {
+		hasVideo {
 			condition = ${video ? true : false}
 			renderer = Fusion:Tag {
 				tagName = 'video'
 				attributes = Fusion:Attributes {
 					controls = true
 					class = 'neos-plyr'
+					preload = ${q(node).property('image') ? 'none' : false}
 					poster = ImageUri {
 						asset = ${q(node).property('image')}
 						maximumWidth = 1920
