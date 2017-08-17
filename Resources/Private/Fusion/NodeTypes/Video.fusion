@@ -31,7 +31,7 @@ prototype(Plyr:Video) < prototype(Plyr:Tag) {
 				attributes = Fusion:Attributes {
 					controls = true
 					class = 'neos-plyr'
-					preload = ${q(node).property('image') ? 'none' : false}
+					preload = ${q(node).property('image') || node.context.inBackend ? 'none' : false}
 					poster = ImageUri {
 						asset = ${q(node).property('image')}
 						maximumWidth = 1920
