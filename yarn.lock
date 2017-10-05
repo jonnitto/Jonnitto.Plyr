@@ -151,9 +151,9 @@ path-is-absolute@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/path-is-absolute/-/path-is-absolute-1.0.1.tgz#174b9268735534ffbc7ace6bf53a5a9e1b5c5f5f"
 
-plyr@^2.0.13:
-  version "2.0.13"
-  resolved "https://registry.yarnpkg.com/plyr/-/plyr-2.0.13.tgz#9b726d2444fd743338c23d3c48ca3416c97712be"
+plyr@^2.0.16:
+  version "2.0.16"
+  resolved "https://registry.yarnpkg.com/plyr/-/plyr-2.0.16.tgz#119ee39a22ae36d59ce599aa48cfb1f53da378ac"
 
 process-nextick-args@~1.0.6:
   version "1.0.7"
