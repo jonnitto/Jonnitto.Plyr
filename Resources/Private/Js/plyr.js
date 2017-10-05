@@ -45,7 +45,7 @@
             loadSprite: true,
             iconPrefix: "plyr",
             iconUrl: "/_Resources/Static/Packages/Jonnitto.Plyr/Sprite.svg",
-            blankUrl: "https://cdn.plyr.io/static/blank.mp4",
+            blankUrl: "/_Resources/Static/Packages/Jonnitto.Plyr/blank.mp4",
             clickToPlay: true,
             hideControls: true,
             showPosterOnEnd: false,
