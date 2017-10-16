@@ -2,8 +2,11 @@ prototype(Plyr:Javascript) < prototype(Fusion:Array) {
 	@context.settings = ${Configuration.setting('Jonnitto.Plyr')}
 	library = Fusion:Tag {
 		tagName = 'script'
-		attributes.src = Fusion:ResourceUri {
-			path = 'resource://Jonnitto.Plyr/Public/Main.js'
+		attributes {
+			async = true
+			src = Fusion:ResourceUri {
+				path = 'resource://Jonnitto.Plyr/Public/Main.js'
+			}
 		}
 		@if.notInBackend = ${node.context.live}
 	}
