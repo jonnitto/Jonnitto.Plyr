@@ -1,0 +1,4 @@
+prototype(Page) {
+    head.plyr = Jonnitto.Plyr:CSS
+    body.javascripts.plyr = Jonnitto.Plyr:Javascript
+}

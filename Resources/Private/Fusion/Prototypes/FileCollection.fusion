@@ -1,19 +1,19 @@
-prototype(Plyr:FileCollection) < prototype(Fusion:Collection) {
-	fileextension= 'fileextension'
-	@context {
-		fileextension = ${this.fileextension}
-		type = ${this.fileextension == 'mp3' || this.fileextension == 'ogg' ? 'audio' : 'video'}
-	}
-	collection = ${q(node).property('files')}
-	itemName = 'asset'
-	iterationName = 'iteration'
-	itemRenderer = Fusion:Case {
-		isRightFile {
-			condition = ${asset.resource.fileextension == fileextension}
-			renderer = Fusion:ResourceUri {
-				resource = ${asset.resource}
-				@process.wrap = ${'<source src="' + value + '" type="' + type + '/' + fileextension + '">'}
-			}
-		}
-	}
+prototype(Jonnitto.Plyr:FileCollection) < prototype(Neos.Fusion:Collection) {
+    fileextension= 'fileextension'
+    @context {
+        fileextension = ${this.fileextension}
+        type = ${this.fileextension == 'mp3' || this.fileextension == 'ogg' ? 'audio' : 'video'}
+    }
+    collection = ${q(node).property('files')}
+    itemName = 'asset'
+    iterationName = 'iteration'
+    itemRenderer = Neos.Fusion:Case {
+        isRightFile {
+            condition = ${asset.resource.fileextension == fileextension}
+            renderer = Neos.Fusion:ResourceUri {
+                resource = ${asset.resource}
+                @process.wrap = ${'<source src="' + value + '" type="' + type + '/' + fileextension + '">'}
+            }
+        }
+    }
 }

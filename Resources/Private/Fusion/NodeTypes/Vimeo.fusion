@@ -1,25 +1,25 @@
-prototype(Plyr:Vimeo) < prototype(Plyr:Tag) {
-	id = Plyr:ParseID
-	@context.id = ${this.id}
+prototype(Jonnitto.Plyr:Vimeo) < prototype(Jonnitto.Plyr:Tag) {
+    id = Jonnitto.Plyr:ParseID
+    @context.id = ${this.id}
 
-	@if.render = ${this.id || node.context.inBackend ? true : false}
+    @if.render = ${this.id || node.context.inBackend ? true : false}
 
-	content = Fusion:Case {
-		hasAudio {
-			condition = ${id ? true : false}
-			renderer = Fusion:Tag {
-				attributes = Fusion:Attributes {
-					class = 'neos-plyr'
-					data-type = 'vimeo'
-					data-video-id = ${id}
-				}
-			}
-		}
-		default {
-			condition = true
-			renderer = Plyr:Notification {
-				key = 'vimeo'
-			}
-		}
-	}
+    content = Neos.Fusion:Case {
+        hasAudio {
+            condition = ${id ? true : false}
+            renderer = Neos.Fusion:Tag {
+                attributes {
+                    class = 'neos-plyr'
+                    data-type = 'vimeo'
+                    data-video-id = ${id}
+                }
+            }
+        }
+        default {
+            condition = true
+            renderer = Jonnitto.Plyr:Notification {
+                key = 'vimeo'
+            }
+        }
+    }
 }

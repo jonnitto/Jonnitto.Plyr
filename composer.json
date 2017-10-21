@@ -3,14 +3,7 @@
     "type": "neos-plugin",
     "license": "MIT",
     "description": "Plyr.io for Neos.io",
-    "keywords": [
-        "flow",
-        "neos",
-        "video",
-        "youtube",
-        "vimeo",
-        "audio"
-    ],
+    "keywords": ["flow", "neos", "video", "youtube", "vimeo", "audio"],
     "authors": [
         {
             "name": "Jon Uhlmann",
@@ -20,12 +13,16 @@
         }
     ],
     "require": {
-        "neos/neos": "~3.0 || dev-master"
+        "neos/neos": "~3.0 || dev-master",
+        "carbon/notification": "^1.0"
     },
     "autoload": {
         "psr-4": {
             "Jonnitto\\Plyr\\": "Classes"
         }
+    },
+    "archive": {
+        "exclude": [".editorconfig", ".gitignore", ".github", ".gitattributes", "gulp.json", "package.json", "CODE_OF_CONDUCT.md"]
     },
     "extra": {
         "marketplace-account": "me@jonnitto.ch",

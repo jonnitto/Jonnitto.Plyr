@@ -1,37 +1,37 @@
-prototype(Plyr:Audio) < prototype(Plyr:Tag) {
-	audio = Fusion:Array {
-		mp3 = Plyr:FileCollection {
-			fileextension = 'mp3'
-		}
-		ogg = Plyr:FileCollection {
-			fileextension = 'ogg'
-		}
-		wav = Plyr:FileCollection {
-			fileextension = 'wav'
-		}
-	}
+prototype(Jonnitto.Plyr:Audio) < prototype(Jonnitto.Plyr:Tag) {
+    audio = Neos.Fusion:Array {
+        mp3 = Jonnitto.Plyr:FileCollection {
+            fileextension = 'mp3'
+        }
+        ogg = Jonnitto.Plyr:FileCollection {
+            fileextension = 'ogg'
+        }
+        wav = Jonnitto.Plyr:FileCollection {
+            fileextension = 'wav'
+        }
+    }
 
-	@context.audio = ${this.audio}
-	@if.render = ${this.audio || node.context.inBackend ? true : false}
+    @context.audio = ${this.audio}
+    @if.render = ${this.audio || node.context.inBackend ? true : false}
 
-	content = Fusion:Case {
-		hasAudio {
-			condition = ${audio ? true : false}
-			renderer = Fusion:Tag {
-				tagName = 'audio'
-				attributes = Fusion:Attributes {
-					controls = true
-					preload = 'none'
-					class = 'neos-plyr'
-				}
-				content = ${audio}
-			}
-		}
-		default {
-			condition = true
-			renderer = Plyr:Notification {
-				key = 'audio'
-			}
-		}
-	}
+    content = Neos.Fusion:Case {
+        hasAudio {
+            condition = ${audio ? true : false}
+            renderer = Neos.Fusion:Tag {
+                tagName = 'audio'
+                attributes {
+                    controls = true
+                    preload = 'none'
+                    class = 'neos-plyr'
+                }
+                content = ${audio}
+            }
+        }
+        default {
+            condition = true
+            renderer = Jonnitto.Plyr:Notification {
+                key = 'audio'
+            }
+        }
+    }
 }

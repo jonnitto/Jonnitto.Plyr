@@ -1,4 +1,0 @@
-prototype(Page) {
-	head.plyr = Plyr:CSS
-	body.javascripts.plyr = Plyr:Javascript
-}

@@ -1,51 +1,50 @@
-prototype(Plyr:Video) < prototype(Plyr:Tag) {
+prototype(Jonnitto.Plyr:Video) < prototype(Jonnitto.Plyr:Tag) {
+    video = Neos.Fusion:Array {
+        mp4 = Jonnitto.Plyr:FileCollection {
+            fileextension = 'mp4'
+        }
+        webm = Jonnitto.Plyr:FileCollection {
+            fileextension = 'webm'
+        }
+        ogg = Jonnitto.Plyr:FileCollection {
+            fileextension = 'ogg'
+        }
 
-	video = Fusion:Array {
-		mp4 = Plyr:FileCollection {
-			fileextension = 'mp4'
-		}
-		webm = Plyr:FileCollection {
-			fileextension = 'webm'
-		}
-		ogg = Plyr:FileCollection {
-			fileextension = 'ogg'
-		}
+        // Captions: Title as Label Captions as language
+        vtt = Jonnitto.Plyr:FileCollection {
+            fileextension = 'vtt'
+            itemRenderer.isRightFile.renderer  {
+                @process.wrap = ${'<track kind="captions" label="' + asset.title + '" src="' + value + '" srclang="'+ asset.caption + '"{f:if(condition:iteration.isFirst,then:\' default\')}>'}
+            }
+        }
+    }
 
-		// Captions: Title as Label Captions as language
-		vtt = Plyr:FileCollection {
-			fileextension = 'vtt'
-			itemRenderer.isRightFile.renderer  {
-				@process.wrap = ${'<track kind="captions" label="' + asset.title + '" src="' + value + '" srclang="'+ asset.caption + '"{f:if(condition:iteration.isFirst,then:\' default\')}>'}
-			}
-		}
-	}
+    @context.video = ${this.video}
+    @if.render = ${this.video || node.context.inBackend ? true : false}
 
-	@context.video = ${this.video}
-	@if.render = ${this.video || node.context.inBackend ? true : false}
-
-	content = Fusion:Case {
-		hasVideo {
-			condition = ${video ? true : false}
-			renderer = Fusion:Tag {
-				tagName = 'video'
-				attributes = Fusion:Attributes {
-					controls = true
-					class = 'neos-plyr'
-					preload = ${q(node).property('image') || node.context.inBackend ? 'none' : false}
-					poster = ImageUri {
-						asset = ${q(node).property('image')}
-						maximumWidth = 1920
-						@if.hasPicture = ${q(node).property('image') ? true : false}
-					}
-				}
-				content = ${video}
-			}
-		}
-		default {
-			condition = true
-			renderer = Plyr:Notification {
-				key = 'video'
-			}
-		}
-	}
+    content = Neos.Fusion:Case {
+        hasVideo {
+            condition = ${video ? true : false}
+            renderer = Neos.Fusion:Tag {
+                tagName = 'video'
+                attributes {
+                    controls = true
+                    class = 'neos-plyr'
+                    preload = ${q(node).property('image') || node.context.inBackend ? 'none' : false}
+                    poster = ImageUri {
+                        asset = ${q(node).property('image')}
+                        maximumWidth = 1920
+                        @if.hasPicture = ${q(node).property('image') ? true : false}
+                    }
+                }
+                content = ${video}
+            }
+        }
+        default {
+            condition = true
+            renderer = Jonnitto.Plyr:Notification {
+                key = 'video'
+            }
+        }
+    }
 }

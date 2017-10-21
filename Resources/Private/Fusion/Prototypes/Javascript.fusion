@@ -1,44 +1,46 @@
-prototype(Plyr:Javascript) < prototype(Fusion:Array) {
-	@context.settings = ${Configuration.setting('Jonnitto.Plyr')}
-	library = Fusion:Tag {
-		tagName = 'script'
-		attributes {
-			async = true
-			src = Fusion:ResourceUri {
-				path = 'resource://Jonnitto.Plyr/Public/Main.js'
-			}
-		}
-		@if.notInBackend = ${node.context.live}
-	}
-	call = Fusion:Tag {
-		tagName = 'script'
-		content = Fusion:Array {
-			options = Fusion:Template {
-				templatePath = 'resource://Jonnitto.Plyr/Private/Templates/Javascript.js'
-				options = ${settings.options}
-				controls = Fusion:Case {
-					isDefault {
-						condition = ${settings.options.controls == ['play-large','play','progress','current-time','mute','volume','captions','fullscreen'] ? true : false}
-						renderer = false
-					}
-					default {
-						condition = true
-						renderer = ${"['" + Array.join(settings.options.controls, "','") + "']"}
-					}
-				}
-				i18n = ${['restart','rewind','play','pause','forward','buffered','currentTime','duration','volume','toggleMute','toggleCaptions','toggleFullscreen']}
-				@process.clean = ${String.pregReplace(String.pregReplace(String.pregReplace(String.pregReplace(String.pregReplace(value, '/\/\/ jshint ignore:start\n/', ''), '/[\s]+/', ' '), '/[\s]+({|}|=|\+|;)[\s]+/', '$1'), '/(\',|;)[\s]+/', '$1'), '/;}/', '}')}
-			}
-			backend = Fusion:Template {
-				templatePath = 'resource://Jonnitto.Plyr/Private/Templates/Backend.js'
-				@if.inBackend = ${node.context.inBackend}
-			}
-		}
-	}
+prototype(Jonnitto.Plyr:Javascript) < prototype(Neos.Fusion:Array) {
+    settings = ${Configuration.setting('Jonnitto.Plyr')}
+    @context.settings = ${this.settings}
+    @ignoreProperties = ${['settings']}
+    library = Neos.Fusion:Tag {
+        tagName = 'script'
+        attributes {
+            async = true
+            src = Neos.Fusion:ResourceUri {
+                path = 'resource://Jonnitto.Plyr/Public/Main.js'
+            }
+        }
+        @if.notInBackend = ${node.context.live}
+    }
+    call = Neos.Fusion:Tag {
+        tagName = 'script'
+        content = Neos.Fusion:Array {
+            options = Neos.Fusion:Template {
+                templatePath = 'resource://Jonnitto.Plyr/Private/Templates/Javascript.js'
+                options = ${settings.options}
+                controls = Neos.Fusion:Case {
+                    isDefault {
+                        condition = ${settings.options.controls == ['play-large','play','progress','current-time','mute','volume','captions','fullscreen'] ? true : false}
+                        renderer = false
+                    }
+                    default {
+                        condition = true
+                        renderer = ${"['" + Array.join(settings.options.controls, "','") + "']"}
+                    }
+                }
+                i18n = ${['restart','rewind','play','pause','forward','buffered','currentTime','duration','volume','toggleMute','toggleCaptions','toggleFullscreen']}
+                @process.clean = ${String.pregReplace(String.pregReplace(String.pregReplace(String.pregReplace(String.pregReplace(value, '/\/\/ jshint ignore:start\n/', ''), '/[\s]+/', ' '), '/[\s]+({|}|=|\+|;)[\s]+/', '$1'), '/(\',|;)[\s]+/', '$1'), '/;}/', '}')}
+            }
+            backend = Neos.Fusion:Template {
+                templatePath = 'resource://Jonnitto.Plyr/Private/Templates/Backend.js'
+                @if.inBackend = ${node.context.inBackend}
+            }
+        }
+    }
 
-	@position = 'end'
-	@if {
-		includeJS = ${settings.includeJavascript}
-		includeCase = Plyr:IncludeCase
-	}
+    @position = 'end'
+    @if {
+        includeJS = ${this.settings.includeJavascript}
+        includeCase = Jonnitto.Plyr:IncludeCase
+    }
 }

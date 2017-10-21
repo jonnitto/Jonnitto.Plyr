@@ -1,4 +1,1 @@
-namespace: Fusion = Neos.Fusion
-namespace: Plyr = Jonnitto.Plyr
-
 include: **/*.fusion
