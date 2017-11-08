@@ -38,7 +38,6 @@ prototype(Jonnitto.Plyr:Javascript) < prototype(Neos.Fusion:Array) {
         }
     }
 
-    @position = 'end'
     @if {
         includeJS = ${this.settings.includeJavascript}
         includeCase = Jonnitto.Plyr:IncludeCase

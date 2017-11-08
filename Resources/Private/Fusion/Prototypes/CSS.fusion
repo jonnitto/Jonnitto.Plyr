@@ -8,7 +8,7 @@ prototype(Jonnitto.Plyr:CSS) <  prototype(Neos.Fusion:Tag) {
             path = 'resource://Jonnitto.Plyr/Public/Main.css'
         }
     }
-    @position = 'end'
+
     @if {
         includeCSS = ${this.includeCSS}
         includeCase = Jonnitto.Plyr:IncludeCase
