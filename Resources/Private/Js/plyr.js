@@ -1,6 +1,6 @@
 // ==========================================================================
 // Plyr
-// plyr.js v2.0.17
+// plyr.js v2.0.18
 // https://github.com/sampotts/plyr
 // License: The MIT License (MIT)
 // ==========================================================================
@@ -1768,8 +1768,10 @@
                         plyr.media.currentTime = 0;
                         plyr.media.muted = instance.isMuted();
 
-                        // Set title
-                        config.title = instance.getVideoData().title;
+                        // Set title if possible
+                        if (typeof instance.getVideoData === 'function') {
+                            config.title = instance.getVideoData().title;
+                        }
 
                         // Set the tabindex
                         if (plyr.supported.full) {
@@ -1886,6 +1888,7 @@
                 byline: false,
                 portrait: false,
                 title: false,
+                speed: true,
                 transparent: 0,
             };
 
