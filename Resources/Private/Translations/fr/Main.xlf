@@ -39,16 +39,16 @@
 				<source>(Dés)activer le mode plein écran</source>
 			</trans-unit>
 			<trans-unit id="backendAlert.audio" xml:space="preserve">
-				<source>Veuillez ajouter les fichiers audio dans Inspektor</source>
+				<source>Veuillez ajouter les fichiers audio dans l'inspecteur</source>
 			</trans-unit>
 			<trans-unit id="backendAlert.video" xml:space="preserve">
-				<source>Veuillez ajouter les fichiers vidéo dans Inspektor</source>
+				<source>Veuillez ajouter les fichiers vidéo dans l'inspecteur</source>
 			</trans-unit>
 			<trans-unit id="backendAlert.youtube" xml:space="preserve">
-				<source>Veuillez ajouter l’ID YouTube ou l'URL dans Inspektor</source>
+				<source>Veuillez ajouter l’ID YouTube ou l'URL dans l'inspecteur</source>
 			</trans-unit>
 			<trans-unit id="backendAlert.vimeo" xml:space="preserve">
-				<source>Veuillez ajouter l’ID Vimeo ou l'URL dans Inspektor</source>
+				<source>Veuillez ajouter l’ID Vimeo ou l'URL dans l'inspecteur</source>
 			</trans-unit>
 		</body>
 	</file>
