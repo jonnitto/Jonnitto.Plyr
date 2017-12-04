@@ -21,10 +21,13 @@
             }, 100);
         });
     } else {
-        var script = document.createElement('script');
-        script.type = 'text/javascript';
+        var script = document.createElement("script");
+        script.type = "text/javascript";
         script.async = true;
-        script.setAttribute('src','/_Resources/Static/Packages/Jonnitto.Plyr/Main.js');
+        script.setAttribute(
+            "src",
+            "/_Resources/Static/Packages/Jonnitto.Plyr/Main.js"
+        );
         script.onload = initPlyr;
         document.head.appendChild(script);
     }
