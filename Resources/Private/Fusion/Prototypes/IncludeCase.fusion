@@ -1,26 +1,15 @@
-prototype(Jonnitto.Plyr:IncludeCase) <  prototype(Neos.Fusion:Case) {
+prototype(Jonnitto.Plyr:IncludeCase) <  prototype(Neos.Fusion:Value) {
     settings = ${Configuration.setting('Jonnitto.Plyr')}
     @context.settings = ${this.settings}
-    @ignoreProperties = ${['settings']}
 
-    inBackend {
-        condition = ${node.context.inBackend}
-        renderer = true
-    }
-    alwaysInclude {
-        condition = ${settings.alwaysInclude}
-        renderer = true
-    }
-    onContent {
-        condition = ${q(documentNode).children(settings.selector.collection).find(settings.selector.content).is()}
-        renderer = true
-    }
-    onDocument {
-        condition = ${settings.selector.onDocument && q(documentNode).filter(settings.selector.onDocument).is()}
-        renderer = true
-    }
-    default {
-        condition = true
-        renderer = false
+    value = Carbon.Condition:Case {
+        context.live = ${settings.alwaysInclude}
+
+        content {
+            collection = ${settings.selector.collection}
+            filter = ${settings.selector.content}
+        }
+
+        document.filter = ${settings.selector.onDocument}
     }
 }
