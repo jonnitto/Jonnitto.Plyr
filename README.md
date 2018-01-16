@@ -1,9 +1,14 @@
-Jonnitto.Plyr
-=============
-
 [![Latest Stable Version](https://poser.pugx.org/jonnitto/plyr/v/stable)](https://packagist.org/packages/jonnitto/plyr)
 [![Total Downloads](https://poser.pugx.org/jonnitto/plyr/downloads)](https://packagist.org/packages/jonnitto/plyr)
-[![License](https://poser.pugx.org/jonnitto/plyr/license)](LICENSE)
+[![License](https://poser.pugx.org/jonnitto/plyr/license)](https://packagist.org/packages/jonnitto/plyr)
+[![GitHub forks](https://img.shields.io/github/forks/jonnitto/Jonnitto.Plyr.svg?style=social&label=Fork)](https://github.com/jonnitto/Jonnitto.Plyr/fork)
+[![GitHub stars](https://img.shields.io/github/stars/jonnitto/Jonnitto.Plyr.svg?style=social&label=Stars)](https://github.com/jonnitto/Jonnitto.Plyr/stargazers)
+[![GitHub watchers](https://img.shields.io/github/watchers/jonnitto/Jonnitto.Plyr.svg?style=social&label=Watch)](https://github.com/jonnitto/Jonnitto.Plyr/subscription)
+[![GitHub followers](https://img.shields.io/github/followers/jonnitto.svg?style=social&label=Follow)](https://github.com/jonnitto/followers)
+[![Follow Jon on Twitter](https://img.shields.io/twitter/follow/jonnitto.svg?style=social&label=Follow)](https://twitter.com/jonnitto)
+
+Jonnitto.Plyr
+=============
 
 [Plyr.io](http://plyr.io/) for [Neos CMS](https://www.neos.io)
 
