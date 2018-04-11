@@ -17,6 +17,6 @@ prototype(Jonnitto.Plyr:Audio) < prototype(Jonnitto.Plyr:Tag) {
             controls = true
             preload = 'none'
         }
-        content = ${media}
+        content = ${props.media}
     }
 }

@@ -1,26 +1,26 @@
 prototype(Jonnitto.Plyr:YouTube) < prototype(Jonnitto.Plyr:Tag) {
     id = Jonnitto.Plyr:ParseID
     progressiveEnhancement = ${Configuration.setting('Jonnitto.Plyr.progressiveEnhancement.YouTube')}
-    @context.progressiveEnhancement = ${this.progressiveEnhancement}
+    playsinline = ${Configuration.setting('Jonnitto.Plyr.options.playsinline')}
 
     content {
         attributes {
-            class.progressiveEnhancement = ${progressiveEnhancement ? ' plyr__video-embed' : false}
-            data-plyr-provider = ${progressiveEnhancement ? null : 'youtube'}
-            data-plyr-embed-id = ${progressiveEnhancement ? null : id}
+            class.progressiveEnhancement = ${props.progressiveEnhancement ? ' plyr__video-embed' : false}
+            data-plyr-provider = ${props.progressiveEnhancement ? null : 'youtube'}
+            data-plyr-embed-id = ${props.progressiveEnhancement ? null : props.id}
         }
         content = Neos.Fusion:Tag {
-            @if.render = ${progressiveEnhancement}
+            @if.render = ${props.progressiveEnhancement}
             tagName = 'iframe'
             attributes {
                 allowfullscreen = true
                 allowtransparency = true
                 allow = 'autoplay'
                 src = Neos.Fusion:Array {
-                    src = ${'https://www.youtube.com/embed/' + id + '?'}
+                    src = ${'https://www.youtube.com/embed/' + props.id + '?'}
                     origin = ${'origin=' + request.httpRequest.uri.scheme + '://' + request.httpRequest.uri.host}
                     options = '&amp;iv_load_policy=3&amp;modestbranding=1&amp;showinfo=0&amp;rel=0&amp;enablejsapi=1'
-                    playsinline = ${Configuration.setting('Jonnitto.Plyr.options.playsinline') ? '&amp;playsinline=1' : ''}
+                    playsinline = ${props.playsinline ? '&amp;playsinline=1' : ''}
                 }
             }
         }

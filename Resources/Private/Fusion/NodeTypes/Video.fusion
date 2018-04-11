@@ -1,4 +1,6 @@
 prototype(Jonnitto.Plyr:Video) < prototype(Jonnitto.Plyr:Tag) {
+    playsinline = ${Configuration.setting('Jonnitto.Plyr.options.playsinline')}
+    poster = ${q(node).property('image')}
     media = Neos.Fusion:Array {
         mp4 = Jonnitto.Plyr:FileCollection {
             fileextension = 'mp4'
@@ -13,7 +15,7 @@ prototype(Jonnitto.Plyr:Video) < prototype(Jonnitto.Plyr:Tag) {
         // Captions: Title as Label Captions as language
         vtt = Jonnitto.Plyr:FileCollection {
             fileextension = 'vtt'
-            itemRenderer.isRightFile.renderer {
+            itemRenderer.renderer {
                 @process.wrap = ${'<track kind="captions" label="' + asset.title + '" src="' + value + '" srclang="'+ asset.caption + (iteration.isFirst ? ' default' : '') + '>'}
             }
         }
@@ -22,15 +24,15 @@ prototype(Jonnitto.Plyr:Video) < prototype(Jonnitto.Plyr:Tag) {
     content {
         tagName = 'video'
         attributes {
-            playsinline = ${Configuration.setting('Jonnitto.Plyr.options.playsinline')}
+            playsinline = ${props.playsinline}
             controls = true
-            preload = ${q(node).property('image') ? 'none' : true}
-            poster = ImageUri {
-                asset = ${q(node).property('image')}
+            preload = ${props.poster ? 'none' : true}
+            poster = Neos.Neos:ImageUri {
+                asset = ${props.poster}
                 maximumWidth = 1920
-                @if.hasPicture = ${q(node).property('image') ? true : false}
+                @if.hasPicture = ${props.poster ? true : false}
             }
         }
-        content = ${media}
+        content = ${props.media}
     }
 }

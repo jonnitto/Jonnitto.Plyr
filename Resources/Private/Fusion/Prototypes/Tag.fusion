@@ -22,16 +22,11 @@ prototype(Jonnitto.Plyr:Tag) < prototype(Neos.Fusion:Tag) {
         }
     }
 
-    @context {
-        id = ${this.id}
-        media = ${this.media}
-        key = ${this.key}
-        editable = ${this.editable}
-    }
+    @context.props = ${this}
 
     attributes.class = Neos.Fusion:RawArray {
-        key = ${'jonnitto-plyr-' + key}
         plyrContainer = 'jonnitto-plyr-container'
+        key = ${'jonnitto-plyr-' + props.key}
         container = ${Configuration.setting('Jonnitto.Plyr.container')}
     }
 
@@ -43,13 +38,13 @@ prototype(Jonnitto.Plyr:Tag) < prototype(Neos.Fusion:Tag) {
         }
     }
     content.@process.notification = Carbon.Notification:Backend {
-        @if.render = ${id || media ? false : true}
+        @if.render = ${props.id || props.media ? false : true}
         type = 'alert'
-        content = ${Translation.translate('backendAlert.' + key, null, [], null, 'Jonnitto.Plyr') }
+        content = ${Translation.translate('backendAlert.' + props.key, null, [], null, 'Jonnitto.Plyr') }
     }
 
     @process.contentElementWrapping {
-        @if.editable = ${editable}
+        @if.editable = ${props.editable}
         expression = Neos.Neos:ContentElementWrapping
         @position = 'end 999999999'
     }

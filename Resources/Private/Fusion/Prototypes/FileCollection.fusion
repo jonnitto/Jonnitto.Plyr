@@ -1,19 +1,15 @@
 prototype(Jonnitto.Plyr:FileCollection) < prototype(Neos.Fusion:Collection) {
     fileextension= 'fileextension'
-    @context {
-        fileextension = ${this.fileextension}
-        type = ${this.fileextension == 'mp3' || this.fileextension == 'ogg' ? 'audio' : 'video'}
-    }
+    type = ${this.fileextension == 'mp3' || this.fileextension == 'ogg' ? 'audio' : 'video'}
+
+    @context.props = ${this}
+
     collection = ${q(node).property('files')}
     itemName = 'asset'
     iterationName = 'iteration'
-    itemRenderer = Neos.Fusion:Case {
-        isRightFile {
-            condition = ${asset.resource.fileextension == fileextension}
-            renderer = Neos.Fusion:ResourceUri {
-                resource = ${asset.resource}
-                @process.wrap = ${'<source src="' + value + '" type="' + type + '/' + fileextension + '">'}
-            }
-        }
+    itemRenderer = Neos.Fusion:ResourceUri {
+        @if.hasCorrectFileextension =  ${asset.resource.fileextension == props.fileextension}
+        resource = ${asset.resource}
+        @process.wrap = ${'<source src="' + value + '" type="' + props.type + '/' + props.fileextension + '">'}
     }
 }

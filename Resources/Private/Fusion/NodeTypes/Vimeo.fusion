@@ -1,23 +1,22 @@
 prototype(Jonnitto.Plyr:Vimeo) < prototype(Jonnitto.Plyr:Tag) {
     id = Jonnitto.Plyr:ParseID
     progressiveEnhancement = ${Configuration.setting('Jonnitto.Plyr.progressiveEnhancement.Vimeo')}
-    @context.progressiveEnhancement = ${this.progressiveEnhancement}
 
     content {
         attributes {
-            class.progressiveEnhancement = ${progressiveEnhancement ? ' plyr__video-embed' : false}
-            data-plyr-provider = ${progressiveEnhancement ? null : 'vimeo'}
-            data-plyr-embed-id = ${progressiveEnhancement ? null : id}
+            class.progressiveEnhancement = ${props.progressiveEnhancement ? ' plyr__video-embed' : false}
+            data-plyr-provider = ${props.progressiveEnhancement ? null : 'vimeo'}
+            data-plyr-embed-id = ${props.progressiveEnhancement ? null : props.id}
         }
         content = Neos.Fusion:Tag {
-            @if.render = ${progressiveEnhancement}
+            @if.render = ${props.progressiveEnhancement}
             tagName = 'iframe'
             attributes {
                 allowfullscreen = true
                 allowtransparency = true
                 allow = 'autoplay'
                 src = Neos.Fusion:Array {
-                    src = ${'https://player.vimeo.com/video/' + id + '?'}
+                    src = ${'https://player.vimeo.com/video/' + props.id + '?'}
                     options = 'loop=false&amp;byline=false&amp;portrait=false&amp;title=false&amp;speed=true&amp;transparent=0&amp;gesture=media'
                 }
             }
