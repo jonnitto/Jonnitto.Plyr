@@ -1,5 +1,0 @@
-prototype(Jonnitto.Plyr:Notification) < prototype(Carbon.Notification:Backend) {
-    key = false
-    type = 'alert'
-    content = ${this.key ? Translation.translate('backendAlert.' + this.key, null, [], null, 'Jonnitto.Plyr') : false}
-}

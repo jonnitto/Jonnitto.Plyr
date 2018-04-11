@@ -1,55 +1,106 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
-	<file original="" product-name="Jonnitto.Plyr" source-language="it" datatype="plaintext">
-		<body>
-			<trans-unit id="restart" xml:space="preserve">
-				<source>Riavvio</source>
-			</trans-unit>
-			<trans-unit id="rewind" xml:space="preserve">
-				<source>Tornare indieto {seektime} sec</source>
-			</trans-unit>
-			<trans-unit id="play" xml:space="preserve">
-				<source>Play</source>
-			</trans-unit>
-			<trans-unit id="pause" xml:space="preserve">
-				<source>Pause</source>
-			</trans-unit>
-			<trans-unit id="forward" xml:space="preserve">
-				<source>Avanzare di {seektime} sec</source>
-			</trans-unit>
-			<trans-unit id="buffered" xml:space="preserve">
-				<source>buffered</source>
-			</trans-unit>
-			<trans-unit id="currentTime" xml:space="preserve">
-				<source>Ora attuale</source>
-			</trans-unit>
-			<trans-unit id="duration" xml:space="preserve">
-				<source>Durata</source>
-			</trans-unit>
-			<trans-unit id="volume" xml:space="preserve">
-				<source>Volume</source>
-			</trans-unit>
-			<trans-unit id="toggleMute" xml:space="preserve">
-				<source>Disattivare/attivare audio</source>
-			</trans-unit>
-			<trans-unit id="toggleCaptions" xml:space="preserve">
-				<source>Disattivare/attivare sottotitoli</source>
-			</trans-unit>
-			<trans-unit id="toggleFullscreen" xml:space="preserve">
-				<source>Disattivare/attivare modalità tutto schermo</source>
-			</trans-unit>
-			<trans-unit id="backendAlert.audio" xml:space="preserve">
-				<source>Pregasi aggiungere i file audio nell'inspektor</source>
-			</trans-unit>
-			<trans-unit id="backendAlert.video" xml:space="preserve">
-				<source>Pregasi aggiungere i file video nell'inspektor</source>
-			</trans-unit>
-			<trans-unit id="backendAlert.youtube" xml:space="preserve">
-				<source>Pregasi aggiungere l'ID o l'URL YouTube nell'inspektor</source>
-			</trans-unit>
-			<trans-unit id="backendAlert.vimeo" xml:space="preserve">
-				<source>Pregasi aggiungere l'ID o l'URL Vimeo nell'inspektor</source>
-			</trans-unit>
-		</body>
-	</file>
+    <file original="" product-name="Jonnitto.Plyr" source-language="it" datatype="plaintext">
+        <body>
+            <trans-unit id="restart" xml:space="preserve">
+                <source>Riavvio</source>
+            </trans-unit>
+            <trans-unit id="rewind" xml:space="preserve">
+                <source>Tornare indieto {seektime} sec</source>
+            </trans-unit>
+            <trans-unit id="play" xml:space="preserve">
+                <source>Play</source>
+            </trans-unit>
+            <trans-unit id="pause" xml:space="preserve">
+                <source>Pause</source>
+            </trans-unit>
+            <trans-unit id="fastForward" xml:space="preserve">
+                <source>Avanzare di {seektime} sec</source>
+            </trans-unit>
+            <trans-unit id="seek" xml:space="preserve">
+                <source>Ricerca</source>
+            </trans-unit>
+            <trans-unit id="played" xml:space="preserve">
+                <source>Suonare</source>
+            </trans-unit>
+            <trans-unit id="buffered" xml:space="preserve">
+                <source>Tamponata</source>
+            </trans-unit>
+            <trans-unit id="currentTime" xml:space="preserve">
+                <source>Ora attuale</source>
+            </trans-unit>
+            <trans-unit id="duration" xml:space="preserve">
+                <source>Durata</source>
+            </trans-unit>
+            <trans-unit id="volume" xml:space="preserve">
+                <source>Volume</source>
+            </trans-unit>
+            <trans-unit id="mute" xml:space="preserve">
+                <source>Disattiva audio</source>
+            </trans-unit>
+            <trans-unit id="unmute" xml:space="preserve">
+                <source>Riattiva audio</source>
+            </trans-unit>
+            <trans-unit id="enableCaptions" xml:space="preserve">
+                <source>Attivare sottotitoli</source>
+            </trans-unit>
+            <trans-unit id="disableCaptions" xml:space="preserve">
+                <source>Disattivare sottotitoli</source>
+            </trans-unit>
+            <trans-unit id="enterFullscreen" xml:space="preserve">
+                <source>Attivare modalità tutto schermo</source>
+            </trans-unit>
+            <trans-unit id="exitFullscreen" xml:space="preserve">
+                <source>Disattivare modalità tutto schermo</source>
+            </trans-unit>
+            <trans-unit id="frameTitle" xml:space="preserve">
+                <source>lettore per {title}</source>
+            </trans-unit>
+            <trans-unit id="captions" xml:space="preserve">
+                <source>Sottotitoli</source>
+            </trans-unit>
+            <trans-unit id="settings" xml:space="preserve">
+                <source>Impostazioni</source>
+            </trans-unit>
+            <trans-unit id="speed" xml:space="preserve">
+                <source>Velocità</source>
+            </trans-unit>
+            <trans-unit id="quality" xml:space="preserve">
+                <source>Qualità</source>
+            </trans-unit>
+            <trans-unit id="loop" xml:space="preserve">
+                <source>Ciclo continuo</source>
+            </trans-unit>
+            <trans-unit id="start" xml:space="preserve">
+                <source>Inizio</source>
+            </trans-unit>
+            <trans-unit id="end" xml:space="preserve">
+                <source>Fine</source>
+            </trans-unit>
+            <trans-unit id="all" xml:space="preserve">
+                <source>Tutti</source>
+            </trans-unit>
+            <trans-unit id="reset" xml:space="preserve">
+                <source>Reset</source>
+            </trans-unit>
+            <trans-unit id="disabled" xml:space="preserve">
+                <source>Disabilitato</source>
+            </trans-unit>
+            <trans-unit id="advertisement" xml:space="preserve">
+                <source>Inserzione</source>
+            </trans-unit>
+            <trans-unit id="backendAlert.audio" xml:space="preserve">
+                <source>Pregasi aggiungere i file audio nell'inspektor</source>
+            </trans-unit>
+            <trans-unit id="backendAlert.video" xml:space="preserve">
+                <source>Pregasi aggiungere i file video nell'inspektor</source>
+            </trans-unit>
+            <trans-unit id="backendAlert.youtube" xml:space="preserve">
+                <source>Pregasi aggiungere l'ID o l'URL YouTube nell'inspektor</source>
+            </trans-unit>
+            <trans-unit id="backendAlert.vimeo" xml:space="preserve">
+                <source>Pregasi aggiungere l'ID o l'URL Vimeo nell'inspektor</source>
+            </trans-unit>
+        </body>
+    </file>
 </xliff>

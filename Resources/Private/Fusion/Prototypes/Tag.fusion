@@ -1,12 +1,55 @@
 prototype(Jonnitto.Plyr:Tag) < prototype(Neos.Fusion:Tag) {
     node = ${node}
+    id = null
+    media = null
+    editable = true
+    key = Neos.Fusion:Case {
+        isYoutube {
+            condition = ${q(node).is('[instanceof Jonnitto.Plyr:YouTube]')}
+            renderer = 'youtube'
+        }
+        isVimeo {
+            condition = ${q(node).is('[instanceof Jonnitto.Plyr:Vimeo]')}
+            renderer = 'vimeo'
+        }
+        isAudio {
+            condition = ${q(node).is('[instanceof Jonnitto.Plyr:Audio]')}
+            renderer = 'audio'
+        }
+        isVideo {
+            condition = ${q(node).is('[instanceof Jonnitto.Plyr:Video]')}
+            renderer = 'video'
+        }
+    }
+
+    @context {
+        id = ${this.id}
+        media = ${this.media}
+        key = ${this.key}
+        editable = ${this.editable}
+    }
 
     attributes.class = Neos.Fusion:RawArray {
+        key = ${'jonnitto-plyr-' + key}
         plyrContainer = 'jonnitto-plyr-container'
         container = ${Configuration.setting('Jonnitto.Plyr.container')}
     }
 
+    @if.render = ${this.id || this.media || node.context.inBackend ? true : false}
+
+    content = Neos.Fusion:Tag {
+        attributes.class = Neos.Fusion:RawArray {
+            plyr = 'neos-plyr'
+        }
+    }
+    content.@process.notification = Carbon.Notification:Backend {
+        @if.render = ${id || media ? false : true}
+        type = 'alert'
+        content = ${Translation.translate('backendAlert.' + key, null, [], null, 'Jonnitto.Plyr') }
+    }
+
     @process.contentElementWrapping {
+        @if.editable = ${editable}
         expression = Neos.Neos:ContentElementWrapping
         @position = 'end 999999999'
     }

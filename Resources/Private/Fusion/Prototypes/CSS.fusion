@@ -1,16 +1,10 @@
-prototype(Jonnitto.Plyr:CSS) <  prototype(Neos.Fusion:Tag) {
-    includeCSS = ${Configuration.setting('Jonnitto.Plyr.includeCSS')}
-
-    tagName = 'link'
-    attributes {
-        rel = 'stylesheet'
-        href = Neos.Fusion:ResourceUri {
-            path = 'resource://Jonnitto.Plyr/Public/Main.css'
-        }
-    }
+prototype(Jonnitto.Plyr:CSS) <  prototype(Carbon.IncludeAssets:File) {
+    file = ${Configuration.setting('Jonnitto.Plyr.include.css.file')}
+    assetPackage = ${Configuration.setting('Jonnitto.Plyr.include.css.assetPackage')}
+    assetPath = ${Configuration.setting('Jonnitto.Plyr.include.css.assetPath')}
 
     @if {
-        includeCSS = ${this.includeCSS}
+        includeCSS = ${this.file}
         includeCase = Jonnitto.Plyr:IncludeCase
     }
 }

@@ -1,5 +1,5 @@
 prototype(Jonnitto.Plyr:Video) < prototype(Jonnitto.Plyr:Tag) {
-    video = Neos.Fusion:Array {
+    media = Neos.Fusion:Array {
         mp4 = Jonnitto.Plyr:FileCollection {
             fileextension = 'mp4'
         }
@@ -13,38 +13,24 @@ prototype(Jonnitto.Plyr:Video) < prototype(Jonnitto.Plyr:Tag) {
         // Captions: Title as Label Captions as language
         vtt = Jonnitto.Plyr:FileCollection {
             fileextension = 'vtt'
-            itemRenderer.isRightFile.renderer  {
-                @process.wrap = ${'<track kind="captions" label="' + asset.title + '" src="' + value + '" srclang="'+ asset.caption + '"{f:if(condition:iteration.isFirst,then:\' default\')}>'}
+            itemRenderer.isRightFile.renderer {
+                @process.wrap = ${'<track kind="captions" label="' + asset.title + '" src="' + value + '" srclang="'+ asset.caption + (iteration.isFirst ? ' default' : '') + '>'}
             }
         }
     }
 
-    @context.video = ${this.video}
-    @if.render = ${this.video || node.context.inBackend ? true : false}
-
-    content = Neos.Fusion:Case {
-        hasVideo {
-            condition = ${video ? true : false}
-            renderer = Neos.Fusion:Tag {
-                tagName = 'video'
-                attributes {
-                    controls = true
-                    class = 'neos-plyr'
-                    preload = ${q(node).property('image') || node.context.inBackend ? 'none' : false}
-                    poster = ImageUri {
-                        asset = ${q(node).property('image')}
-                        maximumWidth = 1920
-                        @if.hasPicture = ${q(node).property('image') ? true : false}
-                    }
-                }
-                content = ${video}
+    content {
+        tagName = 'video'
+        attributes {
+            playsinline = ${Configuration.setting('Jonnitto.Plyr.options.playsinline')}
+            controls = true
+            preload = ${q(node).property('image') ? 'none' : true}
+            poster = ImageUri {
+                asset = ${q(node).property('image')}
+                maximumWidth = 1920
+                @if.hasPicture = ${q(node).property('image') ? true : false}
             }
         }
-        default {
-            condition = true
-            renderer = Jonnitto.Plyr:Notification {
-                key = 'video'
-            }
-        }
+        content = ${media}
     }
 }

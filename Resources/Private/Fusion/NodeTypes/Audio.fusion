@@ -1,5 +1,5 @@
 prototype(Jonnitto.Plyr:Audio) < prototype(Jonnitto.Plyr:Tag) {
-    audio = Neos.Fusion:Array {
+    media = Neos.Fusion:Array {
         mp3 = Jonnitto.Plyr:FileCollection {
             fileextension = 'mp3'
         }
@@ -11,27 +11,12 @@ prototype(Jonnitto.Plyr:Audio) < prototype(Jonnitto.Plyr:Tag) {
         }
     }
 
-    @context.audio = ${this.audio}
-    @if.render = ${this.audio || node.context.inBackend ? true : false}
-
-    content = Neos.Fusion:Case {
-        hasAudio {
-            condition = ${audio ? true : false}
-            renderer = Neos.Fusion:Tag {
-                tagName = 'audio'
-                attributes {
-                    controls = true
-                    preload = 'none'
-                    class = 'neos-plyr'
-                }
-                content = ${audio}
-            }
+    content {
+        tagName = 'audio'
+        attributes {
+            controls = true
+            preload = 'none'
         }
-        default {
-            condition = true
-            renderer = Jonnitto.Plyr:Notification {
-                key = 'audio'
-            }
-        }
+        content = ${media}
     }
 }

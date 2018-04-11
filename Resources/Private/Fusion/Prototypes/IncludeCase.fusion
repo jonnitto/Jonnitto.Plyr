@@ -1,15 +1,15 @@
 prototype(Jonnitto.Plyr:IncludeCase) <  prototype(Neos.Fusion:Value) {
-    settings = ${Configuration.setting('Jonnitto.Plyr')}
-    @context.settings = ${this.settings}
+    configuration = ${Configuration.setting('Jonnitto.Plyr')}
+    @context.configuration = ${this.configuration}
 
     value = Carbon.Condition:Case {
-        context.live = ${settings.alwaysInclude}
+        context.live = ${configuration.alwaysInclude}
 
         content {
-            collection = ${settings.selector.collection}
-            filter = ${settings.selector.content}
+            collection = ${configuration.selector.collection}
+            filter = ${configuration.selector.content}
         }
 
-        document.filter = ${settings.selector.onDocument}
+        document.filter = ${configuration.selector.onDocument}
     }
 }

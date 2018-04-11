@@ -4,6 +4,7 @@
     'Neos.Neos:Content': true
   ui:
     group: multimedia
+    inlineEditable: true
     inspector:
       groups:
         settings:

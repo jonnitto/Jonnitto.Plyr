@@ -13,9 +13,10 @@
         }
     ],
     "require": {
-        "neos/neos": "~3.0 || dev-master",
-        "carbon/notification": "^1.0",
-        "carbon/condition": "^1.0"
+        "neos/neos": "~3.0",
+        "carbon/condition": "^1.0",
+        "carbon/includeassets": "^2.1",
+        "carbon/notification": "^1.0"
     },
     "autoload": {
         "psr-4": {
@@ -23,7 +24,7 @@
         }
     },
     "archive": {
-        "exclude": [".editorconfig", ".gitignore", ".github", ".gitattributes", "gulp.json", "package.json", "CODE_OF_CONDUCT.md"]
+        "exclude": [".editorconfig", ".gitignore", ".github", ".gitattributes", "package.json", "CODE_OF_CONDUCT.md", "yarn.lock"]
     },
     "extra": {
         "marketplace-account": "me@jonnitto.ch",
