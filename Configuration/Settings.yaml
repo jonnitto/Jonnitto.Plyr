@@ -117,7 +117,7 @@ Jonnitto:
         # Toggles if captions should be active by default.
         active: false
         # Sets the default language to load (if available)
-        language: "window.navigator.language.split('-')[0]"
+        language: "(navigator.language || navigator.userLanguage).split('-')[0]"
       fullscreen:
         # Toggles whether fullscreen should be enabled
         enabled: true

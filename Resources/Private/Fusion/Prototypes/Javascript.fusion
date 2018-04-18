@@ -15,7 +15,7 @@ prototype(Jonnitto.Plyr:Javascript) < prototype(Neos.Fusion:Array) {
         content = Neos.Fusion:Array {
             options = Neos.Fusion:Template {
                 templatePath = 'resource://Jonnitto.Plyr/Private/Templates/Javascript.js'
-                i18n = ${['restart','rewind','play','pause','fastForward','seek','played','buffered','currentTime','duration','volume','mute','unmute','enableCaptions','disableCaptions','enterFullscreen','exitFullscreen','frameTitle','captions','settings','speed','quality','loop','start','end','all','reset','disabled','advertisement']}
+                i18n = ${['restart','rewind','play','pause','fastForward','seek','played','buffered','currentTime','duration','volume','mute','unmute','enableCaptions','disableCaptions','enterFullscreen','exitFullscreen','frameTitle','captions','settings','speed','normal','quality','loop','start','end','all','reset','disabled','enabled','advertisement']}
                 options = ${configuration.options}
                 clickToPlay = ${this.options.clickToPlay && node.context.live}
                 controls = Neos.Fusion:Case {
@@ -65,7 +65,7 @@ prototype(Jonnitto.Plyr:Javascript) < prototype(Neos.Fusion:Array) {
                 captions = ${[]}
                 captions.@process {
                     setActive = ${configuration.options.captions.active ? Array.push(value, 'active:true') : value}
-                    setLanguage = ${configuration.options.captions.language != "window.navigator.language.split('-')[0]" ? Array.push(value, 'language:' + configuration.options.captions.language) : value}
+                    setLanguage = ${configuration.options.captions.language != "(navigator.language || navigator.userLanguage).split('-')[0]" ? Array.push(value, 'language:' + configuration.options.captions.language) : value}
                     wrap = ${Array.isEmpty(value) ? false : '{' + Array.join(value, ',') + '}'}
                 }
 

@@ -1,6 +1,6 @@
 // ==========================================================================
 // Plyr
-// plyr.js v3.1.0
+// plyr.js v3.2.0
 // https://github.com/sampotts/plyr
 // License: The MIT License (MIT)
 // ==========================================================================
@@ -57,7 +57,7 @@ class Plyr {
         this.config = utils.extend(
             {},
             defaults,
-            options,
+            options || {},
             (() => {
                 try {
                     return JSON.parse(this.media.getAttribute('data-plyr-config'));
@@ -97,6 +97,7 @@ class Plyr {
         this.options = {
             speed: [],
             quality: [],
+            captions: [],
         };
 
         // Debugging
@@ -184,11 +185,16 @@ class Plyr {
                         if (truthy.includes(params.autoplay)) {
                             this.config.autoplay = true;
                         }
-                        if (truthy.includes(params.playsinline)) {
-                            this.config.inline = true;
-                        }
                         if (truthy.includes(params.loop)) {
                             this.config.loop.active = true;
+                        }
+
+                        // TODO: replace fullscreen.iosNative with this playsinline config option
+                        // YouTube requires the playsinline in the URL
+                        if (this.isYouTube) {
+                            this.config.playsinline = truthy.includes(params.playsinline);
+                        } else {
+                            this.config.playsinline = true;
                         }
                     }
                 } else {
@@ -223,7 +229,7 @@ class Plyr {
                     this.config.autoplay = true;
                 }
                 if (this.media.hasAttribute('playsinline')) {
-                    this.config.inline = true;
+                    this.config.playsinline = true;
                 }
                 if (this.media.hasAttribute('muted')) {
                     this.config.muted = true;
@@ -240,7 +246,7 @@ class Plyr {
         }
 
         // Check for support again but with type
-        this.supported = support.check(this.type, this.provider, this.config.inline);
+        this.supported = support.check(this.type, this.provider, this.config.playsinline);
 
         // If no support for even API, bail
         if (!this.supported.api) {
@@ -368,7 +374,7 @@ class Plyr {
      * Get playing state
      */
     get playing() {
-        return Boolean(!this.paused && !this.ended && (this.isHTML5 ? this.media.readyState > 2 : true));
+        return Boolean(this.ready && !this.paused && !this.ended && (this.isHTML5 ? this.media.readyState > 2 : true));
     }
 
     /**
@@ -845,7 +851,7 @@ class Plyr {
         }
 
         // If the method is called without parameter, toggle based on current value
-        const show = utils.is.boolean(input) ? input : this.elements.container.className.indexOf(this.config.classNames.captions.active) === -1;
+        const show = utils.is.boolean(input) ? input : !this.elements.container.classList.contains(this.config.classNames.captions.active);
 
         // Nothing to change...
         if (this.captions.active === show) {
@@ -875,16 +881,28 @@ class Plyr {
             return;
         }
 
-        // Toggle captions based on input
-        this.toggleCaptions(!utils.is.empty(input));
-
         // If empty string is passed, assume disable captions
         if (utils.is.empty(input)) {
+            this.toggleCaptions(false);
             return;
         }
 
         // Normalize
         const language = input.toLowerCase();
+
+        // Check for support
+        if (!this.options.captions.includes(language)) {
+            this.debug.warn(`Unsupported language option: ${language}`);
+            return;
+        }
+
+        // Ensure captions are enabled
+        this.toggleCaptions(true);
+
+        // Enabled only
+        if (language === 'enabled') {
+            return;
+        }
 
         // If nothing to change, bail
         if (this.language === language) {

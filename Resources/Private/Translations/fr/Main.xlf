@@ -65,6 +65,9 @@
             <trans-unit id="speed" xml:space="preserve">
                 <source>Vitesse</source>
             </trans-unit>
+            <trans-unit id="normal" xml:space="preserve">
+                <source>Normale</source>
+            </trans-unit>
             <trans-unit id="quality" xml:space="preserve">
                 <source>Qualité</source>
             </trans-unit>
@@ -85,6 +88,9 @@
             </trans-unit>
             <trans-unit id="disabled" xml:space="preserve">
                 <source>Désactivé</source>
+            </trans-unit>
+            <trans-unit id="enabled" xml:space="preserve">
+                <source>Activé</source>
             </trans-unit>
             <trans-unit id="advertisement" xml:space="preserve">
                 <source>Advert</source>

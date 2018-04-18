@@ -115,7 +115,7 @@ const defaults = {
     // Captions settings
     captions: {
         active: false,
-        language: window.navigator.language.split('-')[0],
+        language: (navigator.language || navigator.userLanguage).split('-')[0],
     },
 
     // Fullscreen settings
@@ -177,6 +177,7 @@ const defaults = {
         captions: 'Captions',
         settings: 'Settings',
         speed: 'Speed',
+        normal: 'Normal',
         quality: 'Quality',
         loop: 'Loop',
         start: 'Start',
@@ -184,6 +185,7 @@ const defaults = {
         all: 'All',
         reset: 'Reset',
         disabled: 'Disabled',
+        enabled: 'Enabled',
         advertisement: 'Ad',
     },
 

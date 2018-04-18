@@ -73,9 +73,9 @@ nomnom@1.6.x:
     colors "0.5.x"
     underscore "~1.4.4"
 
-plyr@^3.1:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/plyr/-/plyr-3.1.0.tgz#513b42ed980b08158d73be165a24b64bd9463821"
+plyr@^3.2.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/plyr/-/plyr-3.2.0.tgz#eaf25bead0d18503482be239d4d0738cc589d001"
   dependencies:
     babel-polyfill "^6.26.0"
     custom-event-polyfill "^0.3.0"
