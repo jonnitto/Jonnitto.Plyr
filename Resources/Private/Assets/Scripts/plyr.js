@@ -1,6 +1,6 @@
 // ==========================================================================
 // Plyr
-// plyr.js v3.2.0
+// plyr.js v3.2.1
 // https://github.com/sampotts/plyr
 // License: The MIT License (MIT)
 // ==========================================================================
@@ -452,7 +452,7 @@ class Plyr {
         }
 
         // Set
-        this.media.currentTime = parseFloat(targetTime.toFixed(4));
+        this.media.currentTime = targetTime;
 
         // Logging
         this.debug.log(`Seeking to ${this.currentTime} seconds`);
@@ -498,7 +498,7 @@ class Plyr {
      */
     get duration() {
         // Faux duration set via config
-        const fauxDuration = parseInt(this.config.duration, 10);
+        const fauxDuration = parseFloat(this.config.duration);
 
         // True duration
         const realDuration = this.media ? Number(this.media.duration) : 0;
@@ -845,8 +845,8 @@ class Plyr {
      * @param {boolean} input - Whether to enable captions
      */
     toggleCaptions(input) {
-        // If there's no full support, or there's no caption toggle
-        if (!this.supported.ui || !utils.is.element(this.elements.buttons.captions)) {
+        // If there's no full support
+        if (!this.supported.ui) {
             return;
         }
 
