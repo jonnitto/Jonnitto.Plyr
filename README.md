@@ -13,10 +13,10 @@
 
 [![Image of Plyr](https://cdn.plyr.io/static/demo/screenshot.png?v=3)](https://plyr.io)
 
-| Version | Neos |
-| ------- | ---- |
-| 0.\*    | 2.\* |
-| 2.\*    | 3.\* |
+| Version | Neos         |
+| ------- | ------------ |
+| 0.\*    | 2.\*         |
+| > 2.2   | 3.\* + 4.\*  |
 
 ## Installation
 

@@ -13,10 +13,10 @@
         }
     ],
     "require": {
-        "neos/neos": "~3.0",
-        "carbon/condition": "^1.0",
-        "carbon/includeassets": "^2.1",
-        "carbon/notification": "^1.0"
+        "neos/neos": "~3.0 || ~4.0",
+        "carbon/condition": "^1.1",
+        "carbon/includeassets": "^2.2",
+        "carbon/notification": "^1.2"
     },
     "autoload": {
         "psr-4": {
