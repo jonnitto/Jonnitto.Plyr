@@ -6,7 +6,7 @@
                 <source>Restart</source>
             </trans-unit>
             <trans-unit id="rewind" xml:space="preserve">
-                <source>Rewind {seektime} secs</source>
+                <source>Rewind {seektime}s</source>
             </trans-unit>
             <trans-unit id="play" xml:space="preserve">
                 <source>Play</source>
@@ -15,7 +15,7 @@
                 <source>Pause</source>
             </trans-unit>
             <trans-unit id="fastForward" xml:space="preserve">
-                <source>Forward {seektime} secs</source>
+                <source>Forward {seektime}s</source>
             </trans-unit>
             <trans-unit id="seek" xml:space="preserve">
                 <source>Seek</source>

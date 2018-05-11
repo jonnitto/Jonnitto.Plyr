@@ -8,9 +8,9 @@
   },
   "devDependencies": {
     "conditional-file-append": "^1.0.0",
-    "plyr": "^3.2.4",
+    "plyr": "^3.3.7",
     "rename-files": "0.0.2",
-    "replace": "^0.3.0"
+    "replace": "^1.0.0"
   },
   "scripts": {
     "private:styles": "rm -rf Resources/Private/Assets/Styles;mkdir -p Resources/Private/Assets/Styles;cp -R node_modules/plyr/src/sass/. Resources/Private/Assets/Styles",
