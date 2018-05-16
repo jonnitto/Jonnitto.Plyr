@@ -20,10 +20,11 @@
     "postprivate": "condappend .neos-plyr Resources/Private/Assets/Styles/plyr.scss '.jonnitto-plyr-container {\n    margin-bottom: 1em;\n}\n\n.jonnitto-plyr-container > .plyr,\n.neos-plyr {\n    width: 100%;\n}\n'",
     "public": "rm -rf Resources/Public;mkdir -p Resources/Public;cp -R node_modules/plyr/dist/. Resources/Public",
     "postpublic": "condappend .neos-plyr Resources/Public/plyr.css '.jonnitto-plyr-container{margin-bottom:1em}.jonnitto-plyr-container>.plyr,.neos-plyr{width:100%}'",
-    "build": "npm run private && npm run public",
+    "build": "yarn run private && yarn run public",
     "postbuild": "replace 'https://cdn.plyr.io/[^\\/]+/' '/_Resources/Static/Packages/Jonnitto.Plyr/' Resources/* -r --exclude=\"*.svg\"",
-    "start": "npm run build",
-    "install": "npm run build",
-    "postupdate": "npm run build"
+    "start": "yarn run build",
+    "install": "yarn run build",
+    "postupdate": "yarn run build",
+    "test": "yarn run build"
   }
 }
