@@ -4,7 +4,7 @@
 [![Total Downloads](https://poser.pugx.org/jonnitto/plyr/downloads)](https://packagist.org/packages/jonnitto/plyr)
 [![License](https://poser.pugx.org/jonnitto/plyr/license)](https://packagist.org/packages/jonnitto/plyr)
 [![Support development](https://img.shields.io/badge/Donate-PayPal-yellow.svg)](https://www.paypal.me/Jonnitto/20eur)
-[![My wishlist on amazon](https://img.shields.io/badge/Wishlist-Amazon-yellow.svg)](https://www.amazon.de/hz/wishlist/ls/2WPGORAVYF39B?&sort=default)
+[![My wishlist on amazon](https://img.shields.io/badge/Wishlist-Amazon-yellow.svg)](https://www.amazon.de/hz/wishlist/ls/2WPGORAVYF39B?&sort=default)  
 [![GitHub forks](https://img.shields.io/github/forks/jonnitto/Jonnitto.Plyr.svg?style=social&label=Fork)](https://github.com/jonnitto/Jonnitto.Plyr/fork)
 [![GitHub stars](https://img.shields.io/github/stars/jonnitto/Jonnitto.Plyr.svg?style=social&label=Stars)](https://github.com/jonnitto/Jonnitto.Plyr/stargazers)
 [![GitHub watchers](https://img.shields.io/github/watchers/jonnitto/Jonnitto.Plyr.svg?style=social&label=Watch)](https://github.com/jonnitto/Jonnitto.Plyr/subscription)
