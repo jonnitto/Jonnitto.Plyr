@@ -3,15 +3,13 @@
 // ==========================================================================
 
 import loadjs from 'loadjs';
+import Storage from './storage';
 import support from './support';
 import { providers } from './types';
 
 const utils = {
     // Check variable types
     is: {
-        plyr(input) {
-            return this.instanceof(input, window.Plyr);
-        },
         object(input) {
             return this.getConstructor(input) === Object;
         },
@@ -31,19 +29,19 @@ const utils = {
             return !this.nullOrUndefined(input) && Array.isArray(input);
         },
         weakMap(input) {
-            return this.instanceof(input, window.WeakMap);
+            return this.instanceof(input, WeakMap);
         },
         nodeList(input) {
-            return this.instanceof(input, window.NodeList);
+            return this.instanceof(input, NodeList);
         },
         element(input) {
-            return this.instanceof(input, window.Element);
+            return this.instanceof(input, Element);
         },
         textNode(input) {
             return this.getConstructor(input) === Text;
         },
         event(input) {
-            return this.instanceof(input, window.Event);
+            return this.instanceof(input, Event);
         },
         cue(input) {
             return this.instanceof(input, window.TextTrackCue) || this.instanceof(input, window.VTTCue);
@@ -122,6 +120,21 @@ const utils = {
         });
     },
 
+    // Load image avoiding xhr/fetch CORS issues
+    // Server status can't be obtained this way unfortunately, so this uses "naturalWidth" to determine if the image has loaded.
+    // By default it checks if it is at least 1px, but you can add a second argument to change this.
+    loadImage(src, minWidth = 1) {
+        return new Promise((resolve, reject) => {
+            const image = new Image();
+            const handler = () => {
+                delete image.onload;
+                delete image.onerror;
+                (image.naturalWidth >= minWidth ? resolve : reject)(image);
+            };
+            Object.assign(image, {onload: handler, onerror: handler, src});
+        });
+    },
+
     // Load an external script
     loadScript(url) {
         return new Promise((resolve, reject) => {
@@ -159,6 +172,8 @@ const utils = {
 
         // Only load once if ID set
         if (!hasId || !exists()) {
+            const useStorage = Storage.supported;
+
             // Create container
             const container = document.createElement('div');
             utils.toggleHidden(container, true);
@@ -168,7 +183,7 @@ const utils = {
             }
 
             // Check in cache
-            if (support.storage) {
+            if (useStorage) {
                 const cached = window.localStorage.getItem(prefix + id);
                 isCached = cached !== null;
 
@@ -187,7 +202,7 @@ const utils = {
                         return;
                     }
 
-                    if (support.storage) {
+                    if (useStorage) {
                         window.localStorage.setItem(
                             prefix + id,
                             JSON.stringify({
@@ -250,7 +265,7 @@ const utils = {
 
         // Add text node
         if (utils.is.string(text)) {
-            element.textContent = text;
+            element.innerText = text;
         }
 
         // Return built element
@@ -393,14 +408,16 @@ const utils = {
         }
     },
 
-    // Toggle class on an element
-    toggleClass(element, className, toggle) {
+    // Mirror Element.classList.toggle, with IE compatibility for "force" argument
+    toggleClass(element, className, force) {
         if (utils.is.element(element)) {
-            const contains = element.classList.contains(className);
+            let method = 'toggle';
+            if (typeof force !== 'undefined') {
+                method = force ? 'add' : 'remove';
+            }
 
-            element.classList[toggle ? 'add' : 'remove'](className);
-
-            return (toggle && !contains) || (!toggle && contains);
+            element.classList[method](className);
+            return element.classList.contains(className);
         }
 
         return null;
@@ -547,7 +564,7 @@ const utils = {
         const event = new CustomEvent(type, {
             bubbles,
             detail: Object.assign({}, detail, {
-                plyr: utils.is.plyr(this) ? this : null,
+                plyr: this,
             }),
         });
 
@@ -583,7 +600,7 @@ const utils = {
             return input;
         }
 
-        return input.toString().replace(/{(\d+)}/g, (match, i) => utils.is.string(args[i]) ? args[i] : '');
+        return input.toString().replace(/{(\d+)}/g, (match, i) => (utils.is.string(args[i]) ? args[i] : ''));
     },
 
     // Get percentage
@@ -704,6 +721,11 @@ const utils = {
         }
 
         return array.filter((item, index) => array.indexOf(item) === index);
+    },
+
+    // Clone nested objects
+    cloneDeep(object) {
+        return JSON.parse(JSON.stringify(object));
     },
 
     // Get the closest value in an array

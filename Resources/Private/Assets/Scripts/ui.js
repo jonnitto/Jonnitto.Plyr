@@ -74,10 +74,10 @@ const ui = {
         this.quality = null;
 
         // Reset volume display
-        ui.updateVolume.call(this);
+        controls.updateVolume.call(this);
 
         // Reset time display
-        ui.timeUpdate.call(this);
+        controls.timeUpdate.call(this);
 
         // Update the UI
         ui.checkPlaying.call(this);
@@ -105,8 +105,10 @@ const ui = {
         // Set the title
         ui.setTitle.call(this);
 
-        // Set the poster image
-        ui.setPoster.call(this);
+        // Assure the poster image is set, if the property was added before the element was created
+        if (this.poster && this.elements.poster && !this.elements.poster.style.backgroundImage) {
+            ui.setPoster.call(this, this.poster);
+        }
     },
 
     // Setup aria attribute for play and iframe title
@@ -146,15 +148,39 @@ const ui = {
         }
     },
 
-    // Set the poster image
-    setPoster() {
-        if (!utils.is.element(this.elements.poster) || utils.is.empty(this.poster)) {
-            return;
+    // Toggle poster
+    togglePoster(enable) {
+        utils.toggleClass(this.elements.container, this.config.classNames.posterEnabled, enable);
+    },
+
+    // Set the poster image (async)
+    setPoster(poster) {
+        // Set property regardless of validity
+        this.media.setAttribute('poster', poster);
+
+        // Bail if element is missing
+        if (!utils.is.element(this.elements.poster)) {
+            return Promise.reject();
         }
 
-        // Set the inline style
-        const posters = this.poster.split(',');
-        this.elements.poster.style.backgroundImage = posters.map(p => `url('${p}')`).join(',');
+        // Load the image, and set poster if successful
+        const loadPromise = utils.loadImage(poster)
+            .then(() => {
+                this.elements.poster.style.backgroundImage = `url('${poster}')`;
+                Object.assign(this.elements.poster.style, {
+                    backgroundImage: `url('${poster}')`,
+                    // Reset backgroundSize as well (since it can be set to "cover" for padded thumbnails for youtube)
+                    backgroundSize: '',
+                });
+                ui.togglePoster.call(this, true);
+                return poster;
+            });
+
+        // Hide the element if the poster can't be loaded (otherwise it will just be a black element covering the video)
+        loadPromise.catch(() => ui.togglePoster.call(this, false));
+
+        // Return the promise so the caller can use it as well
+        return loadPromise;
     },
 
     // Check playing state
@@ -173,7 +199,7 @@ const ui = {
         }
 
         // Toggle controls
-        this.toggleControls(!this.playing);
+        ui.toggleControls.call(this);
     },
 
     // Check if media is loading
@@ -188,171 +214,22 @@ const ui = {
 
         // Timer to prevent flicker when seeking
         this.timers.loading = setTimeout(() => {
-            // Toggle container class hook
+            // Update progress bar loading class state
             utils.toggleClass(this.elements.container, this.config.classNames.loading, this.loading);
 
-            // Show controls if loading, hide if done
-            this.toggleControls(this.loading);
+            // Update controls visibility
+            ui.toggleControls.call(this);
         }, this.loading ? 250 : 0);
     },
 
-    // Check if media failed to load
-    checkFailed() {
-        // https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/networkState
-        this.failed = this.media.networkState === 3;
+    // Toggle controls based on state and `force` argument
+    toggleControls(force) {
+        const { controls } = this.elements;
 
-        if (this.failed) {
-            utils.toggleClass(this.elements.container, this.config.classNames.loading, false);
-            utils.toggleClass(this.elements.container, this.config.classNames.error, true);
+        if (controls && this.config.hideControls) {
+            // Show controls if force, loading, paused, or button interaction, otherwise hide
+            this.toggleControls(Boolean(force || this.loading || this.paused || controls.pressed || controls.hover));
         }
-
-        // Clear timer
-        clearTimeout(this.timers.failed);
-
-        // Timer to prevent flicker when seeking
-        this.timers.loading = setTimeout(() => {
-            // Toggle container class hook
-            utils.toggleClass(this.elements.container, this.config.classNames.loading, this.loading);
-
-            // Show controls if loading, hide if done
-            this.toggleControls(this.loading);
-        }, this.loading ? 250 : 0);
-    },
-
-    // Update volume UI and storage
-    updateVolume() {
-        if (!this.supported.ui) {
-            return;
-        }
-
-        // Update range
-        if (utils.is.element(this.elements.inputs.volume)) {
-            ui.setRange.call(this, this.elements.inputs.volume, this.muted ? 0 : this.volume);
-        }
-
-        // Update mute state
-        if (utils.is.element(this.elements.buttons.mute)) {
-            utils.toggleState(this.elements.buttons.mute, this.muted || this.volume === 0);
-        }
-    },
-
-    // Update seek value and lower fill
-    setRange(target, value = 0) {
-        if (!utils.is.element(target)) {
-            return;
-        }
-
-        // eslint-disable-next-line
-        target.value = value;
-
-        // Webkit range fill
-        controls.updateRangeFill.call(this, target);
-    },
-
-    // Set <progress> value
-    setProgress(target, input) {
-        const value = utils.is.number(input) ? input : 0;
-        const progress = utils.is.element(target) ? target : this.elements.display.buffer;
-
-        // Update value and label
-        if (utils.is.element(progress)) {
-            progress.value = value;
-
-            // Update text label inside
-            const label = progress.getElementsByTagName('span')[0];
-            if (utils.is.element(label)) {
-                label.childNodes[0].nodeValue = value;
-            }
-        }
-    },
-
-    // Update <progress> elements
-    updateProgress(event) {
-        if (!this.supported.ui || !utils.is.event(event)) {
-            return;
-        }
-
-        let value = 0;
-
-        if (event) {
-            switch (event.type) {
-                // Video playing
-                case 'timeupdate':
-                case 'seeking':
-                    value = utils.getPercentage(this.currentTime, this.duration);
-
-                    // Set seek range value only if it's a 'natural' time event
-                    if (event.type === 'timeupdate') {
-                        ui.setRange.call(this, this.elements.inputs.seek, value);
-                    }
-
-                    break;
-
-                // Check buffer status
-                case 'playing':
-                case 'progress':
-                    ui.setProgress.call(this, this.elements.display.buffer, this.buffered * 100);
-
-                    break;
-
-                default:
-                    break;
-            }
-        }
-    },
-
-    // Update the displayed time
-    updateTimeDisplay(target = null, time = 0, inverted = false) {
-        // Bail if there's no element to display or the value isn't a number
-        if (!utils.is.element(target) || !utils.is.number(time)) {
-            return;
-        }
-
-        // Always display hours if duration is over an hour
-        const forceHours = utils.getHours(this.duration) > 0;
-
-        // eslint-disable-next-line no-param-reassign
-        target.textContent = utils.formatTime(time, forceHours, inverted);
-    },
-
-    // Handle time change event
-    timeUpdate(event) {
-        // Only invert if only one time element is displayed and used for both duration and currentTime
-        const invert = !utils.is.element(this.elements.display.duration) && this.config.invertTime;
-
-        // Duration
-        ui.updateTimeDisplay.call(this, this.elements.display.currentTime, invert ? this.duration - this.currentTime : this.currentTime, invert);
-
-        // Ignore updates while seeking
-        if (event && event.type === 'timeupdate' && this.media.seeking) {
-            return;
-        }
-
-        // Playing progress
-        ui.updateProgress.call(this, event);
-    },
-
-    // Show the duration on metadataloaded
-    durationUpdate() {
-        if (!this.supported.ui) {
-            return;
-        }
-
-        // If there's a spot to display duration
-        const hasDuration = utils.is.element(this.elements.display.duration);
-
-        // If there's only one time display, display duration there
-        if (!hasDuration && this.config.displayDuration && this.paused) {
-            ui.updateTimeDisplay.call(this, this.elements.display.currentTime, this.duration);
-        }
-
-        // If there's a duration element, update content
-        if (hasDuration) {
-            ui.updateTimeDisplay.call(this, this.elements.display.duration, this.duration);
-        }
-
-        // Update the tooltip (if visible)
-        controls.updateSeekTooltip.call(this);
     },
 };
 

@@ -3,10 +3,10 @@
 // TODO: Create as class
 // ==========================================================================
 
-import support from './support';
-import utils from './utils';
 import controls from './controls';
 import i18n from './i18n';
+import support from './support';
+import utils from './utils';
 
 const captions = {
     // Setup captions
@@ -236,7 +236,7 @@ const captions = {
 
             // Set the span content
             if (utils.is.string(caption)) {
-                content.textContent = caption.trim();
+                content.innerText = caption.trim();
             } else {
                 content.appendChild(caption);
             }
