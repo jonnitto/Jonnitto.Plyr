@@ -1,6 +1,6 @@
 // ==========================================================================
 // Plyr
-// plyr.js v3.3.9
+// plyr.js v3.3.12
 // https://github.com/sampotts/plyr
 // License: The MIT License (MIT)
 // ==========================================================================
@@ -84,7 +84,8 @@ class Plyr {
         // Captions
         this.captions = {
             active: null,
-            currentTrack: null,
+            currentTrack: -1,
+            meta: new WeakMap(),
         };
 
         // Fullscreen
@@ -96,7 +97,6 @@ class Plyr {
         this.options = {
             speed: [],
             quality: [],
-            captions: [],
         };
 
         // Debugging
@@ -675,7 +675,7 @@ class Plyr {
             quality = Number(input);
         }
 
-        if (!utils.is.number(quality) || quality === 0) {
+        if (!utils.is.number(quality)) {
             quality = this.storage.get('quality');
         }
 
@@ -838,82 +838,51 @@ class Plyr {
         }
 
         // If the method is called without parameter, toggle based on current value
-        const show = utils.is.boolean(input) ? input : !this.elements.container.classList.contains(this.config.classNames.captions.active);
-
-        // Nothing to change...
-        if (this.captions.active === show) {
-            return;
-        }
-
-        // Set global
-        this.captions.active = show;
+        const active = utils.is.boolean(input) ? input : !this.elements.container.classList.contains(this.config.classNames.captions.active);
 
         // Toggle state
-        utils.toggleState(this.elements.buttons.captions, this.captions.active);
+        utils.toggleState(this.elements.buttons.captions, active);
 
         // Add class hook
-        utils.toggleClass(this.elements.container, this.config.classNames.captions.active, this.captions.active);
+        utils.toggleClass(this.elements.container, this.config.classNames.captions.active, active);
 
-        // Trigger an event
-        utils.dispatchEvent.call(this, this.media, this.captions.active ? 'captionsenabled' : 'captionsdisabled');
+        // Update state and trigger event
+        if (active !== this.captions.active) {
+            this.captions.active = active;
+            utils.dispatchEvent.call(this, this.media, this.captions.active ? 'captionsenabled' : 'captionsdisabled');
+        }
     }
 
     /**
-     * Set the captions language
+     * Set the caption track by index
+     * @param {number} - Caption index
+     */
+    set currentTrack(input) {
+        captions.set.call(this, input);
+    }
+
+    /**
+     * Get the current caption track index (-1 if disabled)
+     */
+    get currentTrack() {
+        const { active, currentTrack } = this.captions;
+        return active ? currentTrack : -1;
+    }
+
+    /**
+     * Set the wanted language for captions
+     * Since tracks can be added later it won't update the actual caption track until there is a matching track
      * @param {string} - Two character ISO language code (e.g. EN, FR, PT, etc)
      */
     set language(input) {
-        // Nothing specified
-        if (!utils.is.string(input)) {
-            return;
-        }
-
-        // If empty string is passed, assume disable captions
-        if (utils.is.empty(input)) {
-            this.toggleCaptions(false);
-            return;
-        }
-
-        // Normalize
-        const language = input.toLowerCase();
-
-        // Check for support
-        if (!this.options.captions.includes(language)) {
-            this.debug.warn(`Unsupported language option: ${language}`);
-            return;
-        }
-
-        // Ensure captions are enabled
-        this.toggleCaptions(true);
-
-        // Enabled only
-        if (language === 'enabled') {
-            return;
-        }
-
-        // If nothing to change, bail
-        if (this.language === language) {
-            return;
-        }
-
-        // Update config
-        this.captions.language = language;
-
-        // Clear caption
-        captions.setText.call(this, null);
-
-        // Update captions
-        captions.setLanguage.call(this);
-
-        // Trigger an event
-        utils.dispatchEvent.call(this, this.media, 'languagechange');
+        captions.setLanguage.call(this, input);
     }
 
     /**
-     * Get the current captions language
+     * Get the current track's language
      */
     get language() {
-        return this.captions.language;
+        return (captions.getCurrentTrack.call(this) || {}).language;
     }
 
     /**
@@ -1164,7 +1133,7 @@ class Plyr {
         } else if (utils.is.nodeList(selector)) {
             targets = Array.from(selector);
         } else if (utils.is.array(selector)) {
-            targets = selector.filter(i => utils.is.element(i));
+            targets = selector.filter(utils.is.element);
         }
 
         if (utils.is.empty(targets)) {

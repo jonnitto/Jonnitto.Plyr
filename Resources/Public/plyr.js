@@ -493,60 +493,62 @@ var utils = {
     // Check variable types
     is: {
         object: function object(input) {
-            return this.getConstructor(input) === Object;
+            return utils.getConstructor(input) === Object;
         },
         number: function number(input) {
-            return this.getConstructor(input) === Number && !Number.isNaN(input);
+            return utils.getConstructor(input) === Number && !Number.isNaN(input);
         },
         string: function string(input) {
-            return this.getConstructor(input) === String;
+            return utils.getConstructor(input) === String;
         },
         boolean: function boolean(input) {
-            return this.getConstructor(input) === Boolean;
+            return utils.getConstructor(input) === Boolean;
         },
         function: function _function(input) {
-            return this.getConstructor(input) === Function;
+            return utils.getConstructor(input) === Function;
         },
         array: function array(input) {
-            return !this.nullOrUndefined(input) && Array.isArray(input);
+            return !utils.is.nullOrUndefined(input) && Array.isArray(input);
         },
         weakMap: function weakMap(input) {
-            return this.instanceof(input, WeakMap);
+            return utils.is.instanceof(input, WeakMap);
         },
         nodeList: function nodeList(input) {
-            return this.instanceof(input, NodeList);
+            return utils.is.instanceof(input, NodeList);
         },
         element: function element(input) {
-            return this.instanceof(input, Element);
+            return utils.is.instanceof(input, Element);
         },
         textNode: function textNode(input) {
-            return this.getConstructor(input) === Text;
+            return utils.getConstructor(input) === Text;
         },
         event: function event(input) {
-            return this.instanceof(input, Event);
+            return utils.is.instanceof(input, Event);
         },
         cue: function cue(input) {
-            return this.instanceof(input, window.TextTrackCue) || this.instanceof(input, window.VTTCue);
+            return utils.is.instanceof(input, window.TextTrackCue) || utils.is.instanceof(input, window.VTTCue);
         },
         track: function track(input) {
-            return this.instanceof(input, TextTrack) || !this.nullOrUndefined(input) && this.string(input.kind);
+            return utils.is.instanceof(input, TextTrack) || !utils.is.nullOrUndefined(input) && utils.is.string(input.kind);
         },
         url: function url(input) {
-            return !this.nullOrUndefined(input) && /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-/]))?/.test(input);
+            return !utils.is.nullOrUndefined(input) && /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-/]))?/.test(input);
         },
         nullOrUndefined: function nullOrUndefined(input) {
             return input === null || typeof input === 'undefined';
         },
         empty: function empty(input) {
-            return this.nullOrUndefined(input) || (this.string(input) || this.array(input) || this.nodeList(input)) && !input.length || this.object(input) && !Object.keys(input).length;
+            return utils.is.nullOrUndefined(input) || (utils.is.string(input) || utils.is.array(input) || utils.is.nodeList(input)) && !input.length || utils.is.object(input) && !Object.keys(input).length;
         },
         instanceof: function _instanceof$$1(input, constructor) {
             return Boolean(input && constructor && input instanceof constructor);
-        },
-        getConstructor: function getConstructor(input) {
-            return !this.nullOrUndefined(input) ? input.constructor : null;
         }
     },
+
+    getConstructor: function getConstructor(input) {
+        return !utils.is.nullOrUndefined(input) ? input.constructor : null;
+    },
+
 
     // Unfortunately, due to mixed support, UA sniffing is required
     getBrowser: function getBrowser() {
@@ -637,26 +639,25 @@ var utils = {
             return;
         }
 
-        var prefix = 'cache-';
+        var prefix = 'cache';
         var hasId = utils.is.string(id);
         var isCached = false;
 
         var exists = function exists() {
-            return document.querySelectorAll('#' + id).length;
+            return document.getElementById(id) !== null;
         };
 
-        function injectSprite(data) {
+        var update = function update(container, data) {
+            container.innerHTML = data;
+
             // Check again incase of race condition
             if (hasId && exists()) {
                 return;
             }
 
-            // Inject content
-            this.innerHTML = data;
-
             // Inject the SVG to the body
-            document.body.insertBefore(this, document.body.childNodes[0]);
-        }
+            document.body.insertAdjacentElement('afterbegin', container);
+        };
 
         // Only load once if ID set
         if (!hasId || !exists()) {
@@ -672,13 +673,12 @@ var utils = {
 
             // Check in cache
             if (useStorage) {
-                var cached = window.localStorage.getItem(prefix + id);
+                var cached = window.localStorage.getItem(prefix + '-' + id);
                 isCached = cached !== null;
 
                 if (isCached) {
                     var data = JSON.parse(cached);
-                    injectSprite.call(container, data.content);
-                    return;
+                    update(container, data.content);
                 }
             }
 
@@ -689,12 +689,12 @@ var utils = {
                 }
 
                 if (useStorage) {
-                    window.localStorage.setItem(prefix + id, JSON.stringify({
+                    window.localStorage.setItem(prefix + '-' + id, JSON.stringify({
                         content: result
                     }));
                 }
 
-                injectSprite.call(container, result);
+                update(container, result);
             }).catch(function () {});
         }
     },
@@ -1169,7 +1169,7 @@ var utils = {
 
         // Bail if the value isn't a number
         if (!utils.is.number(time)) {
-            return this.formatTime(null, displayHours, inverted);
+            return utils.formatTime(null, displayHours, inverted);
         }
 
         // Format time component to add leading zero
@@ -1178,9 +1178,9 @@ var utils = {
         };
 
         // Breakdown to hours, mins, secs
-        var hours = this.getHours(time);
-        var mins = this.getMinutes(time);
-        var secs = this.getSeconds(time);
+        var hours = utils.getHours(time);
+        var mins = utils.getMinutes(time);
+        var secs = utils.getSeconds(time);
 
         // Do we need to display hours?
         if (displayHours || hours > 0) {
@@ -1300,6 +1300,14 @@ var utils = {
     },
 
 
+    // Get a nested value in an object
+    getDeep: function getDeep(object, path) {
+        return path.split('.').reduce(function (obj, key) {
+            return obj && obj[key];
+        }, object);
+    },
+
+
     // Get the closest value in an array
     closest: function closest(array, value) {
         if (!utils.is.array(array) || !array.length) {
@@ -1368,12 +1376,12 @@ var utils = {
 
         // Parse URL if needed
         if (input.startsWith('http://') || input.startsWith('https://')) {
-            var _parseUrl = this.parseUrl(input);
+            var _utils$parseUrl = utils.parseUrl(input);
 
-            search = _parseUrl.search;
+            search = _utils$parseUrl.search;
         }
 
-        if (this.is.empty(search)) {
+        if (utils.is.empty(search)) {
             return null;
         }
 
@@ -1409,6 +1417,14 @@ var utils = {
         fragment.appendChild(element);
         element.innerHTML = source;
         return fragment.firstChild.innerText;
+    },
+
+
+    // Like outerHTML, but also works for DocumentFragment
+    getHTML: function getHTML(element) {
+        var wrapper = document.createElement('div');
+        wrapper.appendChild(element);
+        return wrapper.innerHTML;
     },
 
 
@@ -1719,6 +1735,13 @@ var html5 = {
 
                 player.media.src = supported[0].getAttribute('src');
 
+                // Restore time
+                var onLoadedMetaData = function onLoadedMetaData() {
+                    player.currentTime = currentTime;
+                    player.off('loadedmetadata', onLoadedMetaData);
+                };
+                player.on('loadedmetadata', onLoadedMetaData);
+
                 // Load new source
                 player.media.load();
 
@@ -1726,9 +1749,6 @@ var html5 = {
                 if (playing) {
                     player.play();
                 }
-
-                // Restore time
-                player.currentTime = currentTime;
 
                 // Trigger change event
                 utils.dispatchEvent.call(player, player.media, 'qualitychange', false, {
@@ -1771,11 +1791,15 @@ var i18n = {
         var key = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
         var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
-        if (utils.is.empty(key) || utils.is.empty(config) || !Object.keys(config.i18n).includes(key)) {
+        if (utils.is.empty(key) || utils.is.empty(config)) {
             return '';
         }
 
-        var string = config.i18n[key];
+        var string = utils.getDeep(config.i18n, key);
+
+        if (utils.is.empty(string)) {
+            return '';
+        }
 
         var replace = {
             '{seektime}': config.seekTime,
@@ -2145,9 +2169,15 @@ var controls = {
 
 
     // Create a settings menu item
-    createMenuItem: function createMenuItem(value, list, type, title) {
-        var badge = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
-        var checked = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : false;
+    createMenuItem: function createMenuItem(_ref) {
+        var value = _ref.value,
+            list = _ref.list,
+            type = _ref.type,
+            title = _ref.title,
+            _ref$badge = _ref.badge,
+            badge = _ref$badge === undefined ? null : _ref$badge,
+            _ref$checked = _ref.checked,
+            checked = _ref$checked === undefined ? false : _ref$checked;
 
         var item = utils.createElement('li');
 
@@ -2449,27 +2479,7 @@ var controls = {
 
         // Get the badge HTML for HD, 4K etc
         var getBadge = function getBadge(quality) {
-            var label = '';
-
-            switch (quality) {
-                case 2160:
-                    label = '4K';
-                    break;
-
-                case 1440:
-                case 1080:
-                case 720:
-                    label = 'HD';
-                    break;
-
-                case 576:
-                case 480:
-                    label = 'SD';
-                    break;
-
-                default:
-                    break;
-            }
+            var label = i18n.get('qualityBadge.' + quality, _this3.config);
 
             if (!label.length) {
                 return null;
@@ -2483,8 +2493,13 @@ var controls = {
             var sorting = _this3.config.quality.options;
             return sorting.indexOf(a) > sorting.indexOf(b) ? 1 : -1;
         }).forEach(function (quality) {
-            var label = controls.getLabel.call(_this3, 'quality', quality);
-            controls.createMenuItem.call(_this3, quality, list, type, label, getBadge(quality));
+            controls.createMenuItem.call(_this3, {
+                value: quality,
+                list: list,
+                type: type,
+                title: controls.getLabel.call(_this3, 'quality', quality),
+                badge: getBadge(quality)
+            });
         });
 
         controls.updateSetting.call(this, type, list);
@@ -2492,7 +2507,6 @@ var controls = {
 
 
     // Translate a value into a nice label
-    // TODO: Localisation
     getLabel: function getLabel(setting, value) {
         switch (setting) {
             case 'speed':
@@ -2500,7 +2514,13 @@ var controls = {
 
             case 'quality':
                 if (utils.is.number(value)) {
-                    return value + 'p';
+                    var label = i18n.get('qualityLabel.' + value, this.config);
+
+                    if (!label.length) {
+                        return value + 'p';
+                    }
+
+                    return label;
                 }
 
                 return utils.toTitleCase(value);
@@ -2522,18 +2542,7 @@ var controls = {
 
         switch (setting) {
             case 'captions':
-                if (this.captions.active) {
-                    if (this.options.captions.length > 2 || !this.options.captions.some(function (lang) {
-                        return lang === 'enabled';
-                    })) {
-                        value = this.captions.language;
-                    } else {
-                        value = 'enabled';
-                    }
-                } else {
-                    value = '';
-                }
-
+                value = this.currentTrack;
                 break;
 
             default:
@@ -2628,10 +2637,10 @@ var controls = {
         // TODO: Captions or language? Currently it's mixed
         var type = 'captions';
         var list = this.elements.settings.panes.captions.querySelector('ul');
+        var tracks = captions.getTracks.call(this);
 
         // Toggle the pane and tab
-        var toggle = captions.getTracks.call(this).length;
-        controls.toggleTab.call(this, type, toggle);
+        controls.toggleTab.call(this, type, tracks.length);
 
         // Empty the menu
         utils.emptyElement(list);
@@ -2640,33 +2649,33 @@ var controls = {
         controls.checkMenu.call(this);
 
         // If there's no captions, bail
-        if (!toggle) {
+        if (!tracks.length) {
             return;
         }
 
-        // Re-map the tracks into just the data we need
-        var tracks = captions.getTracks.call(this).map(function (track) {
+        // Generate options data
+        var options = tracks.map(function (track, value) {
             return {
-                language: !utils.is.empty(track.language) ? track.language : 'enabled',
-                label: captions.getLabel.call(_this4, track)
+                value: value,
+                checked: _this4.captions.active && _this4.currentTrack === value,
+                title: captions.getLabel.call(_this4, track),
+                badge: track.language && controls.createBadge.call(_this4, track.language.toUpperCase()),
+                list: list,
+                type: 'language'
             };
         });
 
         // Add the "Disabled" option to turn off captions
-        tracks.unshift({
-            language: '',
-            label: i18n.get('disabled', this.config)
+        options.unshift({
+            value: -1,
+            checked: !this.captions.active,
+            title: i18n.get('disabled', this.config),
+            list: list,
+            type: 'language'
         });
 
         // Generate options
-        tracks.forEach(function (track) {
-            controls.createMenuItem.call(_this4, track.language, list, 'language', track.label, track.language !== 'enabled' ? controls.createBadge.call(_this4, track.language.toUpperCase()) : null, track.language.toLowerCase() === _this4.captions.language.toLowerCase());
-        });
-
-        // Store reference
-        this.options.captions = tracks.map(function (track) {
-            return track.language;
-        });
+        options.forEach(controls.createMenuItem.bind(this));
 
         controls.updateSetting.call(this, type, list);
     },
@@ -2720,8 +2729,12 @@ var controls = {
 
         // Create items
         this.options.speed.forEach(function (speed) {
-            var label = controls.getLabel.call(_this5, 'speed', speed);
-            controls.createMenuItem.call(_this5, speed, list, type, label);
+            controls.createMenuItem.call(_this5, {
+                value: speed,
+                list: list,
+                type: type,
+                title: controls.getLabel.call(_this5, 'speed', speed)
+            });
         });
 
         controls.updateSetting.call(this, type, list);
@@ -3195,10 +3208,10 @@ var controls = {
         var replace = function replace(input) {
             var result = input;
 
-            Object.entries(props).forEach(function (_ref) {
-                var _ref2 = slicedToArray(_ref, 2),
-                    key = _ref2[0],
-                    value = _ref2[1];
+            Object.entries(props).forEach(function (_ref2) {
+                var _ref3 = slicedToArray(_ref2, 2),
+                    key = _ref3[0],
+                    value = _ref3[1];
 
                 result = utils.replaceAll(result, '{' + key + '}', value);
             });
@@ -3268,28 +3281,6 @@ var captions = {
             return;
         }
 
-        // Set default language if not set
-        var stored = this.storage.get('language');
-
-        if (!utils.is.empty(stored)) {
-            this.captions.language = stored;
-        }
-
-        if (utils.is.empty(this.captions.language)) {
-            this.captions.language = this.config.captions.language.toLowerCase();
-        }
-
-        // Set captions enabled state if not set
-        if (!utils.is.boolean(this.captions.active)) {
-            var active = this.storage.get('captions');
-
-            if (utils.is.boolean(active)) {
-                this.captions.active = active;
-            } else {
-                this.captions.active = this.config.captions.active;
-            }
-        }
-
         // Only Vimeo and HTML5 video supported at this point
         if (!this.isVideo || this.isYouTube || this.isHTML5 && !support.textTracks) {
             // Clear menu and hide
@@ -3305,17 +3296,6 @@ var captions = {
             this.elements.captions = utils.createElement('div', utils.getAttributesFromSelector(this.config.selectors.captions));
 
             utils.insertAfter(this.elements.captions, this.elements.wrapper);
-        }
-
-        // Set the class hook
-        utils.toggleClass(this.elements.container, this.config.classNames.captions.enabled, !utils.is.empty(captions.getTracks.call(this)));
-
-        // Get tracks
-        var tracks = captions.getTracks.call(this);
-
-        // If no caption file exists, hide container for caption text
-        if (utils.is.empty(tracks)) {
-            return;
         }
 
         // Get browser info
@@ -3340,61 +3320,176 @@ var captions = {
             });
         }
 
-        // Set language
-        captions.setLanguage.call(this);
+        // Try to load the value from storage
+        var active = this.storage.get('captions');
 
-        // Enable UI
-        captions.show.call(this);
-
-        // Set available languages in list
-        if (utils.is.array(this.config.controls) && this.config.controls.includes('settings') && this.config.settings.includes('captions')) {
-            controls.setCaptionsMenu.call(this);
+        // Otherwise fall back to the default config
+        if (!utils.is.boolean(active)) {
+            active = this.config.captions.active;
         }
+
+        // Get language from storage, fallback to config
+        var language = this.storage.get('language') || this.config.captions.language;
+        if (language === 'auto') {
+            var _split = (navigator.language || navigator.userLanguage).split('-');
+
+            var _split2 = slicedToArray(_split, 1);
+
+            language = _split2[0];
+        }
+        // Set language and show if active
+        captions.setLanguage.call(this, language, active);
+
+        // Watch changes to textTracks and update captions menu
+        if (this.isHTML5) {
+            var trackEvents = this.config.captions.update ? 'addtrack removetrack' : 'removetrack';
+            utils.on(this.media.textTracks, trackEvents, captions.update.bind(this));
+        }
+
+        // Update available languages in list next tick (the event must not be triggered before the listeners)
+        setTimeout(captions.update.bind(this), 0);
     },
-
-
-    // Set the captions language
-    setLanguage: function setLanguage() {
+    update: function update() {
         var _this = this;
 
-        // Setup HTML5 track rendering
+        var tracks = captions.getTracks.call(this, true);
+        // Get the wanted language
+        var _captions = this.captions,
+            language = _captions.language,
+            meta = _captions.meta;
+
+        // Handle tracks (add event listener and "pseudo"-default)
+
         if (this.isHTML5 && this.isVideo) {
-            captions.getTracks.call(this).forEach(function (track) {
-                // Show track
-                utils.on(track, 'cuechange', function (event) {
-                    return captions.setCue.call(_this, event);
+            tracks.filter(function (track) {
+                return !meta.get(track);
+            }).forEach(function (track) {
+                _this.debug.log('Track added', track);
+                // Attempt to store if the original dom element was "default"
+                meta.set(track, {
+                    default: track.mode === 'showing'
                 });
 
                 // Turn off native caption rendering to avoid double captions
-                // eslint-disable-next-line
                 track.mode = 'hidden';
+
+                // Add event listener for cue changes
+                utils.on(track, 'cuechange', function () {
+                    return captions.updateCues.call(_this);
+                });
             });
-
-            // Get current track
-            var currentTrack = captions.getCurrentTrack.call(this);
-
-            // Check if suported kind
-            if (utils.is.track(currentTrack)) {
-                // If we change the active track while a cue is already displayed we need to update it
-                if (Array.from(currentTrack.activeCues || []).length) {
-                    captions.setCue.call(this, currentTrack);
-                }
-            }
-        } else if (this.isVimeo && this.captions.active) {
-            this.embed.enableTextTrack(this.language);
         }
+
+        var trackRemoved = !tracks.find(function (track) {
+            return track === _this.captions.currentTrackNode;
+        });
+        var firstMatch = this.language !== language && tracks.find(function (track) {
+            return track.language === language;
+        });
+
+        // Update language if removed or first matching track added
+        if (trackRemoved || firstMatch) {
+            captions.setLanguage.call(this, language, this.config.captions.active);
+        }
+
+        // Enable or disable captions based on track length
+        utils.toggleClass(this.elements.container, this.config.classNames.captions.enabled, !utils.is.empty(tracks));
+
+        // Update available languages in list
+        if ((this.config.controls || []).includes('settings') && this.config.settings.includes('captions')) {
+            controls.setCaptionsMenu.call(this);
+        }
+    },
+    set: function set$$1(index) {
+        var setLanguage = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+        var show = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
+
+        var tracks = captions.getTracks.call(this);
+
+        // Disable captions if setting to -1
+        if (index === -1) {
+            this.toggleCaptions(false);
+            return;
+        }
+
+        if (!utils.is.number(index)) {
+            this.debug.warn('Invalid caption argument', index);
+            return;
+        }
+
+        if (!(index in tracks)) {
+            this.debug.warn('Track not found', index);
+            return;
+        }
+
+        if (this.captions.currentTrack !== index) {
+            this.captions.currentTrack = index;
+            var track = captions.getCurrentTrack.call(this);
+
+            var _ref = track || {},
+                language = _ref.language;
+
+            // Store reference to node for invalidation on remove
+
+
+            this.captions.currentTrackNode = track;
+
+            // Prevent setting language in some cases, since it can violate user's intentions
+            if (setLanguage) {
+                this.captions.language = language;
+            }
+
+            // Handle Vimeo captions
+            if (this.isVimeo) {
+                this.embed.enableTextTrack(language);
+            }
+
+            // Trigger event
+            utils.dispatchEvent.call(this, this.media, 'languagechange');
+        }
+
+        if (this.isHTML5 && this.isVideo) {
+            // If we change the active track while a cue is already displayed we need to update it
+            captions.updateCues.call(this);
+        }
+
+        // Show captions
+        if (show) {
+            this.toggleCaptions(true);
+        }
+    },
+    setLanguage: function setLanguage(language) {
+        var show = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+
+        if (!utils.is.string(language)) {
+            this.debug.warn('Invalid language argument', language);
+            return;
+        }
+        // Normalize
+        this.captions.language = language.toLowerCase();
+
+        // Set currentTrack
+        var tracks = captions.getTracks.call(this);
+        var track = captions.getCurrentTrack.call(this, true);
+        captions.set.call(this, tracks.indexOf(track), false, show);
     },
 
 
-    // Get the tracks
+    // Get current valid caption tracks
+    // If update is false it will also ignore tracks without metadata
+    // This is used to "freeze" the language options when captions.update is false
     getTracks: function getTracks() {
-        // Return empty array at least
-        if (utils.is.nullOrUndefined(this.media)) {
-            return [];
-        }
+        var _this2 = this;
 
-        // Only get accepted kinds
-        return Array.from(this.media.textTracks || []).filter(function (track) {
+        var update = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+
+        // Handle media or textTracks missing or null
+        var tracks = Array.from((this.media || {}).textTracks || []);
+        // For HTML5, use cache instead of current tracks when it exists (if captions.update is false)
+        // Filter out removed tracks and tracks that aren't captions/subtitles (for example metadata)
+        return tracks.filter(function (track) {
+            return !_this2.isHTML5 || update || _this2.captions.meta.has(track);
+        }).filter(function (track) {
             return ['captions', 'subtitles'].includes(track.kind);
         });
     },
@@ -3402,32 +3497,20 @@ var captions = {
 
     // Get the current track for the current language
     getCurrentTrack: function getCurrentTrack() {
-        var _this2 = this;
+        var _this3 = this;
+
+        var fromLanguage = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
 
         var tracks = captions.getTracks.call(this);
-
-        if (!tracks.length) {
-            return null;
-        }
-
-        // Get track based on current language
-        var track = tracks.find(function (track) {
-            return track.language.toLowerCase() === _this2.language;
+        var sortIsDefault = function sortIsDefault(track) {
+            return Number((_this3.captions.meta.get(track) || {}).default);
+        };
+        var sorted = Array.from(tracks).sort(function (a, b) {
+            return sortIsDefault(b) - sortIsDefault(a);
         });
-
-        // Get the <track> with default attribute
-        if (!track) {
-            track = utils.getElement.call(this, 'track[default]');
-        }
-
-        // Get the first track
-        if (!track) {
-            var _tracks = slicedToArray(tracks, 1);
-
-            track = _tracks[0];
-        }
-
-        return track;
+        return !fromLanguage && tracks[this.currentTrack] || sorted.find(function (track) {
+            return track.language === _this3.captions.language;
+        }) || sorted[0];
     },
 
 
@@ -3455,77 +3538,50 @@ var captions = {
     },
 
 
-    // Display active caption if it contains text
-    setCue: function setCue(input) {
-        // Get the track from the event if needed
-        var track = utils.is.event(input) ? input.target : input;
-        var activeCues = track.activeCues;
-
-        var active = activeCues.length && activeCues[0];
-        var currentTrack = captions.getCurrentTrack.call(this);
-
-        // Only display current track
-        if (track !== currentTrack) {
-            return;
-        }
-
-        // Display a cue, if there is one
-        if (utils.is.cue(active)) {
-            captions.setText.call(this, active.getCueAsHTML());
-        } else {
-            captions.setText.call(this, null);
-        }
-
-        utils.dispatchEvent.call(this, this.media, 'cuechange');
-    },
-
-
-    // Set the current caption
-    setText: function setText(input) {
+    // Update captions using current track's active cues
+    // Also optional array argument in case there isn't any track (ex: vimeo)
+    updateCues: function updateCues(input) {
         // Requires UI
         if (!this.supported.ui) {
             return;
         }
 
-        if (utils.is.element(this.elements.captions)) {
-            var content = utils.createElement('span');
-
-            // Empty the container
-            utils.emptyElement(this.elements.captions);
-
-            // Default to empty
-            var caption = !utils.is.nullOrUndefined(input) ? input : '';
-
-            // Set the span content
-            if (utils.is.string(caption)) {
-                content.innerText = caption.trim();
-            } else {
-                content.appendChild(caption);
-            }
-
-            // Set new caption text
-            this.elements.captions.appendChild(content);
-        } else {
+        if (!utils.is.element(this.elements.captions)) {
             this.debug.warn('No captions element to render to');
-        }
-    },
-
-
-    // Display captions container and button (for initialization)
-    show: function show() {
-        // Try to load the value from storage
-        var active = this.storage.get('captions');
-
-        // Otherwise fall back to the default config
-        if (!utils.is.boolean(active)) {
-            active = this.config.captions.active;
-        } else {
-            this.captions.active = active;
+            return;
         }
 
-        if (active) {
-            utils.toggleClass(this.elements.container, this.config.classNames.captions.active, true);
-            utils.toggleState(this.elements.buttons.captions, true);
+        // Only accept array or empty input
+        if (!utils.is.nullOrUndefined(input) && !Array.isArray(input)) {
+            this.debug.warn('updateCues: Invalid input', input);
+            return;
+        }
+
+        var cues = input;
+
+        // Get cues from track
+        if (!cues) {
+            var track = captions.getCurrentTrack.call(this);
+            cues = Array.from((track || {}).activeCues || []).map(function (cue) {
+                return cue.getCueAsHTML();
+            }).map(utils.getHTML);
+        }
+
+        // Set new caption text
+        var content = cues.map(function (cueText) {
+            return cueText.trim();
+        }).join('\n');
+        var changed = content !== this.elements.captions.innerHTML;
+
+        if (changed) {
+            // Empty the container and create a new child element
+            utils.emptyElement(this.elements.captions);
+            var caption = utils.createElement('span', utils.getAttributesFromSelector(this.config.selectors.caption));
+            caption.innerHTML = content;
+            this.elements.captions.appendChild(caption);
+
+            // Trigger event
+            utils.dispatchEvent.call(this, this.media, 'cuechange');
         }
     }
 };
@@ -3667,7 +3723,10 @@ var defaults$1 = {
     // Captions settings
     captions: {
         active: false,
-        language: (navigator.language || navigator.userLanguage).split('-')[0]
+        language: 'auto',
+        // Listen to new tracks added after Plyr is initialized.
+        // This is needed for streaming captions, but may result in unselectable options
+        update: false
     },
 
     // Fullscreen settings
@@ -3724,7 +3783,15 @@ var defaults$1 = {
         reset: 'Reset',
         disabled: 'Disabled',
         enabled: 'Enabled',
-        advertisement: 'Ad'
+        advertisement: 'Ad',
+        qualityBadge: {
+            2160: '4K',
+            1440: 'HD',
+            1080: 'HD',
+            720: 'HD',
+            576: 'SD',
+            480: 'SD'
+        }
     },
 
     // URLs
@@ -3812,13 +3879,13 @@ var defaults$1 = {
         display: {
             currentTime: '.plyr__time--current',
             duration: '.plyr__time--duration',
-            buffer: '.plyr__progress--buffer',
-            played: '.plyr__progress--played',
-            loop: '.plyr__progress--loop',
+            buffer: '.plyr__progress__buffer',
+            loop: '.plyr__progress__loop', // Used later
             volume: '.plyr__volume--display'
         },
         progress: '.plyr__progress',
         captions: '.plyr__captions',
+        caption: '.plyr__caption',
         menu: {
             quality: '.js-plyr__menu__list--quality'
         }
@@ -4183,8 +4250,10 @@ var ui = {
         // Remove native controls
         ui.toggleNativeControls.call(this);
 
-        // Captions
-        captions.setup.call(this);
+        // Setup captions for HTML5
+        if (this.isHTML5) {
+            captions.setup.call(this);
+        }
 
         // Reset volume
         this.volume = null;
@@ -4236,6 +4305,12 @@ var ui = {
         // Assure the poster image is set, if the property was added before the element was created
         if (this.poster && this.elements.poster && !this.elements.poster.style.backgroundImage) {
             ui.setPoster.call(this, this.poster);
+        }
+
+        // Manually set the duration if user has overridden it.
+        // The event listeners for it doesn't get called if preload is disabled (#701)
+        if (this.config.duration) {
+            controls.durationUpdate.call(this);
         }
     },
 
@@ -4426,7 +4501,7 @@ var Listeners = function () {
                 // and if the focused element is not editable (e.g. text input)
                 // and any that accept key input http://webaim.org/techniques/keyboard/
                 var focused = utils.getFocusElement();
-                if (utils.is.element(focused) && utils.matches(focused, this.player.config.selectors.editable)) {
+                if (utils.is.element(focused) && focused !== this.player.elements.inputs.seek && utils.matches(focused, this.player.config.selectors.editable)) {
                     return;
                 }
 
@@ -4789,9 +4864,11 @@ var Listeners = function () {
             // Proxy events to container
             // Bubble up key events for Edge
             utils.on(this.player.media, this.player.config.events.concat(['keyup', 'keydown']).join(' '), function (event) {
-                var detail = {};
+                var _event$detail = event.detail,
+                    detail = _event$detail === undefined ? {} : _event$detail;
 
                 // Get error details from media
+
                 if (event.type === 'error') {
                     detail = _this3.player.media.error;
                 }
@@ -4890,7 +4967,7 @@ var Listeners = function () {
                 // Settings menu items - use event delegation as items are added/removed
                 if (utils.matches(event.target, _this4.player.config.selectors.inputs.language)) {
                     proxy(event, function () {
-                        _this4.player.language = event.target.value;
+                        _this4.player.currentTrack = Number(event.target.value);
                         showHomeTab();
                     }, 'language');
                 } else if (utils.matches(event.target, _this4.player.config.selectors.inputs.quality)) {
@@ -4920,6 +4997,12 @@ var Listeners = function () {
             on(this.player.elements.inputs.seek, 'mousedown mouseup keydown keyup touchstart touchend', function (event) {
                 var seek = event.currentTarget;
 
+                var code = event.keyCode ? event.keyCode : event.which;
+                var eventType = event.type;
+
+                if ((eventType === 'keydown' || eventType === 'keyup') && code !== 39 && code !== 37) {
+                    return;
+                }
                 // Was playing before?
                 var play = seek.hasAttribute('play-on-seeked');
 
@@ -5079,6 +5162,9 @@ var Listeners = function () {
 
 // Set playback state and trigger change (only on actual change)
 function assurePlaybackState(play) {
+    if (play && !this.embed.hasPlayed) {
+        this.embed.hasPlayed = true;
+    }
     if (this.media.paused === play) {
         this.media.paused = !play;
         utils.dispatchEvent.call(this, this.media, play ? 'play' : 'pause');
@@ -5231,24 +5317,25 @@ var vimeo = {
                     paused = player.paused,
                     volume = player.volume;
 
-                // Set seeking state and trigger event
+                var restorePause = paused && !embed.hasPlayed;
 
+                // Set seeking state and trigger event
                 media.seeking = true;
                 utils.dispatchEvent.call(player, media, 'seeking');
 
                 // If paused, mute until seek is complete
-                Promise.resolve(paused && embed.setVolume(0))
+                Promise.resolve(restorePause && embed.setVolume(0))
                 // Seek
                 .then(function () {
                     return embed.setCurrentTime(time);
                 })
                 // Restore paused
                 .then(function () {
-                    return paused && embed.pause();
+                    return restorePause && embed.pause();
                 })
                 // Restore volume
                 .then(function () {
-                    return paused && embed.setVolume(volume);
+                    return restorePause && embed.setVolume(volume);
                 }).catch(function () {
                     // Do nothing
                 });
@@ -5378,17 +5465,25 @@ var vimeo = {
             captions.setup.call(player);
         });
 
-        player.embed.on('cuechange', function (data) {
-            var cue = null;
+        player.embed.on('cuechange', function (_ref) {
+            var _ref$cues = _ref.cues,
+                cues = _ref$cues === undefined ? [] : _ref$cues;
 
-            if (data.cues.length) {
-                cue = utils.stripHTML(data.cues[0].text);
-            }
-
-            captions.setText.call(player, cue);
+            var strippedCues = cues.map(function (cue) {
+                return utils.stripHTML(cue.text);
+            });
+            captions.updateCues.call(player, strippedCues);
         });
 
         player.embed.on('loaded', function () {
+            // Assure state and events are updated on autoplay
+            player.embed.getPaused().then(function (paused) {
+                assurePlaybackState.call(player, !paused);
+                if (!paused) {
+                    utils.dispatchEvent.call(player, player.media, 'playing');
+                }
+            });
+
             if (utils.is.element(player.embed.element) && player.supported.ui) {
                 var frame = player.embed.element;
 
@@ -5518,6 +5613,9 @@ function mapQualityUnits(levels) {
 
 // Set playback state and trigger change (only on actual change)
 function assurePlaybackState$1(play) {
+    if (play && !this.embed.hasPlayed) {
+        this.embed.hasPlayed = true;
+    }
     if (this.media.paused === play) {
         this.media.paused = !play;
         utils.dispatchEvent.call(this, this.media, play ? 'play' : 'pause');
@@ -5931,7 +6029,7 @@ var youtube = {
 
                         case 1:
                             // Restore paused state (YouTube starts playing on seek if the video hasn't been played yet)
-                            if (player.media.paused) {
+                            if (player.media.paused && !player.embed.hasPlayed) {
                                 player.media.pause();
                             } else {
                                 assurePlaybackState$1.call(player, true);
@@ -6922,7 +7020,8 @@ var Plyr = function () {
         // Captions
         this.captions = {
             active: null,
-            currentTrack: null
+            currentTrack: -1,
+            meta: new WeakMap()
         };
 
         // Fullscreen
@@ -6933,8 +7032,7 @@ var Plyr = function () {
         // Options
         this.options = {
             speed: [],
-            quality: [],
-            captions: []
+            quality: []
         };
 
         // Debugging
@@ -7294,29 +7392,24 @@ var Plyr = function () {
             }
 
             // If the method is called without parameter, toggle based on current value
-            var show = utils.is.boolean(input) ? input : !this.elements.container.classList.contains(this.config.classNames.captions.active);
-
-            // Nothing to change...
-            if (this.captions.active === show) {
-                return;
-            }
-
-            // Set global
-            this.captions.active = show;
+            var active = utils.is.boolean(input) ? input : !this.elements.container.classList.contains(this.config.classNames.captions.active);
 
             // Toggle state
-            utils.toggleState(this.elements.buttons.captions, this.captions.active);
+            utils.toggleState(this.elements.buttons.captions, active);
 
             // Add class hook
-            utils.toggleClass(this.elements.container, this.config.classNames.captions.active, this.captions.active);
+            utils.toggleClass(this.elements.container, this.config.classNames.captions.active, active);
 
-            // Trigger an event
-            utils.dispatchEvent.call(this, this.media, this.captions.active ? 'captionsenabled' : 'captionsdisabled');
+            // Update state and trigger event
+            if (active !== this.captions.active) {
+                this.captions.active = active;
+                utils.dispatchEvent.call(this, this.media, this.captions.active ? 'captionsenabled' : 'captionsdisabled');
+            }
         }
 
         /**
-         * Set the captions language
-         * @param {string} - Two character ISO language code (e.g. EN, FR, PT, etc)
+         * Set the caption track by index
+         * @param {number} - Caption index
          */
 
     }, {
@@ -7843,7 +7936,7 @@ var Plyr = function () {
                 quality = Number(input);
             }
 
-            if (!utils.is.number(quality) || quality === 0) {
+            if (!utils.is.number(quality)) {
                 quality = this.storage.get('quality');
             }
 
@@ -8007,60 +8100,41 @@ var Plyr = function () {
             return Boolean(this.config.autoplay);
         }
     }, {
-        key: 'language',
+        key: 'currentTrack',
         set: function set$$1(input) {
-            // Nothing specified
-            if (!utils.is.string(input)) {
-                return;
-            }
-
-            // If empty string is passed, assume disable captions
-            if (utils.is.empty(input)) {
-                this.toggleCaptions(false);
-                return;
-            }
-
-            // Normalize
-            var language = input.toLowerCase();
-
-            // Check for support
-            if (!this.options.captions.includes(language)) {
-                this.debug.warn('Unsupported language option: ' + language);
-                return;
-            }
-
-            // Ensure captions are enabled
-            this.toggleCaptions(true);
-
-            // Enabled only
-            if (language === 'enabled') {
-                return;
-            }
-
-            // If nothing to change, bail
-            if (this.language === language) {
-                return;
-            }
-
-            // Update config
-            this.captions.language = language;
-
-            // Clear caption
-            captions.setText.call(this, null);
-
-            // Update captions
-            captions.setLanguage.call(this);
-
-            // Trigger an event
-            utils.dispatchEvent.call(this, this.media, 'languagechange');
+            captions.set.call(this, input);
         }
 
         /**
-         * Get the current captions language
+         * Get the current caption track index (-1 if disabled)
          */
         ,
         get: function get$$1() {
-            return this.captions.language;
+            var _captions = this.captions,
+                active = _captions.active,
+                currentTrack = _captions.currentTrack;
+
+            return active ? currentTrack : -1;
+        }
+
+        /**
+         * Set the wanted language for captions
+         * Since tracks can be added later it won't update the actual caption track until there is a matching track
+         * @param {string} - Two character ISO language code (e.g. EN, FR, PT, etc)
+         */
+
+    }, {
+        key: 'language',
+        set: function set$$1(input) {
+            captions.setLanguage.call(this, input);
+        }
+
+        /**
+         * Get the current track's language
+         */
+        ,
+        get: function get$$1() {
+            return (captions.getCurrentTrack.call(this) || {}).language;
         }
 
         /**
@@ -8136,9 +8210,7 @@ var Plyr = function () {
             } else if (utils.is.nodeList(selector)) {
                 targets = Array.from(selector);
             } else if (utils.is.array(selector)) {
-                targets = selector.filter(function (i) {
-                    return utils.is.element(i);
-                });
+                targets = selector.filter(utils.is.element);
             }
 
             if (utils.is.empty(targets)) {
