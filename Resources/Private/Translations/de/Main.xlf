@@ -95,6 +95,9 @@
             <trans-unit id="advertisement" xml:space="preserve">
                 <source>Werbung</source>
             </trans-unit>
+            <trans-unit id="qualityBadge" xml:space="preserve">
+                <source><![CDATA[{2160:'4K',1440:'HD',1080:'HD',720:'HD',576:'SD',480:'SD'}]]></source>
+            </trans-unit>
             <trans-unit id="backendAlert.audio" xml:space="preserve">
                 <source>Bitte Audiodateien im Inspektor hinzufügen</source>
             </trans-unit>

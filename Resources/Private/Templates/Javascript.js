@@ -1,10 +1,6 @@
 (function () {
     var o={
-        i18n:{
-            <f:for each="{i18n}" as="key" iteration="iteration">
-                {key}:'<f:translate package="Jonnitto.Plyr" id="{key}" />'<f:if condition="{iteration.isLast}"><f:else>,</f:else></f:if>
-            </f:for>
-        }
+        <f:if condition="{i18n}">{i18n -> f:format.raw()}</f:if>
         <f:if condition="{options.enabled}"><f:else>,enabled:false</f:else></f:if>
         <f:if condition="{options.debug}">,debug:true</f:if>
         <f:if condition="{controls}">,controls:{controls -> f:format.raw()}</f:if>

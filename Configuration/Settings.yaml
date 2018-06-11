@@ -117,7 +117,10 @@ Jonnitto:
         # Toggles if captions should be active by default.
         active: false
         # Sets the default language to load (if available)
-        language: "(navigator.language || navigator.userLanguage).split('-')[0]"
+        language: auto
+        # Listen to new tracks added after Plyr is initialized.
+        # This is needed for streaming captions, but may result in unselectable options
+        update: false
       fullscreen:
         # Toggles whether fullscreen should be enabled
         enabled: true
