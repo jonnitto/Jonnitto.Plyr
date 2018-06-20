@@ -20,6 +20,9 @@
             <trans-unit id="seek" xml:space="preserve">
                 <source>Suchen</source>
             </trans-unit>
+            <trans-unit id="seekLabel" xml:space="preserve">
+                <source>{currentTime} von {duration}</source>
+            </trans-unit>
             <trans-unit id="played" xml:space="preserve">
                 <source>Abgespielt</source>
             </trans-unit>
@@ -61,6 +64,9 @@
             </trans-unit>
             <trans-unit id="settings" xml:space="preserve">
                 <source>Einstellungen</source>
+            </trans-unit>
+            <trans-unit id="menuBack" xml:space="preserve">
+                <source>Gehe zurück zum vorherigen Menü</source>
             </trans-unit>
             <trans-unit id="speed" xml:space="preserve">
                 <source>Geschwindigkeit</source>

@@ -17,7 +17,7 @@ prototype(Jonnitto.Plyr:Javascript) < prototype(Neos.Fusion:Array) {
                 templatePath = 'resource://Jonnitto.Plyr/Private/Templates/Javascript.js'
 
                 i18n = Neos.Fusion:Collection {
-                    collection = ${['restart','rewind','play','pause','fastForward','seek','played','buffered','currentTime','duration','volume','mute','unmute','enableCaptions','disableCaptions','enterFullscreen','exitFullscreen','frameTitle','captions','settings','speed','normal','quality','loop','start','end','all','reset','disabled','enabled','advertisement','qualityBadge']}
+                    collection = ${['restart','rewind','play','pause','fastForward','seek','seekLabel','played','buffered','currentTime','duration','volume','mute','unmute','enableCaptions','disableCaptions','enterFullscreen','exitFullscreen','frameTitle','captions','settings','menuBack','speed','normal','quality','loop','start','end','all','reset','disabled','enabled','advertisement','qualityBadge']}
                     itemRenderer = Neos.Fusion:Value {
                         translation = ${Translation.translate(item, null, [], null, 'Jonnitto.Plyr')}
                         wrappedTranslation = ${item == 'qualityBadge' ? this.translation : ("'" + this.translation + "'")}
