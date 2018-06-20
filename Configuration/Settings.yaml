@@ -23,51 +23,19 @@ Jonnitto:
       YouTube: true
       Vimeo: true
     options:
-      playsinline: true
       # Completely disable Plyr. This would allow you to do a User Agent check or
       # similar to programmatically enable or disable Plyr for a certain UA
       enabled: true
       # Display debugging information in the console
       debug: false
-      # See https://github.com/sampotts/plyr/blob/master/controls.md for more information
-      controls:
-        - 'play-large' # The large play button in the center
-        # - 'restart' # Restart playback
-        # - 'rewind' # Rewind by the seek time (default 10 seconds)
-        - 'play' # Play/pause playback
-        # - 'fast-forward' # Fast forward by the seek time (default 10 seconds)
-        - 'progress' # The progress bar and scrubber for playback and buffering
-        - 'current-time' # The current time of playback
-        # - 'duration' # The full duration of the media
-        - 'mute' # Toggle mute
-        - 'volume' # Volume control
-        - 'captions' # Toggle captions
-        - 'settings' # Settings menu
-        - 'pip' # Picture-in-picture (currently Safari only)
-        - 'airplay' # Airplay (currently Safari only)
-        - 'fullscreen' # Toggle fullscreen
-      # If you're using the default controls are used then you can specify which settings to show in the menu
-      settings: ['captions', 'quality', 'speed', 'loop']
-      # Load the SVG sprite specified as the iconUrl option (if a URL).
-      # If false, it is assumed you are handling sprite loading yourself.
-      loadSprite: true
-      # Specify a URL or path to the SVG sprite.
-      # See https://github.com/sampotts/plyr#svg for more info
-      iconUrl: null
-      # Specify the id prefix for the icons used in the default controls
-      # (e.g. "plyr-play" would be "plyr"). This is to prevent clashes
-      # if you're using your own SVG sprite but with the default controls.
-      # Most people can ignore this option.
-      iconPrefix: 'plyr'
-      # Specify a URL or path to a blank video file used to properly cancel network requests.
-      # Default to blank.mp4 from the public folder
-      blankUrl: null
       # Autoplay the media on load. This is generally advised against on UX grounds.
       # It is also disabled by default in some browsers. If the autoplay attribute is
       # present on a <video> or <audio> element, this will be automatically set to true.
       autoplay: false
       # Only allow one player playing at once (Vimeo only)
       autopause: true
+      # Allow inline playback on iOS (this effects YouTube/Vimeo - HTML5 requires the attribute present)
+      playsinline: true
       # The time, in seconds, to seek when a user hits fast forward or rewind
       seekTime: 10
       # A number, between 0 and 1, representing the initial volume of the player
@@ -75,20 +43,77 @@ Jonnitto:
       # Whether to start playback muted. If the muted attribute is present on a
       # <video> or <audio> element, this will be automatically set to true
       muted: false
+      # Specify a custom duration for media
+      duration: null
+      # Displays the duration of the media on the "metadataloaded" event (on startup)
+      # in the current time display. This will only work if the preload attribute is
+      # not set to none (or is not set at all) and you choose not to display the
+      # duration (see controls option).
+      displayDuration: true
+      # Display the current time as a countdown rather than an incremental counter
+      invertTime: true
+      # Clicking the currentTime inverts it's value to show time left rather than elapsed
+      toggleInvert: true
+      # The aspect ratio you want to use for embedded players
+      ratio: '16:9'
       # Click (or tap) of the video container will toggle play/pause
       clickToPlay: true
-      # Disable right click menu on video to help as very primitive obfuscation
-      # to prevent downloads of content
-      disableContextMenu: true
       # Hide video controls automatically after 2s of no mouse or focus movement,
       # on control element blur (tab out), on playback start or entering fullscreen.
       # As soon as the mouse is moved, a control element is focused or playback is
       # paused, the controls reappear instantly
       hideControls: true
-      # This will restore and reload HTML5 video once playback is complete.
-      # Note: depending on the browser caching, this may result in the video
-      # downloading again (or parts of it). Use with caution.
-      showPosterOnEnd: false
+      # Reset to start when playback ended
+      resetOnEnd: false
+      # Disable right click menu on video to help as very primitive obfuscation
+      # to prevent downloads of content
+      disableContextMenu: true
+      # Load the SVG sprite specified as the iconUrl option (if a URL).
+      # If false, it is assumed you are handling sprite loading yourself.
+      loadSprite: true
+      # Specify the id prefix for the icons used in the default controls
+      # (e.g. "plyr-play" would be "plyr"). This is to prevent clashes
+      # if you're using your own SVG sprite but with the default controls.
+      # Most people can ignore this option.
+      iconPrefix: plyr
+      # Specify a URL or path to the SVG sprite.
+      # See https://github.com/sampotts/plyr#svg for more info
+      iconUrl: '/_Resources/Static/Packages/Jonnitto.Plyr/plyr.svg'
+      # Blank video (used to prevent errors on source change)
+      blankVideo: '/_Resources/Static/Packages/Jonnitto.Plyr/blank.mp4'
+      # Quality default
+      quality:
+        default: 576
+        options:
+          - 4320
+          - 2880
+          - 2160
+          - 1440
+          - 1080
+          - 720
+          - 576
+          - 480
+          - 360
+          - 240
+          - default #YouTube's "auto"
+      loop:
+        # Whether to loop the current video. If the loop attribute is present
+        # on a <video> or <audio> element, this will be automatically set to
+        # true This is an object to support future functionality
+        active: false
+      # Speed default and options to display
+      speed:
+        # The default speed for playback
+        selected: 1
+        # Options to display in the menu. Most browsers will refuse to play slower than 0.5
+        options:
+          - 0.5
+          - 0.75
+          - 1
+          - 1.25
+          - 1.5
+          - 1.75
+          - 2
       # Enable keyboard shortcuts for focused players only or globally
       # See https://github.com/sampotts/plyr#shortcuts for more info
       keyboard:
@@ -100,19 +125,7 @@ Jonnitto:
         controls: false
         # Display a seek tooltip to indicate on click where the media would seek to.
         seek: true
-      # Specify a custom duration for media
-      duration: null
-      # Displays the duration of the media on the "metadataloaded" event (on startup)
-      # in the current time display. This will only work if the preload attribute is
-      # not set to none (or is not set at all) and you choose not to display the
-      # duration (see controls option).
-      displayDuration: true
-      # Display the current time as a countdown rather than an incremental counter
-      invertTime: true
-      # Allows binding of event listeners to the controls before the default handlers.
-      # See the defaults.js for available listeners. If your handler prevents default
-      # on the event (event.preventDefault()), the default handler will not fire.
-      listeners: null
+      # Captions settings
       captions:
         # Toggles if captions should be active by default.
         active: false
@@ -121,6 +134,7 @@ Jonnitto:
         # Listen to new tracks added after Plyr is initialized.
         # This is needed for streaming captions, but may result in unselectable options
         update: false
+      # Fullscreen settings
       fullscreen:
         # Toggles whether fullscreen should be enabled
         enabled: true
@@ -129,28 +143,60 @@ Jonnitto:
         # whether to use native iOS fullscreen when entering
         # fullscreen (no custom controls)
         iosNative: false
-      # The aspect ratio you want to use for embedded players
-      ratio: '16:9'
+
+      # Local storage
       storage:
         # Allow use of local storage to store user settings
         enabled: true
         # The key name to use
-        key: 'plyr'
-      speed:
-        # The default speed for playback
-        selected: 1
-        # Options to display in the menu. Most browsers will refuse to play slower than 0.5
-        options: [0.5, 0.75, 1, 1.25, 1.5, 1.75, 2]
-      # Currently only supported by YouTube
-      # default is the default quality level, determined by YouTube
-      quality:
-        default: 'default'
-        options: ['hd2160', 'hd1440', 'hd1080', 'hd720', 'large', 'medium', 'small', 'tiny', 'default']
-      loop:
-        # Whether to loop the current video. If the loop attribute is present
-        # on a <video> or <audio> element, this will be automatically set to
-        # true This is an object to support future functionality
-        active: false
+        key: plyr
+      # See https://github.com/sampotts/plyr/blob/master/controls.md for more information
+      controls:
+        - play-large # The large play button in the center
+        # - restart # Restart playback
+        # - rewind # Rewind by the seek time (default 10 seconds)
+        - play # Play/pause playback
+        # - fast-forward # Fast forward by the seek time (default 10 seconds)
+        - progress # The progress bar and scrubber for playback and buffering
+        - current-time # The current time of playback
+        # - duration # The full duration of the media
+        - mute # Toggle mute
+        - volume # Volume control
+        - captions # Toggle captions
+        - settings # Settings menu
+        - pip # Picture-in-picture (currently Safari only)
+        - airplay # Airplay (currently Safari only)
+        - fullscreen # Toggle fullscreen
+      # If you're using the default controls are used then you can specify which settings to show in the menu
+      settings:
+        - captions
+        - quality
+        - speed
+      # Allows binding of event listeners to the controls before the default handlers.
+      # If your handler prevents default on the event
+      # (event.preventDefault()), the default handler will not fire.
+      listeners:
+        seek: null
+        play: null
+        pause: null
+        restart: null
+        rewind: null
+        fastForward: null
+        mute: null
+        volume: null
+        captions: null
+        fullscreen: null
+        pip: null
+        airplay: null
+        speed: null
+        quality: null
+        loop: null
+        language: null
+      # API keys
+      keys:
+        google: null
+      # Advertisements plugin
+      # Register for an account here: http://vi.ai/publisher-video-monetization/?aid=plyrio
       ads:
         # Whether to enable vi.ai ads
         enabled: false
