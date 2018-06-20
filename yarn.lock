@@ -99,17 +99,17 @@ nomnom@1.8.1:
     chalk "~0.4.0"
     underscore "~1.6.0"
 
-plyr@^3.3.12:
-  version "3.3.12"
-  resolved "https://registry.yarnpkg.com/plyr/-/plyr-3.3.12.tgz#2222863fe3e48e115c8b945757391e11f5925965"
+plyr@^3.3.17:
+  version "3.3.17"
+  resolved "https://registry.yarnpkg.com/plyr/-/plyr-3.3.17.tgz#efff54e70a015f0c82958e74a4fbeff7a2f70fb5"
   dependencies:
     babel-polyfill "^6.26.0"
     custom-event-polyfill "^0.3.0"
     loadjs "^3.5.4"
-    raven-js "^3.26.1"
+    raven-js "^3.26.2"
     url-polyfill "^1.0.13"
 
-raven-js@^3.26.1:
+raven-js@^3.26.2:
   version "3.26.2"
   resolved "https://registry.yarnpkg.com/raven-js/-/raven-js-3.26.2.tgz#9153af2416e96ccf4e0b9cbc6c90c34dda0d7e88"
 
