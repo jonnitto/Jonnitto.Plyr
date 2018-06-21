@@ -17,7 +17,7 @@ prototype(Jonnitto.Plyr:Javascript) < prototype(Neos.Fusion:Array) {
                 templatePath = 'resource://Jonnitto.Plyr/Private/Templates/Javascript.js'
 
                 i18n = Neos.Fusion:Collection {
-                    collection = ${['restart','rewind','play','pause','fastForward','seek','played','buffered','currentTime','duration','volume','mute','unmute','enableCaptions','disableCaptions','enterFullscreen','exitFullscreen','frameTitle','captions','settings','speed','normal','quality','loop','start','end','all','reset','disabled','enabled','advertisement','qualityBadge']}
+                    collection = ${['restart','rewind','play','pause','fastForward','seek','seekLabel','played','buffered','currentTime','duration','volume','mute','unmute','enableCaptions','disableCaptions','enterFullscreen','exitFullscreen','frameTitle','captions','settings','menuBack','speed','normal','quality','loop','start','end','all','reset','disabled','enabled','advertisement','qualityBadge']}
                     itemRenderer = Neos.Fusion:Value {
                         translation = ${Translation.translate(item, null, [], null, 'Jonnitto.Plyr')}
                         wrappedTranslation = ${item == 'qualityBadge' ? this.translation : ("'" + this.translation + "'")}
@@ -28,25 +28,25 @@ prototype(Jonnitto.Plyr:Javascript) < prototype(Neos.Fusion:Array) {
 
                 options = ${configuration.options}
                 clickToPlay = ${this.options.clickToPlay && node.context.live}
-                controls = Neos.Fusion:Case {
-                    isDefault {
-                        condition = ${configuration.options.controls == ['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'captions', 'settings', 'pip', 'airplay', 'fullscreen'] ? true : false}
-                        renderer = false
-                    }
-                    default {
-                        condition = true
-                        renderer = ${"['" + Array.join(configuration.options.controls, "','") + "']"}
-                    }
+
+                // quality:
+                //     default: 576
+                //     options: [4320, 2880, 2160, 1440, 1080, 720, 576, 480, 360, 240, 'default']
+                quality = ${[]}
+                quality.@process {
+                    setDefault = ${configuration.options.quality.default != 576 ? Array.push(value, "default:'" + configuration.options.quality.default + "'") : value}
+                    setOptions = ${configuration.options.quality.options != [4320, 2880, 2160, 1440, 1080, 720, 576, 480, 360, 240, 'default'] ? Array.push(value, "options:['" + Array.join(configuration.options.controls, "','") + "']") : value}
+                    wrap = ${Array.isEmpty(value) ? false : '{' + Array.join(value, ',') + '}'}
                 }
-                settings = Neos.Fusion:Case {
-                    isDefault {
-                        condition = ${configuration.options.settings == ['captions', 'quality', 'speed', 'loop'] ? true : false}
-                        renderer = false
-                    }
-                    default {
-                        condition = true
-                        renderer = ${"['" + Array.join(configuration.options.settings, "','") + "']"}
-                    }
+
+                // speed:
+                //     selected: 1
+                //     options: [0.5, 0.75, 1, 1.25, 1.5, 1.75, 2]
+                speed = ${[]}
+                speed.@process {
+                    setSelected = ${configuration.options.speed.selected != 1 ? Array.push(value, 'selected:' + configuration.options.speed.selected) : value}
+                    setOptions = ${configuration.options.speed.options != [0.5, 0.75, 1, 1.25, 1.5, 1.75, 2] ? Array.push(value, 'options:[' + Array.join(configuration.options.speed.options, ',') + ']') : value}
+                    wrap = ${Array.isEmpty(value) ? false : '{' + Array.join(value, ',') + '}'}
                 }
 
                 // keyboard:
@@ -103,23 +103,87 @@ prototype(Jonnitto.Plyr:Javascript) < prototype(Neos.Fusion:Array) {
                     wrap = ${Array.isEmpty(value) ? false : '{' + Array.join(value, ',') + '}'}
                 }
 
-                // speed:
-                //     selected: 1
-                //     options: [0.5, 0.75, 1, 1.25, 1.5, 1.75, 2]
-                speed = ${[]}
-                speed.@process {
-                    setSelected = ${configuration.options.speed.selected != 1 ? Array.push(value, 'selected:' + configuration.options.speed.selected) : value}
-                    setOptions = ${configuration.options.speed.options != [0.5, 0.75, 1, 1.25, 1.5, 1.75, 2] ? Array.push(value, 'options:[' + Array.join(configuration.options.speed.options, ',') + ']') : value}
+                // controls:
+                //     - play-large
+                //     - play
+                //     - progress
+                //     - current-time
+                //     - mute
+                //     - volume
+                //     - captions
+                //     - settings
+                //     - pip
+                //     - airplay
+                //     - fullscreen
+                controls = Neos.Fusion:Case {
+                    isDefault {
+                        condition = ${configuration.options.controls == ['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'captions', 'settings', 'pip', 'airplay', 'fullscreen'] ? true : false}
+                        renderer = false
+                    }
+                    default {
+                        condition = true
+                        renderer = ${"['" + Array.join(configuration.options.controls, "','") + "']"}
+                    }
+                }
+
+                // settings:
+                //      - captions
+                //      - quality
+                //      - speed
+                settings = Neos.Fusion:Case {
+                    isDefault {
+                        condition = ${configuration.options.settings == ['captions', 'quality', 'speed'] ? true : false}
+                        renderer = false
+                    }
+                    default {
+                        condition = true
+                        renderer = ${"['" + Array.join(configuration.options.settings, "','") + "']"}
+                    }
+                }
+
+                // listeners:
+                //    seek: null
+                //    play: null
+                //    pause: null
+                //    restart: null
+                //    rewind: null
+                //    fastForward: null
+                //    mute: null
+                //    volume: null
+                //    captions: null
+                //    fullscreen: null
+                //    pip: null
+                //    airplay: null
+                //    speed: null
+                //    quality: null
+                //    loop: null
+                //    language: null
+                listeners = ${[]}
+                listeners.@process {
+                    setSeek = ${configuration.options.listeners.seek ? Array.push(value, 'seek:' + configuration.options.listeners.seek) : value}
+                    setPlay = ${configuration.options.listeners.play ? Array.push(value, 'play:' + configuration.options.listeners.play) : value}
+                    setPause = ${configuration.options.listeners.pause ? Array.push(value, 'pause:' + configuration.options.listeners.pause) : value}
+                    setRestart = ${configuration.options.listeners.restart ? Array.push(value, 'restart:' + configuration.options.listeners.restart) : value}
+                    setRewind = ${configuration.options.listeners.rewind ? Array.push(value, 'rewind:' + configuration.options.listeners.rewind) : value}
+                    setFastForward = ${configuration.options.listeners.fastForward ? Array.push(value, 'fastForward:' + configuration.options.listeners.fastForward) : value}
+                    setMute = ${configuration.options.listeners.mute ? Array.push(value, 'mute:' + configuration.options.listeners.mute) : value}
+                    setVolume = ${configuration.options.listeners.volume ? Array.push(value, 'volume:' + configuration.options.listeners.volume) : value}
+                    setCaptions = ${configuration.options.listeners.captions ? Array.push(value, 'captions:' + configuration.options.listeners.captions) : value}
+                    setFullscreen = ${configuration.options.listeners.fullscreen ? Array.push(value, 'fullscreen:' + configuration.options.listeners.fullscreen) : value}
+                    setPip = ${configuration.options.listeners.pip ? Array.push(value, 'pip:' + configuration.options.listeners.pip) : value}
+                    setAirplay = ${configuration.options.listeners.airplay ? Array.push(value, 'airplay:' + configuration.options.listeners.airplay) : value}
+                    setSpeed = ${configuration.options.listeners.speed ? Array.push(value, 'speed:' + configuration.options.listeners.speed) : value}
+                    setQuality = ${configuration.options.listeners.quality ? Array.push(value, 'quality:' + configuration.options.listeners.quality) : value}
+                    setLoop = ${configuration.options.listeners.loop ? Array.push(value, 'loop:' + configuration.options.listeners.loop) : value}
+                    setLanguage = ${configuration.options.listeners.language ? Array.push(value, 'language:' + configuration.options.listeners.language) : value}
                     wrap = ${Array.isEmpty(value) ? false : '{' + Array.join(value, ',') + '}'}
                 }
 
-                // quality:
-                //     default: 'default'
-                //     options: ['hd2160', 'hd1440', 'hd1080', 'hd720', 'large', 'medium', 'small', 'tiny', 'default']
-                quality = ${[]}
-                quality.@process {
-                    setDefault = ${configuration.options.quality.default != 'default' ? Array.push(value, "default:'" + configuration.options.quality.default + "'") : value}
-                    setOptions = ${configuration.options.quality.options != ['hd2160', 'hd1440', 'hd1080', 'hd720', 'large', 'medium', 'small', 'tiny', 'default'] ? Array.push(value, "options:['" + Array.join(configuration.options.controls, "','") + "']") : value}
+                // keys:
+                //    google: null
+                keys = ${[]}
+                keys.@process {
+                    setGoogle = ${configuration.options.keys.google ? Array.push(value, 'google:"' + configuration.options.keys.google + '"') : value}
                     wrap = ${Array.isEmpty(value) ? false : '{' + Array.join(value, ',') + '}'}
                 }
 
