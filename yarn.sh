@@ -1,7 +1,7 @@
 #!/bin/bash
 
-if [[ $TRAVIS_PULL_REQUEST_BRANCH != *"dependabot/npm_and_yarn"* ]]; then
-  # Not a dependabot npm_and_yarn Pull Request, aborting
+if [[ $TRAVIS_PULL_REQUEST_BRANCH != *"dependabot"* ]]; then
+  echo "Not a dependabot Pull Request, aborting"
   exit 0
 fi
 
@@ -12,8 +12,10 @@ cd repo
 echo "Switching to branch $TRAVIS_PULL_REQUEST_BRANCH"
 git checkout $TRAVIS_PULL_REQUEST_BRANCH
 
-# See if commit message includes "Bump"
-git log --name-status HEAD^..HEAD | grep "Bump" || exit 0
+# See if commit message includes "Bump plyr"
+git log --name-status HEAD^..HEAD | grep "Bump plyr" || exit 0
+
+echo "Update Plyr assets"
 
 yarn
 
@@ -22,5 +24,5 @@ git config --global user.name "Travis CI"
 git config --global push.default simple
 
 git add .
-git commit -m ":arrow_up: Update assets"
+git commit -m ":arrow_up: Update Plyr assets"
 git push
