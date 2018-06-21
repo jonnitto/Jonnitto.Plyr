@@ -15,7 +15,7 @@
 
 [Plyr.io](http://plyr.io/) for [Neos CMS](https://www.neos.io)
 
-[![Image of Plyr](https://cdn.plyr.io/static/demo/screenshot.png?v=3)](https://plyr.io)
+[![Image of Plyr](https://cdn.plyr.io/static/demo/screenshot.png?v=3)](https://plyr.io) [![Greenkeeper badge](https://badges.greenkeeper.io/jonnitto/Jonnitto.Plyr.svg)](https://greenkeeper.io/)
 
 | Version | Neos         |
 | ------- | ------------ |
