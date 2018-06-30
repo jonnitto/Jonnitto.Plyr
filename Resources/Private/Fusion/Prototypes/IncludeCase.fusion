@@ -3,7 +3,7 @@ prototype(Jonnitto.Plyr:IncludeCase) <  prototype(Neos.Fusion:Value) {
     @context.configuration = ${this.configuration}
 
     value = Carbon.Condition:Case {
-        context.live = ${configuration.alwaysInclude}
+        context.live = ${configuration.include.always}
 
         content {
             collection = ${configuration.selector.collection}
