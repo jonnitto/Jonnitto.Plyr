@@ -3,7 +3,14 @@
     "type": "neos-plugin",
     "license": "MIT",
     "description": "Plyr.io for Neos.io",
-    "keywords": ["flow", "neos", "video", "youtube", "vimeo", "audio"],
+    "keywords": [
+        "flow",
+        "neos",
+        "video",
+        "youtube",
+        "vimeo",
+        "audio"
+    ],
     "authors": [
         {
             "name": "Jon Uhlmann",
@@ -25,7 +32,18 @@
         }
     },
     "archive": {
-        "exclude": [".editorconfig", ".gitignore", ".github", ".gitattributes", "package.json", "CODE_OF_CONDUCT.md", "yarn.lock"]
+        "exclude": [
+            ".editorconfig",
+            ".gitattributes",
+            ".github",
+            ".gitignore",
+            ".nvmrc",
+            ".travis.yml",
+            "CODE_OF_CONDUCT.md",
+            "package.json",
+            "yarn.lock",
+            "yarn.sh"
+        ]
     },
     "extra": {
         "marketplace-account": "me@jonnitto.ch",
