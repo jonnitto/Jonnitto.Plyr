@@ -99,9 +99,9 @@ nomnom@1.8.1:
     chalk "~0.4.0"
     underscore "~1.6.0"
 
-plyr@^3.3.21:
-  version "3.3.21"
-  resolved "https://registry.yarnpkg.com/plyr/-/plyr-3.3.21.tgz#843c471937ab81b0f0de893066c1158fd7615d55"
+plyr@^3.3.22:
+  version "3.3.22"
+  resolved "https://registry.yarnpkg.com/plyr/-/plyr-3.3.22.tgz#4de75704afe766c32e1d89672bc6efbdc3f877e8"
   dependencies:
     babel-polyfill "^6.26.0"
     custom-event-polyfill "^0.3.0"
