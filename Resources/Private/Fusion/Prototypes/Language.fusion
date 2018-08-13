@@ -1,0 +1,14 @@
+prototype(Jonnitto.Plyr:Language) < prototype(Neos.Fusion:Case) {
+    hasDimension {
+        condition = ${Configuration.setting('Neos.ContentRepository.contentDimensions.language') != null}
+        renderer = ${String.replace(documentNode.context.dimensions.language[0], '_', '-')}
+    }
+    hasDefaultLocale {
+        condition = ${String.crop(Configuration.setting('Neos.Flow.i18n.defaultLocale'), 2)}
+        renderer = ${String.crop(Configuration.setting('Neos.Flow.i18n.defaultLocale'), 2)}
+    }
+    default {
+        condition = true
+        renderer = false
+    }
+}
