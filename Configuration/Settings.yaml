@@ -95,7 +95,6 @@ Jonnitto:
           - 480
           - 360
           - 240
-          - default #YouTube's "auto"
       loop:
         # Whether to loop the current video. If the loop attribute is present
         # on a <video> or <audio> element, this will be automatically set to

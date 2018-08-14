@@ -31,11 +31,12 @@ prototype(Jonnitto.Plyr:Javascript) < prototype(Neos.Fusion:Array) {
 
                 // quality:
                 //     default: 576
-                //     options: [4320, 2880, 2160, 1440, 1080, 720, 576, 480, 360, 240, 'default']
+                //     options: [4320, 2880, 2160, 1440, 1080, 720, 576, 480, 360, 240]
+
                 quality = ${[]}
                 quality.@process {
                     setDefault = ${configuration.options.quality.default != 576 ? Array.push(value, "default:'" + configuration.options.quality.default + "'") : value}
-                    setOptions = ${configuration.options.quality.options != [4320, 2880, 2160, 1440, 1080, 720, 576, 480, 360, 240, 'default'] ? Array.push(value, "options:['" + Array.join(configuration.options.controls, "','") + "']") : value}
+                    setOptions = ${configuration.options.quality.options != [4320, 2880, 2160, 1440, 1080, 720, 576, 480, 360, 240] ? Array.push(value, "options:['" + Array.join(configuration.options.controls, "','") + "']") : value}
                     wrap = ${Array.isEmpty(value) ? false : '{' + Array.join(value, ',') + '}'}
                 }
 
