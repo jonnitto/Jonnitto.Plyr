@@ -20,7 +20,8 @@
         }
     ],
     "require": {
-        "typo3/neos": "2.*"
+        "typo3/neos": "2.*",
+        "carbon/notification": "^0.1"
     },
     "autoload": {
         "psr-0": {
