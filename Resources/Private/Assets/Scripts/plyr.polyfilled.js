@@ -1,11 +1,10 @@
 // ==========================================================================
 // Plyr Polyfilled Build
-// plyr.js v3.4.3
+// plyr.js v3.4.4
 // https://github.com/sampotts/plyr
 // License: The MIT License (MIT)
 // ==========================================================================
 
-import 'babel-polyfill';
 import 'custom-event-polyfill';
 import 'url-polyfill';
 import Plyr from './plyr';
