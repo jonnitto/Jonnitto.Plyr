@@ -6,21 +6,6 @@ ansi-styles@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/ansi-styles/-/ansi-styles-1.0.0.tgz#cb102df1c56f5123eab8b67cd7b98027a0279178"
 
-babel-polyfill@^6.26.0:
-  version "6.26.0"
-  resolved "https://registry.yarnpkg.com/babel-polyfill/-/babel-polyfill-6.26.0.tgz#379937abc67d7895970adc621f284cd966cf2153"
-  dependencies:
-    babel-runtime "^6.26.0"
-    core-js "^2.5.0"
-    regenerator-runtime "^0.10.5"
-
-babel-runtime@^6.26.0:
-  version "6.26.0"
-  resolved "https://registry.yarnpkg.com/babel-runtime/-/babel-runtime-6.26.0.tgz#965c7058668e82b55d7bfe04ff2337bc8b5647fe"
-  dependencies:
-    core-js "^2.4.0"
-    regenerator-runtime "^0.11.0"
-
 balanced-match@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/balanced-match/-/balanced-match-1.0.0.tgz#89b4d199ab2bee49de164ea02b89ce462d71b767"
@@ -56,9 +41,9 @@ conditional-file-append@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/conditional-file-append/-/conditional-file-append-1.0.0.tgz#a9682a6bfd89cffb40c3ab6d7a3253128ec01422"
 
-core-js@^2.4.0, core-js@^2.5.0:
-  version "2.5.5"
-  resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.5.5.tgz#b14dde936c640c0579a6b50cabcc132dd6127e3b"
+core-js@^2.5.7:
+  version "2.5.7"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.5.7.tgz#f972608ff0cead68b841a16a932d0b183791814e"
 
 custom-event-polyfill@^1.0.6:
   version "1.0.6"
@@ -99,27 +84,19 @@ nomnom@1.8.1:
     chalk "~0.4.0"
     underscore "~1.6.0"
 
-plyr@^3.4.3:
-  version "3.4.3"
-  resolved "https://registry.yarnpkg.com/plyr/-/plyr-3.4.3.tgz#7e4466cee4c13efc1cf3fa4dd1f450339eab1ad3"
+plyr@^3.4.4:
+  version "3.4.4"
+  resolved "https://registry.yarnpkg.com/plyr/-/plyr-3.4.4.tgz#2c1de389f3599f2cfa978ee3fc6e401ecf4cd4b9"
   dependencies:
-    babel-polyfill "^6.26.0"
+    core-js "^2.5.7"
     custom-event-polyfill "^1.0.6"
     loadjs "^3.5.4"
-    raven-js "^3.26.4"
-    url-polyfill "^1.0.14"
+    raven-js "^3.27.0"
+    url-polyfill "^1.1.0"
 
-raven-js@^3.26.4:
-  version "3.26.4"
-  resolved "https://registry.yarnpkg.com/raven-js/-/raven-js-3.26.4.tgz#32aae3a63a9314467a453c94c89a364ea43707be"
-
-regenerator-runtime@^0.10.5:
-  version "0.10.5"
-  resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.10.5.tgz#336c3efc1220adcedda2c9fab67b5a7955a33658"
-
-regenerator-runtime@^0.11.0:
-  version "0.11.1"
-  resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.11.1.tgz#be05ad7f9bf7d22e056f9726cee5017fbf19e2e9"
+raven-js@^3.27.0:
+  version "3.27.0"
+  resolved "https://registry.yarnpkg.com/raven-js/-/raven-js-3.27.0.tgz#9f47c03e17933ce756e189f3669d49c441c1ba6e"
 
 rename-files@0.0.2:
   version "0.0.2"
@@ -151,6 +128,6 @@ underscore@~1.6.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.6.0.tgz#8b38b10cacdef63337b8b24e4ff86d45aea529a8"
 
-url-polyfill@^1.0.14:
-  version "1.0.14"
-  resolved "https://registry.yarnpkg.com/url-polyfill/-/url-polyfill-1.0.14.tgz#1baf108b0c09eacaa1915c067409f639a2a7e061"
+url-polyfill@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/url-polyfill/-/url-polyfill-1.1.0.tgz#d34e1a596d954b864bc8608f84c592820df422db"
