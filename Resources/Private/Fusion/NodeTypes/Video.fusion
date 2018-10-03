@@ -2,14 +2,14 @@ prototype(Jonnitto.Plyr:Video) < prototype(Jonnitto.Plyr:Tag) {
     playsinline = ${Configuration.setting('Jonnitto.Plyr.options.playsinline')}
     poster = ${q(node).property('image')}
     media = Neos.Fusion:Array {
-        mp4 = Jonnitto.Plyr:FileCollection {
-            fileextension = 'mp4'
-        }
         webm = Jonnitto.Plyr:FileCollection {
             fileextension = 'webm'
         }
         ogg = Jonnitto.Plyr:FileCollection {
             fileextension = 'ogg'
+        }
+        mp4 = Jonnitto.Plyr:FileCollection {
+            fileextension = 'mp4'
         }
 
         // Captions: Title as Label Captions as language
