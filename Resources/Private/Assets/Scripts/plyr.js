@@ -1,6 +1,6 @@
 // ==========================================================================
 // Plyr
-// plyr.js v3.4.4
+// plyr.js v3.4.5
 // https://github.com/sampotts/plyr
 // License: The MIT License (MIT)
 // ==========================================================================
@@ -302,6 +302,9 @@ class Plyr {
         if (this.config.autoplay) {
             this.play();
         }
+
+        // Seek time will be recorded (in listeners.js) so we can prevent hiding controls for a few seconds after seek
+        this.lastSeekTime = 0;
     }
 
     // ---------------------------------------
@@ -786,6 +789,15 @@ class Plyr {
      */
     get source() {
         return this.media.currentSrc;
+    }
+
+    /**
+     * Get a download URL (either source or custom)
+     */
+    get download() {
+        const { download } = this.config.urls;
+
+        return is.url(download) ? download : this.source;
     }
 
     /**

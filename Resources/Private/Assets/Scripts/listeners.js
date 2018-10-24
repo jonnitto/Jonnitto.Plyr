@@ -371,7 +371,7 @@ class Listeners {
                 return;
             }
 
-            // On click play, pause ore restart
+            // On click play, pause or restart
             on.call(player, elements.container, 'click', event => {
                 const targets = [elements.container, wrapper];
 
@@ -429,6 +429,11 @@ class Listeners {
         on.call(player, player.media, 'qualitychange', event => {
             // Update UI
             controls.updateSetting.call(player, 'quality', null, event.detail.quality);
+        });
+
+        // Update download link when ready and if quality changes
+        on.call(player, player.media, 'ready qualitychange', () => {
+            controls.setDownloadLink.call(player);
         });
 
         // Proxy events to container
@@ -517,6 +522,16 @@ class Listeners {
         // Captions toggle
         this.bind(elements.buttons.captions, 'click', () => player.toggleCaptions());
 
+        // Download
+        this.bind(
+            elements.buttons.download,
+            'click',
+            () => {
+                triggerEvent.call(player, player.media, 'download');
+            },
+            'download',
+        );
+
         // Fullscreen toggle
         this.bind(
             elements.buttons.fullscreen,
@@ -604,6 +619,9 @@ class Listeners {
             if (is.keyboardEvent(event) && (code !== 39 && code !== 37)) {
                 return;
             }
+
+            // Record seek time so we can prevent hiding controls for a few seconds after seek
+            player.lastSeekTime = Date.now();
 
             // Was playing before?
             const play = seek.hasAttribute(attribute);
@@ -697,33 +715,29 @@ class Listeners {
             elements.controls.pressed = ['mousedown', 'touchstart'].includes(event.type);
         });
 
-        // Focus in/out on controls
-        this.bind(elements.controls, 'focusin focusout', event => {
+        // Show controls when they receive focus (e.g., when using keyboard tab key)
+        this.bind(elements.controls, 'focusin', () => {
             const { config, elements, timers } = player;
-            const isFocusIn = event.type === 'focusin';
 
             // Skip transition to prevent focus from scrolling the parent element
-            toggleClass(elements.controls, config.classNames.noTransition, isFocusIn);
+            toggleClass(elements.controls, config.classNames.noTransition, true);
 
             // Toggle
-            ui.toggleControls.call(player, isFocusIn);
+            ui.toggleControls.call(player, true);
 
-            // If focusin, hide again after delay
-            if (isFocusIn) {
-                // Restore transition
-                setTimeout(() => {
-                    toggleClass(elements.controls, config.classNames.noTransition, false);
-                }, 0);
+            // Restore transition
+            setTimeout(() => {
+                toggleClass(elements.controls, config.classNames.noTransition, false);
+            }, 0);
 
-                // Delay a little more for keyboard users
-                const delay = this.touch ? 3000 : 4000;
+            // Delay a little more for mouse users
+            const delay = this.touch ? 3000 : 4000;
 
-                // Clear timer
-                clearTimeout(timers.controls);
+            // Clear timer
+            clearTimeout(timers.controls);
 
-                // Hide
-                timers.controls = setTimeout(() => ui.toggleControls.call(player, false), delay);
-            }
+            // Hide again after delay
+            timers.controls = setTimeout(() => ui.toggleControls.call(player, false), delay);
         });
 
         // Mouse wheel for volume
