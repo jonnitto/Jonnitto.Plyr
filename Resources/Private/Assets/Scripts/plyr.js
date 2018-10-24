@@ -1,12 +1,13 @@
 // ==========================================================================
 // Plyr
-// plyr.js v3.4.5
+// plyr.js v3.4.6
 // https://github.com/sampotts/plyr
 // License: The MIT License (MIT)
 // ==========================================================================
 
 import captions from './captions';
 import defaults from './config/defaults';
+import { pip } from './config/states';
 import { getProviderByUrl, providers, types } from './config/types';
 import Console from './console';
 import controls from './controls';
@@ -695,10 +696,15 @@ class Plyr {
             config.default,
         ].find(is.number);
 
+        let updateStorage = true;
+
         if (!options.includes(quality)) {
             const value = closest(options, quality);
             this.debug.warn(`Unsupported quality option: ${quality}, using ${value} instead`);
             quality = value;
+
+            // Don't update storage if quality is not supported
+            updateStorage = false;
         }
 
         // Update config
@@ -706,6 +712,11 @@ class Plyr {
 
         // Set quality
         this.media.quality = quality;
+
+        // Save to storage
+        if (updateStorage) {
+            this.storage.set({ quality });
+        }
     }
 
     /**
@@ -886,21 +897,28 @@ class Plyr {
      * TODO: detect outside changes
      */
     set pip(input) {
-        const states = {
-            pip: 'picture-in-picture',
-            inline: 'inline',
-        };
-
         // Bail if no support
         if (!support.pip) {
             return;
         }
 
         // Toggle based on current state if not passed
-        const toggle = is.boolean(input) ? input : this.pip === states.inline;
+        const toggle = is.boolean(input) ? input : !this.pip;
 
         // Toggle based on current state
-        this.media.webkitSetPresentationMode(toggle ? states.pip : states.inline);
+        // Safari
+        if (is.function(this.media.webkitSetPresentationMode)) {
+            this.media.webkitSetPresentationMode(toggle ? pip.active : pip.inactive);
+        }
+
+        // Chrome
+        if (is.function(this.media.requestPictureInPicture)) {
+            if (!this.pip && toggle) {
+                this.media.requestPictureInPicture();
+            } else if (this.pip && !toggle) {
+                document.exitPictureInPicture();
+            }
+        }
     }
 
     /**
@@ -911,7 +929,13 @@ class Plyr {
             return null;
         }
 
-        return this.media.webkitPresentationMode;
+        // Safari
+        if (!is.empty(this.media.webkitPresentationMode)) {
+            return this.media.webkitPresentationMode === pip.active;
+        }
+
+        // Chrome
+        return this.media === document.pictureInPictureElement;
     }
 
     /**
