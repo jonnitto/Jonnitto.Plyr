@@ -84,9 +84,9 @@ nomnom@1.8.1:
     chalk "~0.4.0"
     underscore "~1.6.0"
 
-plyr@^3.4.5:
-  version "3.4.5"
-  resolved "https://registry.yarnpkg.com/plyr/-/plyr-3.4.5.tgz#7c59a8db9845f69e93116d49fb7b6e72f7158757"
+plyr@^3.4.6:
+  version "3.4.6"
+  resolved "https://registry.yarnpkg.com/plyr/-/plyr-3.4.6.tgz#03406ff00ec32f564eea83ce34823820f13ee357"
   dependencies:
     core-js "^2.5.7"
     custom-event-polyfill "^1.0.6"
