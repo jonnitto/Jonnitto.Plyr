@@ -38,6 +38,25 @@ composer require "jonnitto/plyr:^0.2" --no-update
 
 The `--no-update` command prevent the automatic update of the dependencies. After the package was added to your theme `composer.json`, go back to the root of the Neos installation and run `composer update`. Et voilà! Your desired package is now installed correctly.
 
+## FAQ
+
+**What are the differences from this package to the [Jonnitto.PrettyembedYoutube](https://github.com/jonnitto/Jonnitto.PrettyembedYoutube) package?**
+
+|                           | Jonnitto.PrettyEmbedYoutube | Jonnitto.Plyr |
+| ------------------------- | :-------------------------: | :-----------: |
+| YouTube Video             |              ✓              |       ✓       |
+| YouTube Playlist          |              ✓              |               |
+| Vimeo                     |                             |       ✓       |
+| Native Audio              |                             |       ✓       |
+| Native Video              |                             |       ✓       |
+| Preview image for Youtube |              ✓              |               |
+| Picture in picture        |                             |       ✓       |
+| Picture in picture        |                             |       ✓       |
+| Filesize (JS & CSS)       |           smaller           |    bigger     |
+
+Jonnitto.PrettyembedYoutube also has the benefit of a better frontend performance since the player gets only loaded on request.
+So, no iframe until the user wants to watch a video.
+
 ## License
 
 Licensed under MIT, see [LICENSE](LICENSE)
