@@ -51,10 +51,11 @@ The `--no-update` command prevent the automatic update of the dependencies. Afte
 | Native Video              |                             |       ✓       |
 | Preview image for Youtube |              ✓              |               |
 | Picture in picture        |                             |       ✓       |
-| Picture in picture        |                             |       ✓       |
+| Javascript API            |                             |       ✓       |
 | Filesize (JS & CSS)       |           smaller           |    bigger     |
 
-Jonnitto.PrettyembedYoutube also has the benefit of a better frontend performance since the player gets only loaded on request.
+Jonnitto.PrettyembedYoutube also has the benefit of a better frontend  
+performance since the player gets only loaded on request.  
 So, no iframe until the user wants to watch a video.
 
 ## License
