@@ -10,7 +10,7 @@
     "conditional-file-append": "^1.0.0",
     "plyr": "^3.4.8",
     "rename-files": "0.0.2",
-    "replace": "^1.0.0"
+    "replace": "^1.0.1"
   },
   "scripts": {
     "private:styles": "rm -rf Resources/Private/Assets/Styles;mkdir -p Resources/Private/Assets/Styles;cp -R node_modules/plyr/src/sass/. Resources/Private/Assets/Styles",
