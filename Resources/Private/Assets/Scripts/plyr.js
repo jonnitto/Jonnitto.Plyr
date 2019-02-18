@@ -1,6 +1,6 @@
 // ==========================================================================
 // Plyr
-// plyr.js v3.4.8
+// plyr.js v3.5.0
 // https://github.com/sampotts/plyr
 // License: The MIT License (MIT)
 // ==========================================================================
@@ -15,6 +15,7 @@ import Fullscreen from './fullscreen';
 import Listeners from './listeners';
 import media from './media';
 import Ads from './plugins/ads';
+import PreviewThumbnails from './plugins/previewThumbnails';
 import source from './source';
 import Storage from './storage';
 import support from './support';
@@ -187,7 +188,7 @@ class Plyr {
                         // YouTube requires the playsinline in the URL
                         if (this.isYouTube) {
                             this.config.playsinline = truthy.includes(url.searchParams.get('playsinline'));
-                            this.config.hl = url.searchParams.get('hl'); // TODO: Should this be setting language?
+                            this.config.youtube.hl = url.searchParams.get('hl'); // TODO: Should this be setting language?
                         } else {
                             this.config.playsinline = true;
                         }
@@ -262,7 +263,7 @@ class Plyr {
 
         // Wrap media
         if (!is.element(this.elements.container)) {
-            this.elements.container = createElement('div');
+            this.elements.container = createElement('div', { tabindex: 0 });
             wrap(this.media, this.elements.container);
         }
 
@@ -306,6 +307,11 @@ class Plyr {
 
         // Seek time will be recorded (in listeners.js) so we can prevent hiding controls for a few seconds after seek
         this.lastSeekTime = 0;
+
+        // Setup preview thumbnails if enabled
+        if (this.config.previewThumbnails.enabled) {
+            this.previewThumbnails = new PreviewThumbnails(this);
+        }
     }
 
     // ---------------------------------------
@@ -345,6 +351,11 @@ class Plyr {
     play() {
         if (!is.function(this.media.play)) {
             return null;
+        }
+
+        // Intecept play with ads
+        if (this.ads && this.ads.enabled) {
+            this.ads.managerPromise.then(() => this.ads.play()).catch(() => this.media.play());
         }
 
         // Return the promise (for HTML5)
