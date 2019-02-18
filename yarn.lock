@@ -53,9 +53,9 @@ conditional-file-append@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/conditional-file-append/-/conditional-file-append-1.0.0.tgz#a9682a6bfd89cffb40c3ab6d7a3253128ec01422"
 
-core-js@^2.5.7:
-  version "2.5.7"
-  resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.5.7.tgz#f972608ff0cead68b841a16a932d0b183791814e"
+core-js@^2.6.5:
+  version "2.6.5"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.6.5.tgz#44bc8d249e7fb2ff5d00e0341a7ffb94fbf67895"
 
 cross-spawn@^6.0.0:
   version "6.0.5"
@@ -143,9 +143,9 @@ lcid@^2.0.0:
   dependencies:
     invert-kv "^2.0.0"
 
-loadjs@^3.5.4:
-  version "3.5.4"
-  resolved "https://registry.yarnpkg.com/loadjs/-/loadjs-3.5.4.tgz#ef0f4eb5a6ac2b86c7597a3d4de97b83816e36b8"
+loadjs@^3.5.5:
+  version "3.5.5"
+  resolved "https://registry.yarnpkg.com/loadjs/-/loadjs-3.5.5.tgz#2fbaa981ffdd079e0f8786ea75aeed643483b368"
 
 locate-path@^3.0.0:
   version "3.0.0"
@@ -236,15 +236,20 @@ path-key@^2.0.0, path-key@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/path-key/-/path-key-2.0.1.tgz#411cadb574c5a140d3a4b1910d40d80cc9f40b40"
 
-plyr@^3.4.8:
-  version "3.4.8"
-  resolved "https://registry.yarnpkg.com/plyr/-/plyr-3.4.8.tgz#8472dc6ba8545a9a50d9d0260fe31f6aaf956b82"
+plyr@^3.5.0:
+  version "3.5.0"
+  resolved "https://registry.yarnpkg.com/plyr/-/plyr-3.5.0.tgz#e8b42c478b818fda6f5d1fe69bc86a7c731e0988"
   dependencies:
-    core-js "^2.5.7"
+    core-js "^2.6.5"
     custom-event-polyfill "^1.0.6"
-    loadjs "^3.5.4"
+    loadjs "^3.5.5"
+    rangetouch "^2.0.0"
     raven-js "^3.27.0"
-    url-polyfill "^1.1.0"
+    url-polyfill "^1.1.3"
+
+rangetouch@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/rangetouch/-/rangetouch-2.0.0.tgz#5459cdb38b929326c5484ab47aac9632fbe3a896"
 
 raven-js@^3.27.0:
   version "3.27.0"
@@ -333,9 +338,9 @@ strip-eof@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/strip-eof/-/strip-eof-1.0.0.tgz#bb43ff5598a6eb05d89b59fcd129c983313606bf"
 
-url-polyfill@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/url-polyfill/-/url-polyfill-1.1.0.tgz#d34e1a596d954b864bc8608f84c592820df422db"
+url-polyfill@^1.1.3:
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/url-polyfill/-/url-polyfill-1.1.3.tgz#ce0bdf2e923aa6f66bc198ab776323dfc5a91e62"
 
 which-module@^2.0.0:
   version "2.0.0"
