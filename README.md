@@ -17,10 +17,10 @@
 
 [![Image of Plyr](https://cdn.plyr.io/static/demo/screenshot.png?v=3)](https://plyr.io)
 
-| Version | Neos         |
-| ------- | ------------ |
-| 0.\*    | 2.\*         |
-| > 2.2   | 3.\* + 4.\*  |
+| Version | Neos        |
+| ------- | ----------- |
+| 0.\*    | 2.\*        |
+| > 2.2   | 3.\* + 4.\* |
 
 ## Installation
 
@@ -40,22 +40,23 @@ The `--no-update` command prevent the automatic update of the dependencies. Afte
 
 ## FAQ
 
-**What are the differences from this package to the [Jonnitto.PrettyembedYoutube](https://github.com/jonnitto/Jonnitto.PrettyembedYoutube) package?**
+**What are the differences from this package to the [Jonnitto.PrettyEmbedYoutube](https://github.com/jonnitto/Jonnitto.PrettyEmbedYoutube) or the [Jonnitto.PrettyEmbedVimeo](https://github.com/jonnitto/Jonnitto.PrettyEmbedVimeo) package?**
 
-|                           | Jonnitto.PrettyEmbedYoutube | Jonnitto.Plyr |
-| ------------------------- | :-------------------------: | :-----------: |
-| YouTube Video             |              ✓              |       ✓       |
-| YouTube Playlist          |              ✓              |               |
-| Vimeo                     |                             |       ✓       |
-| Native Audio              |                             |       ✓       |
-| Native Video              |                             |       ✓       |
-| Preview image for Youtube |              ✓              |               |
-| Picture in picture        |                             |       ✓       |
-| Javascript API            |                             |       ✓       |
-| Filesize (JS & CSS)       |           smaller           |    bigger     |
+|                           | Jonnitto.PrettyEmbedYoutube | Jonnitto.Plyr | Jonnitto.PrettyEmbedVimeo |
+| ------------------------- | :-------------------------: | :-----------: | :-----------------------: |
+| YouTube Video             |              ✓              |       ✓       |                           |
+| YouTube Playlist          |              ✓              |               |                           |
+| Vimeo                     |                             |       ✓       |             ✓             |
+| Native Audio              |                             |       ✓       |                           |
+| Native Video              |                             |       ✓       |                           |
+| Preview image for Youtube |              ✓              |               |                           |
+| Preview image for Vimeo   |                             |               |             ✓             |
+| Picture in picture        |                             |       ✓       |                           |
+| Javascript API            |                             |       ✓       |                           |
+| Filesize (JS & CSS)       |           smaller           |    bigger     |          smaller          |
 
-Jonnitto.PrettyembedYoutube also has the benefit of a better frontend  
-performance since the player gets only loaded on request.  
+Jonnitto.PrettyembedYoutube and Jonnitto.PrettyEmbedVimeo also has the benefit
+of a better frontend performance since the player gets only loaded on request.  
 So, no iframe until the user wants to watch a video.
 
 ## License
