@@ -37,13 +37,9 @@ code-point-at@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/code-point-at/-/code-point-at-1.1.0.tgz#0d070b4d043a5bea33a2f1a40e2edb3d9a4ccf77"
 
-colors@1.2.4:
+colors@1.2.4, colors@^1.1.2:
   version "1.2.4"
   resolved "https://registry.yarnpkg.com/colors/-/colors-1.2.4.tgz#e0cb41d3e4b20806b3bfc27f4559f01b94bc2f7c"
-
-colors@^1.1.2:
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/colors/-/colors-1.2.1.tgz#f4a3d302976aaf042356ba1ade3b1a2c62d9d794"
 
 concat-map@0.0.1:
   version "0.0.1"
@@ -258,9 +254,9 @@ rename-files@0.0.2:
     glue-path "0.0.4"
     semafor "0.0.1"
 
-replace@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/replace/-/replace-1.0.1.tgz#a7838aaf5977d443e903aea4ba52b2c7ac432190"
+replace@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/replace/-/replace-1.1.0.tgz#4cb04f138d14f37c47b9f2d214eb4a057bd94b22"
   dependencies:
     colors "1.2.4"
     minimatch "3.0.4"
