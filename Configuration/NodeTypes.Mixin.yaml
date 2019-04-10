@@ -20,7 +20,7 @@
     files:
       type: array<Neos\Media\Domain\Model\Asset>
       validation:
-        Neos.Neos/Validation/NotEmptyValidator: true
+        Neos.Neos/Validation/NotEmptyValidator: []
       ui:
         label: i18n
         reloadIfChanged: true
