@@ -19,7 +19,7 @@
     files:
       type: 'array<TYPO3\Media\Domain\Model\Asset>'
       validation:
-        'TYPO3.Neos/Validation/NotEmptyValidator': true
+        'TYPO3.Neos/Validation/NotEmptyValidator': []
       ui:
         label: i18n
         reloadIfChanged: true
