@@ -1,5 +1,5 @@
-(function () {
-    var o={
+<![CDATA[(function () {
+    var o={]]>
         <f:if condition="{i18n}">{i18n -> f:format.raw()}</f:if>
         <f:if condition="{options.enabled}"><f:else>,enabled:false</f:else></f:if>
         <f:if condition="{options.debug}">,debug:true</f:if>
@@ -34,7 +34,7 @@
         <f:if condition="{settings}">,settings:{settings -> f: format.raw()}</f:if>
         <f:if condition="{listeners}">,listeners:{listeners -> f: format.raw()}</f:if>
         <f:if condition="{keys}">,keys:{keys -> f: format.raw()}</f:if>
-        <f:if condition="{ads}">,ads:{ads -> f:format.raw()}</f:if>
+        <f:if condition="{ads}">,ads:{ads -> f:format.raw()}</f:if><![CDATA[
     };
     window.initPlyrMax = 100;
     window.initPlyr = function (event) {
@@ -60,4 +60,4 @@
     if (!document.querySelector('.neos-backend')) {
         initPlyr();
     }
-})();
+})();]]>
