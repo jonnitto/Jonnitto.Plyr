@@ -15,8 +15,8 @@ prototype(Jonnitto.Plyr:Video) < prototype(Jonnitto.Plyr:Tag) {
         // Captions: Title as Label Captions as language
         vtt = Jonnitto.Plyr:FileCollection {
             fileextension = 'vtt'
-            itemRenderer.renderer {
-                @process.wrap = ${'<track kind="captions" label="' + asset.title + '" src="' + value + '" srclang="'+ asset.caption + (iteration.isFirst ? ' default' : '') + '>'}
+            itemRenderer {
+                @process.wrap = ${'<track kind="captions" label="' + asset.title + '" src="' + value + '" srclang="'+ asset.caption + (iteration.isFirst ? ' default' : '') + '">'}
             }
         }
     }
