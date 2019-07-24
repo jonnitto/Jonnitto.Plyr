@@ -7,8 +7,9 @@ import ui from './ui';
 import { repaint } from './utils/animation';
 import browser from './utils/browser';
 import { getElement, getElements, matches, toggleClass, toggleHidden } from './utils/elements';
-import { on, once, toggleListener, triggerEvent } from './utils/events';
+import { off, on, once, toggleListener, triggerEvent } from './utils/events';
 import is from './utils/is';
+import { getAspectRatio, setAspectRatio } from './utils/style';
 
 class Listeners {
     constructor(player) {
@@ -146,7 +147,7 @@ class Listeners {
                     player.loop = !player.loop;
                     break;
 
-                    /* case 73:
+                /* case 73:
                     this.setLoop('start');
                     break;
 
@@ -164,7 +165,7 @@ class Listeners {
 
             // Escape is handle natively when in full screen
             // So we only need to worry about non native
-            if (!player.fullscreen.enabled && player.fullscreen.active && code === 27) {
+            if (code === 27 && !player.fullscreen.usingNative && player.fullscreen.active) {
                 player.fullscreen.toggle();
             }
 
@@ -261,10 +262,10 @@ class Listeners {
     // Container listeners
     container() {
         const { player } = this;
-        const { elements } = player;
+        const { config, elements, timers } = player;
 
         // Keyboard shortcuts
-        if (!player.config.keyboard.global && player.config.keyboard.focused) {
+        if (!config.keyboard.global && config.keyboard.focused) {
             on.call(player, elements.container, 'keydown keyup', this.handleKey, false);
         }
 
@@ -274,17 +275,16 @@ class Listeners {
             elements.container,
             'mousemove mouseleave touchstart touchmove enterfullscreen exitfullscreen',
             event => {
-                const { controls } = elements;
+                const { controls: controlsElement } = elements;
 
                 // Remove button states for fullscreen
-                if (controls && event.type === 'enterfullscreen') {
-                    controls.pressed = false;
-                    controls.hover = false;
+                if (controlsElement && event.type === 'enterfullscreen') {
+                    controlsElement.pressed = false;
+                    controlsElement.hover = false;
                 }
 
                 // Show, then hide after a timeout unless another control event occurs
                 const show = ['touchstart', 'touchmove', 'mousemove'].includes(event.type);
-
                 let delay = 0;
 
                 if (show) {
@@ -294,12 +294,74 @@ class Listeners {
                 }
 
                 // Clear timer
-                clearTimeout(player.timers.controls);
+                clearTimeout(timers.controls);
 
                 // Set new timer to prevent flicker when seeking
-                player.timers.controls = setTimeout(() => ui.toggleControls.call(player, false), delay);
+                timers.controls = setTimeout(() => ui.toggleControls.call(player, false), delay);
             },
         );
+
+        // Set a gutter for Vimeo
+        const setGutter = (ratio, padding, toggle) => {
+            if (!player.isVimeo) {
+                return;
+            }
+
+            const target = player.elements.wrapper.firstChild;
+            const [, y] = ratio;
+            const [videoX, videoY] = getAspectRatio.call(player);
+
+            target.style.maxWidth = toggle ? `${(y / videoY) * videoX}px` : null;
+            target.style.margin = toggle ? '0 auto' : null;
+        };
+
+        // Resize on fullscreen change
+        const setPlayerSize = measure => {
+            // If we don't need to measure the viewport
+            if (!measure) {
+                return setAspectRatio.call(player);
+            }
+
+            const rect = elements.container.getBoundingClientRect();
+            const { width, height } = rect;
+
+            return setAspectRatio.call(player, `${width}:${height}`);
+        };
+
+        const resized = () => {
+            clearTimeout(timers.resized);
+            timers.resized = setTimeout(setPlayerSize, 50);
+        };
+
+        on.call(player, elements.container, 'enterfullscreen exitfullscreen', event => {
+            const { target, usingNative } = player.fullscreen;
+
+            // Ignore events not from target
+            if (target !== elements.container) {
+                return;
+            }
+
+            // If it's not an embed and no ratio specified
+            if (!player.isEmbed && is.empty(player.config.ratio)) {
+                return;
+            }
+
+            const isEnter = event.type === 'enterfullscreen';
+            // Set the player size when entering fullscreen to viewport size
+            const { padding, ratio } = setPlayerSize(isEnter);
+
+            // Set Vimeo gutter
+            setGutter(ratio, padding, isEnter);
+
+            // If not using native fullscreen, we need to check for resizes of viewport
+            if (!usingNative) {
+                if (isEnter) {
+                    on.call(player, window, 'resize', resized);
+                } else {
+                    off.call(player, window, 'resize', resized);
+                }
+            }
+        });
     }
 
     // Listen for media events
@@ -347,20 +409,6 @@ class Listeners {
         // Loading state
         on.call(player, player.media, 'waiting canplay seeked playing', event => ui.checkLoading.call(player, event));
 
-        // If autoplay, then load advertisement if required
-        // TODO: Show some sort of loading state while the ad manager loads else there's a delay before ad shows
-        on.call(player, player.media, 'playing', () => {
-            if (!player.ads) {
-                return;
-            }
-
-            // If ads are enabled, wait for them first
-            if (player.ads.enabled && !player.ads.initialized) {
-                // Wait for manager response
-                player.ads.managerPromise.then(() => player.ads.play()).catch(() => player.play());
-            }
-        });
-
         // Click video
         if (player.supported.ui && player.config.clickToPlay && !player.isAudio) {
             // Re-fetch the wrapper
@@ -386,10 +434,10 @@ class Listeners {
                 }
 
                 if (player.ended) {
-                    player.restart();
-                    player.play();
+                    this.proxy(event, player.restart, 'restart');
+                    this.proxy(event, player.play, 'play');
                 } else {
-                    player.togglePlay();
+                    this.proxy(event, player.togglePlay, 'play');
                 }
             });
         }
@@ -433,7 +481,7 @@ class Listeners {
 
         // Update download link when ready and if quality changes
         on.call(player, player.media, 'ready qualitychange', () => {
-            controls.setDownloadLink.call(player);
+            controls.setDownloadUrl.call(player);
         });
 
         // Proxy events to container
@@ -489,7 +537,6 @@ class Listeners {
     controls() {
         const { player } = this;
         const { elements } = player;
-
         // IE doesn't support input event, so we fallback to change
         const inputEvent = browser.isIE ? 'change' : 'input';
 
@@ -625,7 +672,6 @@ class Listeners {
 
             // Was playing before?
             const play = seek.hasAttribute(attribute);
-
             // Done seeking
             const done = ['mouseup', 'touchend', 'keyup'].includes(event.type);
 
@@ -653,7 +699,6 @@ class Listeners {
             inputEvent,
             event => {
                 const seek = event.currentTarget;
-
                 // If it exists, use seek-value instead of "value" for consistency with tooltip time (#954)
                 let seekTo = seek.getAttribute('seek-value');
 
@@ -672,6 +717,42 @@ class Listeners {
         this.bind(elements.progress, 'mouseenter mouseleave mousemove', event =>
             controls.updateSeekTooltip.call(player, event),
         );
+
+        // Preview thumbnails plugin
+        // TODO: Really need to work on some sort of plug-in wide event bus or pub-sub for this
+        this.bind(elements.progress, 'mousemove touchmove', event => {
+            const { previewThumbnails } = player;
+
+            if (previewThumbnails && previewThumbnails.loaded) {
+                previewThumbnails.startMove(event);
+            }
+        });
+
+        // Hide thumbnail preview - on mouse click, mouse leave, and video play/seek. All four are required, e.g., for buffering
+        this.bind(elements.progress, 'mouseleave click', () => {
+            const { previewThumbnails } = player;
+
+            if (previewThumbnails && previewThumbnails.loaded) {
+                previewThumbnails.endMove(false, true);
+            }
+        });
+
+        // Show scrubbing preview
+        this.bind(elements.progress, 'mousedown touchstart', event => {
+            const { previewThumbnails } = player;
+
+            if (previewThumbnails && previewThumbnails.loaded) {
+                previewThumbnails.startScrubbing(event);
+            }
+        });
+
+        this.bind(elements.progress, 'mouseup touchend', event => {
+            const { previewThumbnails } = player;
+
+            if (previewThumbnails && previewThumbnails.loaded) {
+                previewThumbnails.endScrubbing(event);
+            }
+        });
 
         // Polyfill for lower fill in <input type="range"> for webkit
         if (browser.isWebkit) {
@@ -717,7 +798,7 @@ class Listeners {
 
         // Show controls when they receive focus (e.g., when using keyboard tab key)
         this.bind(elements.controls, 'focusin', () => {
-            const { config, elements, timers } = player;
+            const { config, timers } = player;
 
             // Skip transition to prevent focus from scrolling the parent element
             toggleClass(elements.controls, config.classNames.noTransition, true);
@@ -748,10 +829,8 @@ class Listeners {
                 // Detect "natural" scroll - suppored on OS X Safari only
                 // Other browsers on OS X will be inverted until support improves
                 const inverted = event.webkitDirectionInvertedFromDevice;
-
                 // Get delta from event. Invert if `inverted` is true
                 const [x, y] = [event.deltaX, -event.deltaY].map(value => (inverted ? -value : value));
-
                 // Using the biggest delta, normalize to 1 or -1 (or 0 if no delta)
                 const direction = Math.sign(Math.abs(x) > Math.abs(y) ? x : y);
 

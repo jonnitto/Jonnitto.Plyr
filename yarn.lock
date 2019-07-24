@@ -71,13 +71,15 @@ conditional-file-append@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/conditional-file-append/-/conditional-file-append-1.0.0.tgz#a9682a6bfd89cffb40c3ab6d7a3253128ec01422"
 
-core-js@^2.5.7:
-  version "2.5.7"
-  resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.5.7.tgz#f972608ff0cead68b841a16a932d0b183791814e"
+core-js@^3.1.4:
+  version "3.1.4"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.1.4.tgz#3a2837fc48e582e1ae25907afcd6cf03b0cc7a07"
+  integrity sha512-YNZN8lt82XIMLnLirj9MhKDFZHalwzzrL9YLt6eb0T5D0EDl4IQ90IGkua8mHbnxNrkj1d8hbdizMc0Qmg1WnQ==
 
-custom-event-polyfill@^1.0.6:
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/custom-event-polyfill/-/custom-event-polyfill-1.0.6.tgz#6b026e81cd9f7bc896bd6b016a427407bb068db1"
+custom-event-polyfill@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/custom-event-polyfill/-/custom-event-polyfill-1.0.7.tgz#9bc993ddda937c1a30ccd335614c6c58c4f87aee"
+  integrity sha512-TDDkd5DkaZxZFM8p+1I3yAlvM3rSr1wbrOliG4yJiwinMZN8z/iGL7BTlDkrJcYTmgUSb4ywVCc3ZaUtOtC76w==
 
 decamelize@^1.2.0:
   version "1.2.0"
@@ -157,9 +159,10 @@ is-plain-obj@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/is-plain-obj/-/is-plain-obj-1.1.0.tgz#71a50c8429dfca773c92a390a4a03b39fcd51d3e"
 
-loadjs@^3.5.4:
-  version "3.5.4"
-  resolved "https://registry.yarnpkg.com/loadjs/-/loadjs-3.5.4.tgz#ef0f4eb5a6ac2b86c7597a3d4de97b83816e36b8"
+loadjs@^3.6.1:
+  version "3.6.1"
+  resolved "https://registry.yarnpkg.com/loadjs/-/loadjs-3.6.1.tgz#1e756ccd4f4c5ed4988085b330e1b4ad9b6a8340"
+  integrity sha512-AZEBw2GWdJk2IzBgQ+Wohoao5j+t0rajqK8dJu8jQqgYxDTxhmCt0ayMo/vCa0ZAMvZxnJcam6uLICfnVd8KAw==
 
 locate-path@^3.0.0:
   version "3.0.0"
@@ -206,19 +209,21 @@ path-is-absolute@^1.0.0:
   resolved "https://registry.yarnpkg.com/path-is-absolute/-/path-is-absolute-1.0.1.tgz#174b9268735534ffbc7ace6bf53a5a9e1b5c5f5f"
   integrity sha1-F0uSaHNVNP+8es5r9TpanhtcX18=
 
-plyr@^3.4.8:
-  version "3.4.8"
-  resolved "https://registry.yarnpkg.com/plyr/-/plyr-3.4.8.tgz#8472dc6ba8545a9a50d9d0260fe31f6aaf956b82"
+plyr@^3.5.6:
+  version "3.5.6"
+  resolved "https://registry.yarnpkg.com/plyr/-/plyr-3.5.6.tgz#1679d098af3fd0541bba62bc03f662f7c9ae6f2b"
+  integrity sha512-buudbt2qwZYjEdBXW9DvQ7t/LqaSbv9tSjCrqg7nTXVM5BXNdhuiJCyvko+5+DFMdp30mliyKGoOHGXz43OwrA==
   dependencies:
-    core-js "^2.5.7"
-    custom-event-polyfill "^1.0.6"
-    loadjs "^3.5.4"
-    raven-js "^3.27.0"
-    url-polyfill "^1.1.0"
+    core-js "^3.1.4"
+    custom-event-polyfill "^1.0.7"
+    loadjs "^3.6.1"
+    rangetouch "^2.0.0"
+    url-polyfill "^1.1.5"
 
-raven-js@^3.27.0:
-  version "3.27.0"
-  resolved "https://registry.yarnpkg.com/raven-js/-/raven-js-3.27.0.tgz#9f47c03e17933ce756e189f3669d49c441c1ba6e"
+rangetouch@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/rangetouch/-/rangetouch-2.0.0.tgz#5459cdb38b929326c5484ab47aac9632fbe3a896"
+  integrity sha512-y66wTFbwh7KafYligRsmIYYR1kZY8U9tGHH9PgbVhBUFmGzPMsOSjslXPedgR5D3M9W1QKVbAf1AtaVAt7JJTw==
 
 rename-files@0.0.2:
   version "0.0.2"
@@ -279,9 +284,10 @@ supports-color@^5.3.0:
   dependencies:
     has-flag "^3.0.0"
 
-url-polyfill@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/url-polyfill/-/url-polyfill-1.1.0.tgz#d34e1a596d954b864bc8608f84c592820df422db"
+url-polyfill@^1.1.5:
+  version "1.1.7"
+  resolved "https://registry.yarnpkg.com/url-polyfill/-/url-polyfill-1.1.7.tgz#402ee84360eb549bbeb585f4c7971e79a31de9e3"
+  integrity sha512-ZrAxYWCREjmMtL8gSbSiKKLZZticgihCvVBtrFbUVpyoETt8GQJeG2okMWA8XryDAaHMjJfhnc+rnhXRbI4DXA==
 
 which-module@^2.0.0:
   version "2.0.0"
