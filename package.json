@@ -10,7 +10,7 @@
     "conditional-file-append": "^1.0.0",
     "plyr": "^3.4.8",
     "rename-files": "0.0.2",
-    "replace": "^1.0.1"
+    "replace-in-file": "^4.1.1"
   },
   "scripts": {
     "private:styles": "rm -rf Resources/Private/Assets/Styles;mkdir -p Resources/Private/Assets/Styles;cp -R node_modules/plyr/src/sass/. Resources/Private/Assets/Styles",
@@ -21,7 +21,7 @@
     "public": "rm -rf Resources/Public;mkdir -p Resources/Public;cp -R node_modules/plyr/dist/. Resources/Public",
     "postpublic": "condappend .neos-plyr Resources/Public/plyr.css '.jonnitto-plyr-container{margin-bottom:1em}.jonnitto-plyr-container>.plyr,.neos-plyr{width:100%}'",
     "build": "yarn run private && yarn run public",
-    "postbuild": "replace 'https://cdn.plyr.io/[^\\/]+/' '/_Resources/Static/Packages/Jonnitto.Plyr/' Resources/* -r --exclude=\"*.svg\"",
+    "postbuild": "replace-in-file '/https://cdn\\.plyr\\.io/[^\/]+//gm' '/_Resources/Static/Packages/Jonnitto.Plyr/' 'Resources/**/*.*' --ignore=Resources/**/*.svg --isRegex --verbose",
     "start": "yarn run build",
     "install": "yarn run build",
     "postupdate": "yarn run build",
