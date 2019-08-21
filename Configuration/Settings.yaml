@@ -201,6 +201,18 @@ Jonnitto:
         enabled: false
         # Your unique vi.ai publisher ID
         publisherId: ''
+      # YouTube plugin
+      youtube:
+        # Whether to use an alternative version of YouTube without cookies
+        noCookie: false
+        # No related vids
+        rel: null
+        # Hide info
+        showinfo: null
+        # Hide annotations
+        ivLoadPolicy: null
+        # Hide logos as much as possible (they still show one in the corner when paused)
+        modestbranding: null
 
 Neos:
   Neos:

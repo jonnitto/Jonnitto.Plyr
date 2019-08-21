@@ -31,10 +31,12 @@
         <f:if condition="{fullscreen}">,fullscreen:{fullscreen -> f:format.raw()}</f:if>
         <f:if condition="{storage}">,storage:{storage -> f:format.raw()}</f:if>
         <f:if condition="{controls}">,controls:{controls -> f:format.raw()}</f:if>
-        <f:if condition="{settings}">,settings:{settings -> f: format.raw()}</f:if>
-        <f:if condition="{listeners}">,listeners:{listeners -> f: format.raw()}</f:if>
-        <f:if condition="{keys}">,keys:{keys -> f: format.raw()}</f:if>
-        <f:if condition="{ads}">,ads:{ads -> f:format.raw()}</f:if><![CDATA[
+        <f:if condition="{settings}">,settings:{settings -> f:format.raw()}</f:if>
+        <f:if condition="{listeners}">,listeners:{listeners -> f:format.raw()}</f:if>
+        <f:if condition="{keys}">,keys:{keys -> f:format.raw()}</f:if>
+        <f:if condition="{ads}">,ads:{ads -> f:format.raw()}</f:if>
+        <f:if condition="{youtube}">,youtube:{youtube -> f:format.raw()}</f:if>
+<![CDATA[
     };
     window.initPlyrMax = 100;
     window.initPlyr = function (event) {
