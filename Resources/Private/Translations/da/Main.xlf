@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file original="" product-name="Jonnitto.Plyr" source-language="en" datatype="plaintext" target-language="da">
+        <body>
+            <trans-unit id="restart" xml:space="preserve">
+                <source>Restart</source>
+                <target>Genstart</target>
+            </trans-unit>
+            <trans-unit id="rewind" xml:space="preserve">
+                <source>Rewind {seektime}s</source>
+                <target>Spole tilbage {seektime}s</target>
+            </trans-unit>
+            <trans-unit id="play" xml:space="preserve">
+                <source>Play</source>
+                <target>Spil</target>
+            </trans-unit>
+            <trans-unit id="pause" xml:space="preserve">
+                <source>Pause</source>
+                <target>Pause</target>
+            </trans-unit>
+            <trans-unit id="fastForward" xml:space="preserve">
+                <source>Forward {seektime}s</source>
+                <target>Frem {seektime}s</target>
+            </trans-unit>
+            <trans-unit id="seek" xml:space="preserve">
+                <source>Seek</source>
+                <target>Spillet</target>
+            </trans-unit>
+            <trans-unit id="seekLabel" xml:space="preserve">
+                <source>{currentTime} of {duration}</source>
+                <target>{currentTime} af {duration}</target>
+            </trans-unit>
+            <trans-unit id="played" xml:space="preserve">
+                <source>Played</source>
+                <target>Spillet</target>
+            </trans-unit>
+            <trans-unit id="buffered" xml:space="preserve">
+                <source>buffered</source>
+                <target>pufret</target>
+            </trans-unit>
+            <trans-unit id="currentTime" xml:space="preserve">
+                <source>Current time</source>
+                <target>Nuværende tid</target>
+            </trans-unit>
+            <trans-unit id="duration" xml:space="preserve">
+                <source>Duration</source>
+                <target>Varighed</target>
+            </trans-unit>
+            <trans-unit id="volume" xml:space="preserve">
+                <source>Volume</source>
+                <target>Bind</target>
+            </trans-unit>
+            <trans-unit id="mute" xml:space="preserve">
+                <source>Mute</source>
+                <target>Stum</target>
+            </trans-unit>
+            <trans-unit id="unmute" xml:space="preserve">
+                <source>Unmute</source>
+                <target>Lyd til</target>
+            </trans-unit>
+            <trans-unit id="enableCaptions" xml:space="preserve">
+                <source>Enable captions</source>
+                <target>Aktivér billedtekst</target>
+            </trans-unit>
+            <trans-unit id="disableCaptions" xml:space="preserve">
+                <source>Disable captions</source>
+                <target>Deaktiver billedtekster</target>
+            </trans-unit>
+            <trans-unit id="enterFullscreen" xml:space="preserve">
+                <source>Enter fullscreen</source>
+                <target>Indtast fuldskærm</target>
+            </trans-unit>
+            <trans-unit id="exitFullscreen" xml:space="preserve">
+                <source>Exit fullscreen</source>
+                <target>Gå ud af fuldskærm</target>
+            </trans-unit>
+            <trans-unit id="frameTitle" xml:space="preserve">
+                <source>Player for {title}</source>
+                <target>Spiller for {title}</target>
+            </trans-unit>
+            <trans-unit id="captions" xml:space="preserve">
+                <source>Captions</source>
+                <target>Billedtekster</target>
+            </trans-unit>
+            <trans-unit id="settings" xml:space="preserve">
+                <source>Settings</source>
+                <target>Indstillinger</target>
+            </trans-unit>
+            <trans-unit id="menuBack" xml:space="preserve">
+                <source>Go back to previous menu</source>
+                <target>Gå tilbage til den forrige menu</target>
+            </trans-unit>
+            <trans-unit id="speed" xml:space="preserve">
+                <source>Speed</source>
+                <target>Hastighed</target>
+            </trans-unit>
+            <trans-unit id="normal" xml:space="preserve">
+                <source>Normal</source>
+                <target>Normalt</target>
+            </trans-unit>
+            <trans-unit id="quality" xml:space="preserve">
+                <source>Quality</source>
+                <target>Kvalitet</target>
+            </trans-unit>
+            <trans-unit id="loop" xml:space="preserve">
+                <source>Loop</source>
+                <target>Loop</target>
+            </trans-unit>
+            <trans-unit id="start" xml:space="preserve">
+                <source>Start</source>
+                <target>Start</target>
+            </trans-unit>
+            <trans-unit id="end" xml:space="preserve">
+                <source>End</source>
+                <target>Ende</target>
+            </trans-unit>
+            <trans-unit id="all" xml:space="preserve">
+                <source>All</source>
+                <target>Alle</target>
+            </trans-unit>
+            <trans-unit id="reset" xml:space="preserve">
+                <source>Reset</source>
+                <target>Nulstil</target>
+            </trans-unit>
+            <trans-unit id="disabled" xml:space="preserve">
+                <source>Disabled</source>
+                <target>Deaktiveret</target>
+            </trans-unit>
+            <trans-unit id="enabled" xml:space="preserve">
+                <source>Enabled</source>
+                <target>Aktiveret</target>
+            </trans-unit>
+            <trans-unit id="advertisement" xml:space="preserve">
+                <source>Ad</source>
+                <target>Reklame</target>
+            </trans-unit>
+            <trans-unit id="qualityBadge" xml:space="preserve">
+                <source><![CDATA[{2160:'4K',1440:'HD',1080:'HD',720:'HD',576:'SD',480:'SD'}]]></source>
+                <target><![CDATA[{2160:'4K',1440:'HD',1080:'HD',720:'HD',576:'SD',480:'SD'}]]></target>
+            </trans-unit>
+            <trans-unit id="backendAlert.audio" xml:space="preserve">
+                <source>Please add some audio files in the inspector</source>
+                <target>Tilføj venligst lydfiler i inspektøren</target>
+            </trans-unit>
+            <trans-unit id="backendAlert.video" xml:space="preserve">
+                <source>Please add some video files in the inspector</source>
+                <target>Tilføj venligst videofiler i inspektøren</target>
+            </trans-unit>
+            <trans-unit id="backendAlert.youtube" xml:space="preserve">
+                <source>Please add a YouTube ID or url in the inspector</source>
+                <target>Tilføj venligst YouTube ID eller URL i inspektøren</target>
+            </trans-unit>
+            <trans-unit id="backendAlert.vimeo" xml:space="preserve">
+                <source>Please add a Vimeo ID or url in the inspector</source>
+                <target>Tilføj venligst Vimeo ID eller URL i inspektøren</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

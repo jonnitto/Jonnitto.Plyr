@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file original="" product-name="Jonnitto.Plyr" source-language="en" datatype="plaintext" target-language="da">
+        <body>
+            <trans-unit id="groups.settings" xml:space="preserve">
+                <source>Settings</source>
+                <target>Indstillinger</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
