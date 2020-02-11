@@ -215,10 +215,10 @@ path-is-absolute@^1.0.0:
   resolved "https://registry.yarnpkg.com/path-is-absolute/-/path-is-absolute-1.0.1.tgz#174b9268735534ffbc7ace6bf53a5a9e1b5c5f5f"
   integrity sha1-F0uSaHNVNP+8es5r9TpanhtcX18=
 
-plyr@^3.5.7:
-  version "3.5.7"
-  resolved "https://registry.yarnpkg.com/plyr/-/plyr-3.5.7.tgz#21a1d08f27945e2e6b025a2f448fb5fa55a0a9f7"
-  integrity sha512-d2MocWOzs6ppb6sbxA1ejbZArZoKBhdykHxxLqGyiI5W7DnsHPjPnJL/Y82tg3ZTmK8OdeAIAqJABQXOYwKIxg==
+plyr@^3.5.8:
+  version "3.5.8"
+  resolved "https://registry.yarnpkg.com/plyr/-/plyr-3.5.8.tgz#efd023667534c2cb0877f9eecd4c1a2ea5117774"
+  integrity sha512-AoC7MPjLuOB1PTmsdAQ0pGqwnlaNGwC0l2qvHX0tll381DJhuVnj7gd0ujpszeu1U9rFl7ccVteegouP2VlDyw==
   dependencies:
     core-js "^3.6.4"
     custom-event-polyfill "^1.0.7"
