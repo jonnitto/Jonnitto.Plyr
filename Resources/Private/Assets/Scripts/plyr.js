@@ -1,6 +1,6 @@
 // ==========================================================================
 // Plyr
-// plyr.js v3.6.1
+// plyr.js v3.6.2
 // https://github.com/sampotts/plyr
 // License: The MIT License (MIT)
 // ==========================================================================
@@ -1054,7 +1054,7 @@ class Plyr {
       const hiding = toggleClass(this.elements.container, this.config.classNames.hideControls, force);
 
       // Close menu
-      if (hiding && this.config.controls.includes('settings') && !is.empty(this.config.settings)) {
+      if (hiding && is.array(this.config.controls) && this.config.controls.includes('settings') && !is.empty(this.config.settings)) {
         controls.toggleMenu.call(this, false);
       }
 
