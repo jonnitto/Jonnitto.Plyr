@@ -8,7 +8,7 @@
   },
   "devDependencies": {
     "conditional-file-append": "^1.0.0",
-    "plyr": "^3.6.2",
+    "plyr": "^3.6.3",
     "rename-files": "0.0.2",
     "replace-in-file": "^6.1.0"
   },
