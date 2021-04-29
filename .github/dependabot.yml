@@ -1,0 +1,16 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "07:00"
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: replace-in-file
+    versions:
+    - 6.2.0
+  - dependency-name: y18n
+    versions:
+    - 4.0.1
+    - 4.0.2
