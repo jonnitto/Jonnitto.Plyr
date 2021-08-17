@@ -40,7 +40,7 @@ prototype(Jonnitto.Plyr:Tag) < prototype(Neos.Fusion:Tag) {
     content.@process.notification = Carbon.Notification:Backend {
         @if.render = ${props.id || props.media ? false : true}
         type = 'alert'
-        content = ${Translation.translate('backendAlert.' + props.key, null, [], null, 'Jonnitto.Plyr') }
+        content = ${Translation.translate('backendAlert.' + props.key, null, [], 'Main', 'Jonnitto.Plyr') }
     }
 
     @process.contentElementWrapping {
