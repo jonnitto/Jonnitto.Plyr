@@ -14,8 +14,8 @@
     "authors": [
         {
             "name": "Jon Uhlmann",
-            "email": "me@jonnitto.ch",
-            "homepage": "https://twitter.com/jonnitto",
+            "email": "hello@uhlmann.pro",
+            "homepage": "https://uhlmann.pro",
             "role": "Developer"
         }
     ],
@@ -38,15 +38,12 @@
             ".github",
             ".gitignore",
             ".nvmrc",
-            ".travis.yml",
             "CODE_OF_CONDUCT.md",
             "package.json",
             "yarn.lock",
-            "yarn.sh"
         ]
     },
     "extra": {
-        "marketplace-account": "me@jonnitto.ch",
         "installer-name": "Jonnitto.Plyr",
         "neos": {
             "package-key": "Jonnitto.Plyr"
