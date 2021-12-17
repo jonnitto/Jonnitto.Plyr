@@ -1,5 +1,3 @@
-[![Development dependency status](https://david-dm.org/jonnitto/Jonnitto.Plyr/dev-status.svg)](https://david-dm.org/jonnitto/Jonnitto.Plyr?type=dev)
-[![Build status](https://travis-ci.org/jonnitto/Jonnitto.Plyr.svg?branch=master)](https://travis-ci.org/jonnitto/Jonnitto.Plyr)
 [![Latest stable version](https://poser.pugx.org/jonnitto/plyr/v/stable)](https://packagist.org/packages/jonnitto/plyr)
 [![Total Downloads](https://poser.pugx.org/jonnitto/plyr/downloads)](https://packagist.org/packages/jonnitto/plyr)
 [![License](https://poser.pugx.org/jonnitto/plyr/license)](https://packagist.org/packages/jonnitto/plyr)
@@ -17,10 +15,10 @@
 
 [![Image of Plyr](https://cdn.plyr.io/static/demo/screenshot.png?v=3)](https://plyr.io)
 
-| Version | Neos              | Maintained | 
-| ------- | ----------------- | :--------: |
-| 0.\*    | 2.\*              |     ✗      |
-| > 2.2   | 3.\*, 4.\* + 5.\* |     ✓      |
+| Version | Neos                     | Maintained |
+| ------- | ------------------------ | :--------: |
+| 0.\*    | 2.\*                     |     ✗      |
+| > 2.2   | 3.\*, 4.\* + 5.\* + 7.\* |     ✓      |
 
 ## Installation
 
