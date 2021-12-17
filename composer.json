@@ -40,7 +40,7 @@
             ".nvmrc",
             "CODE_OF_CONDUCT.md",
             "package.json",
-            "yarn.lock",
+            "yarn.lock"
         ]
     },
     "extra": {
