@@ -20,7 +20,7 @@
         }
     ],
     "require": {
-        "neos/neos": "^5.3 || ^7.0 || dev-master",
+        "neos/neos": "^5.3 || ^7.0 || ^8.0 || dev-master",
         "carbon/condition": "^1.1 || ^2.0 || dev-master",
         "carbon/eel": "^1.2 || ^2.0 || dev-master",
         "carbon/includeassets": "^4.0 || ^5.0 || dev-master",
