@@ -15,7 +15,7 @@ prototype(Jonnitto.Plyr:Vimeo) < prototype(Jonnitto.Plyr:Tag) {
                 allowfullscreen = true
                 allowtransparency = true
                 allow = 'autoplay'
-                src = Neos.Fusion:Array {
+                src = Neos.Fusion:Join {
                     src = ${'https://player.vimeo.com/video/' + props.id + '?'}
                     options = 'loop=false&amp;byline=false&amp;portrait=false&amp;title=false&amp;speed=true&amp;transparent=0&amp;gesture=media'
                 }

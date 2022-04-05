@@ -17,7 +17,7 @@ prototype(Jonnitto.Plyr:YouTube) < prototype(Jonnitto.Plyr:Tag) {
                 allowfullscreen = true
                 allowtransparency = true
                 allow = 'autoplay'
-                src = Neos.Fusion:Array {
+                src = Neos.Fusion:Join {
                     src = ${'https://www.youtube.com/embed/' + props.id + '?'}
                     origin = ${'origin=' + request.httpRequest.uri.scheme + '://' + request.httpRequest.uri.host}
                     options = '&amp;iv_load_policy=3&amp;modestbranding=1&amp;showinfo=0&amp;rel=0&amp;enablejsapi=1'

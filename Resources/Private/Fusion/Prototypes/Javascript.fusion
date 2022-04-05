@@ -1,4 +1,4 @@
-prototype(Jonnitto.Plyr:Javascript) < prototype(Neos.Fusion:Array) {
+prototype(Jonnitto.Plyr:Javascript) < prototype(Neos.Fusion:Join) {
     configuration = ${Configuration.setting('Jonnitto.Plyr')}
     @context.configuration = ${this.configuration}
     @ignoreProperties = ${['configuration']}
@@ -12,12 +12,12 @@ prototype(Jonnitto.Plyr:Javascript) < prototype(Neos.Fusion:Array) {
 
     call = Neos.Fusion:Tag {
         tagName = 'script'
-        content = Neos.Fusion:Array {
+        content = Neos.Fusion:Join {
             options = Neos.Fusion:Template {
                 templatePath = 'resource://Jonnitto.Plyr/Private/Templates/Javascript.js'
 
-                i18n = Neos.Fusion:Collection {
-                    collection = ${['restart','rewind','play','pause','fastForward','seek','seekLabel','played','buffered','currentTime','duration','volume','mute','unmute','enableCaptions','disableCaptions','enterFullscreen','exitFullscreen','frameTitle','captions','settings','menuBack','speed','normal','quality','loop','start','end','all','reset','disabled','enabled','advertisement','qualityBadge']}
+                i18n = Neos.Fusion:Loop {
+                    items = ${['restart','rewind','play','pause','fastForward','seek','seekLabel','played','buffered','currentTime','duration','volume','mute','unmute','enableCaptions','disableCaptions','enterFullscreen','exitFullscreen','frameTitle','captions','settings','menuBack','speed','normal','quality','loop','start','end','all','reset','disabled','enabled','advertisement','qualityBadge']}
                     itemRenderer = Neos.Fusion:Value {
                         englishDefault = ${Translation.translate(item, null, [], 'Main', 'Jonnitto.Plyr', null, 'en')}
                         translation = ${Translation.translate(item, this.englishDefault, [], 'Main', 'Jonnitto.Plyr')}

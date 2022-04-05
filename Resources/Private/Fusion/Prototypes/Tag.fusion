@@ -24,7 +24,7 @@ prototype(Jonnitto.Plyr:Tag) < prototype(Neos.Fusion:Tag) {
 
     @context.props = ${this}
 
-    attributes.class = Neos.Fusion:RawArray {
+    attributes.class = Neos.Fusion:DataStructure {
         plyrContainer = 'jonnitto-plyr-container'
         key = ${'jonnitto-plyr-' + props.key}
         container = ${Configuration.setting('Jonnitto.Plyr.container')}
@@ -33,7 +33,7 @@ prototype(Jonnitto.Plyr:Tag) < prototype(Neos.Fusion:Tag) {
     @if.render = ${this.id || this.media || node.context.inBackend ? true : false}
 
     content = Neos.Fusion:Tag {
-        attributes.class = Neos.Fusion:RawArray {
+        attributes.class = Neos.Fusion:DataStructure {
             plyr = 'neos-plyr'
         }
     }

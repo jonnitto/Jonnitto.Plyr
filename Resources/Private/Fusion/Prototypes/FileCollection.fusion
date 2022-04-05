@@ -1,10 +1,10 @@
-prototype(Jonnitto.Plyr:FileCollection) < prototype(Neos.Fusion:Collection) {
+prototype(Jonnitto.Plyr:FileCollection) < prototype(Neos.Fusion:Loop) {
     fileextension= 'fileextension'
     type = ${this.fileextension == 'mp3' || this.fileextension == 'ogg' ? 'audio' : 'video'}
 
     @context.props = ${this}
 
-    collection = ${q(node).property('files')}
+    items = ${q(node).property('files')}
     itemName = 'asset'
     iterationName = 'iteration'
     itemRenderer = Neos.Fusion:ResourceUri {

@@ -1,7 +1,7 @@
 prototype(Jonnitto.Plyr:Video) < prototype(Jonnitto.Plyr:Tag) {
     playsinline = ${Configuration.setting('Jonnitto.Plyr.options.playsinline')}
     poster = ${q(node).property('image')}
-    media = Neos.Fusion:Array {
+    media = Neos.Fusion:Join {
         webm = Jonnitto.Plyr:FileCollection {
             fileextension = 'webm'
         }
