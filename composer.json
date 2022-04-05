@@ -1,7 +1,7 @@
 {
     "name": "jonnitto/plyr",
     "type": "neos-plugin",
-    "license": "MIT",
+    "license": "GPL-3.0",
     "description": "Plyr.io for Neos.io",
     "keywords": [
         "flow",

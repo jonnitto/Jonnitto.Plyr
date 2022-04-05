@@ -1,7 +1,7 @@
 {
   "name": "JonnittoPlyr",
   "description": "Dependencies for Jonnitto.Plyr",
-  "license": "MIT",
+  "license": "GPL-3.0",
   "repository": {
     "type": "git",
     "url": "git://github.com/jonnitto/Jonnitto.Plyr.git"

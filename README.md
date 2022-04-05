@@ -18,7 +18,8 @@
 | Version | Neos                     | Maintained |
 | ------- | ------------------------ | :--------: |
 | 0.\*    | 2.\*                     |     ✗      |
-| > 2.2   | 3.\*, 4.\* + 5.\* + 7.\* |     ✓      |
+| > 2.2   | 3.\*, 4.\* + 5.\* + 7.\* |     ✗      |
+| 3.\*    | 5.3.\* + 7.\* + 8.\*     |     ✓      |
 
 ## Installation
 
@@ -53,7 +54,3 @@ The `--no-update` command prevent the automatic update of the dependencies. Afte
 
 The PrettyEmbed series also has the benefit of a better frontend performance since the player gets only loaded on request.  
 So, no media get loaded until the user wants to consume it.
-
-## License
-
-Licensed under MIT, see [LICENSE](LICENSE)
