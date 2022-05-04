@@ -350,6 +350,7 @@ const defaults = {
     hover: 'plyr--hover',
     tooltip: 'plyr__tooltip',
     cues: 'plyr__cues',
+    marker: 'plyr__progress__marker',
     hidden: 'plyr__sr-only',
     hideControls: 'plyr--hide-controls',
     isIos: 'plyr--is-ios',
@@ -440,6 +441,20 @@ const defaults = {
     // Custom settings from Plyr
     customControls: true,
     noCookie: false, // Whether to use an alternative version of YouTube without cookies
+  },
+
+  // Media Metadata
+  mediaMetadata: {
+    title: '',
+    artist: '',
+    album: '',
+    artwork: [],
+  },
+
+  // Markers
+  markers: {
+    enabled: false,
+    points: [],
   },
 };
 
