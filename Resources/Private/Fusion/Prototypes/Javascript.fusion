@@ -36,8 +36,8 @@ prototype(Jonnitto.Plyr:Javascript) < prototype(Neos.Fusion:Join) {
 
                 quality = ${[]}
                 quality.@process {
-                    setDefault = ${configuration.options.quality.default != 576 ? Array.push(value, "default:'" + configuration.options.quality.default + "'") : value}
-                    setOptions = ${configuration.options.quality.options != [4320, 2880, 2160, 1440, 1080, 720, 576, 480, 360, 240] ? Array.push(value, "options:['" + Array.join(configuration.options.controls, "','") + "']") : value}
+                    setDefault = ${configuration.options.quality && configuration.options.quality.default ? Array.push(value, "default:'" + configuration.options.quality.default + "'") : value}
+                    setOptions = ${configuration.options.quality && configuration.options.quality.options ? Array.push(value, "options:['" + Array.join(Array.filter(configuration.options.quality.options), "','") + "']") : value}
                     wrap = ${Array.isEmpty(value) ? false : '{' + Array.join(value, ',') + '}'}
                 }
 
@@ -46,8 +46,8 @@ prototype(Jonnitto.Plyr:Javascript) < prototype(Neos.Fusion:Join) {
                 //     options: [0.5, 0.75, 1, 1.25, 1.5, 1.75, 2]
                 speed = ${[]}
                 speed.@process {
-                    setSelected = ${configuration.options.speed.selected != 1 ? Array.push(value, 'selected:' + configuration.options.speed.selected) : value}
-                    setOptions = ${configuration.options.speed.options != [0.5, 0.75, 1, 1.25, 1.5, 1.75, 2] ? Array.push(value, 'options:[' + Array.join(configuration.options.speed.options, ',') + ']') : value}
+                    setSelected = ${configuration.options.speed && configuration.options.speed.selected ? Array.push(value, 'selected:' + configuration.options.speed.selected) : value}
+                    setOptions = ${configuration.options.speed && configuration.options.speed.options ? Array.push(value, 'options:[' + Array.join(Array.filter(configuration.options.speed.options), ',') + ']') : value}
                     wrap = ${Array.isEmpty(value) ? false : '{' + Array.join(value, ',') + '}'}
                 }
 
@@ -117,31 +117,12 @@ prototype(Jonnitto.Plyr:Javascript) < prototype(Neos.Fusion:Join) {
                 //     - pip
                 //     - airplay
                 //     - fullscreen
-                controls = Neos.Fusion:Case {
-                    isDefault {
-                        condition = ${configuration.options.controls == ['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'captions', 'settings', 'pip', 'airplay', 'fullscreen'] ? true : false}
-                        renderer = false
-                    }
-                    default {
-                        condition = true
-                        renderer = ${"['" + Array.join(configuration.options.controls, "','") + "']"}
-                    }
-                }
-
+                controls = ${configuration.options.controls ? "['" + Array.join(Array.filter(configuration.options.controls), "','") + "']" : false}
                 // settings:
                 //      - captions
                 //      - quality
                 //      - speed
-                settings = Neos.Fusion:Case {
-                    isDefault {
-                        condition = ${configuration.options.settings == ['captions', 'quality', 'speed'] ? true : false}
-                        renderer = false
-                    }
-                    default {
-                        condition = true
-                        renderer = ${"['" + Array.join(configuration.options.settings, "','") + "']"}
-                    }
-                }
+                settings = ${configuration.options.settings ? "['" + Array.join(Array.filter(configuration.options.settings), "','") + "']" : false}
 
                 // listeners:
                 //    seek: null

@@ -8,17 +8,17 @@ Jonnitto:
       # You can set file attributes like you can do in https://github.com/jonnitto/Carbon.IncludeAssets
       # If you set the value file to false, no css or js will be included
       javascript:
-        file: 'plyr.min.js[defer]'
-        assetPackage: 'Jonnitto.Plyr'
-        assetPath: 'Public'
+        file: "plyr.min.js[defer]"
+        assetPackage: "Jonnitto.Plyr"
+        assetPath: "Public"
       css:
-        file: 'plyr.css'
-        assetPackage: 'Jonnitto.Plyr'
-        assetPath: 'Public'
+        file: "plyr.css"
+        assetPackage: "Jonnitto.Plyr"
+        assetPath: "Public"
     selector:
       onDocument: false
-      collection: '[instanceof Neos.Neos:ContentCollection]'
-      content: '[instanceof Jonnitto.Plyr:Content]'
+      collection: "[instanceof Neos.Neos:ContentCollection]"
+      content: "[instanceof Jonnitto.Plyr:Content]"
     progressiveEnhancement:
       YouTube: true
       Vimeo: true
@@ -55,7 +55,7 @@ Jonnitto:
       # Clicking the currentTime inverts it's value to show time left rather than elapsed
       toggleInvert: true
       # The aspect ratio you want to use for embedded players
-      ratio: '16:9'
+      ratio: "16:9"
       # Click (or tap) of the video container will toggle play/pause
       clickToPlay: true
       # Hide video controls automatically after 2s of no mouse or focus movement,
@@ -78,41 +78,41 @@ Jonnitto:
       iconPrefix: plyr
       # Specify a URL or path to the SVG sprite.
       # See https://github.com/sampotts/plyr#svg for more info
-      iconUrl: '/_Resources/Static/Packages/Jonnitto.Plyr/plyr.svg'
+      iconUrl: "/_Resources/Static/Packages/Jonnitto.Plyr/plyr.svg"
       # Blank video (used to prevent errors on source change)
-      blankVideo: '/_Resources/Static/Packages/Jonnitto.Plyr/blank.mp4'
-      # Quality default
-      quality:
-        default: 576
-        options:
-          - 4320
-          - 2880
-          - 2160
-          - 1440
-          - 1080
-          - 720
-          - 576
-          - 480
-          - 360
-          - 240
+      blankVideo: "/_Resources/Static/Packages/Jonnitto.Plyr/blank.mp4"
+      # Quality default (Enable this in you Settings.yaml to override defaults)
+      # quality:
+      #   default: 576
+      #   options:
+      #     - 4320
+      #     - 2880
+      #     - 2160
+      #     - 1440
+      #     - 1080
+      #     - 720
+      #     - 576
+      #     - 480
+      #     - 360
+      #     - 240
       loop:
         # Whether to loop the current video. If the loop attribute is present
         # on a <video> or <audio> element, this will be automatically set to
         # true This is an object to support future functionality
         active: false
-      # Speed default and options to display
-      speed:
-        # The default speed for playback
-        selected: 1
-        # Options to display in the menu. Most browsers will refuse to play slower than 0.5
-        options:
-          - 0.5
-          - 0.75
-          - 1
-          - 1.25
-          - 1.5
-          - 1.75
-          - 2
+      # Speed default and options to display (Enable this in you Settings.yaml to override defaults)
+      # speed:
+      #   # The default speed for playback
+      #   selected: 1
+      #   # Options to display in the menu. Most browsers will refuse to play slower than 0.5
+      #   options:
+      #     - 0.5
+      #     - 0.75
+      #     - 1
+      #     - 1.25
+      #     - 1.5
+      #     - 1.75
+      #     - 2
       # Enable keyboard shortcuts for focused players only or globally
       # See https://github.com/sampotts/plyr#shortcuts for more info
       keyboard:
@@ -149,28 +149,32 @@ Jonnitto:
         enabled: true
         # The key name to use
         key: plyr
+
       # See https://github.com/sampotts/plyr/blob/master/controls.md for more information
-      controls:
-        - play-large # The large play button in the center
-        # - restart # Restart playback
-        # - rewind # Rewind by the seek time (default 10 seconds)
-        - play # Play/pause playback
-        # - fast-forward # Fast forward by the seek time (default 10 seconds)
-        - progress # The progress bar and scrubber for playback and buffering
-        - current-time # The current time of playback
-        # - duration # The full duration of the media
-        - mute # Toggle mute
-        - volume # Volume control
-        - captions # Toggle captions
-        - settings # Settings menu
-        - pip # Picture-in-picture (currently Safari only)
-        - airplay # Airplay (currently Safari only)
-        - fullscreen # Toggle fullscreen
+      # (Enable this in you Settings.yaml to override defaults)
+      # controls:
+      #   - play-large # The large play button in the center
+      #   - restart # Restart playback
+      #   - rewind # Rewind by the seek time (default 10 seconds)
+      #   - play # Play/pause playback
+      #   - fast-forward # Fast forward by the seek time (default 10 seconds)
+      #   - progress # The progress bar and scrubber for playback and buffering
+      #   - current-time # The current time of playback
+      #   - duration # The full duration of the media
+      #   - mute # Toggle mute
+      #   - volume # Volume control
+      #   - captions # Toggle captions
+      #   - settings # Settings menu
+      #   - pip # Picture-in-picture (currently Safari only)
+      #   - airplay # Airplay (currently Safari only)
+      #   - fullscreen # Toggle fullscreen
+
       # If you're using the default controls are used then you can specify which settings to show in the menu
-      settings:
-        - captions
-        - quality
-        - speed
+      # (Enable this in you Settings.yaml to override defaults)
+      # settings:
+      #   - captions
+      #   - quality
+      #   - speed
       # Allows binding of event listeners to the controls before the default handlers.
       # If your handler prevents default on the event
       # (event.preventDefault()), the default handler will not fire.
@@ -200,7 +204,7 @@ Jonnitto:
         # Whether to enable vi.ai ads
         enabled: false
         # Your unique vi.ai publisher ID
-        publisherId: ''
+        publisherId: ""
       # YouTube plugin
       youtube:
         # Whether to use an alternative version of YouTube without cookies
@@ -220,12 +224,12 @@ Neos:
       translation:
         autoInclude:
           Jonnitto.Plyr:
-            - 'NodeTypes/*'
+            - "NodeTypes/*"
     nodeTypes:
       groups:
         multimedia:
           position: 200
-          label: 'Jonnitto.Plyr:NodeTypes.Groups:multimedia'
+          label: "Jonnitto.Plyr:NodeTypes.Groups:multimedia"
     fusion:
       autoInclude:
         Jonnitto.Plyr: true
