@@ -1,7 +1,7 @@
 prototype(Jonnitto.Plyr:Tag) < prototype(Neos.Fusion:Tag) {
     node = ${node}
-    id = null
-    media = null
+    id = ${null}
+    media = ${null}
     editable = true
     key = Neos.Fusion:Case {
         isYoutube {
