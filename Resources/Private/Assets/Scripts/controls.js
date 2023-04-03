@@ -383,6 +383,7 @@ const controls = {
       extend(attributes, {
         class: `${attributes.class ? attributes.class : ''} ${this.config.classNames.display.time} `.trim(),
         'aria-label': i18n.get(type, this.config),
+        role: 'timer',
       }),
       '00:00',
     );
@@ -404,7 +405,7 @@ const controls = {
       'keydown keyup',
       (event) => {
         // We only care about space and ⬆️ ⬇️️ ➡️
-        if (!['Space', 'ArrowUp', 'ArrowDown', 'ArrowRight'].includes(event.key)) {
+        if (![' ', 'ArrowUp', 'ArrowDown', 'ArrowRight'].includes(event.key)) {
           return;
         }
 
@@ -420,12 +421,12 @@ const controls = {
         const isRadioButton = matches(menuItem, '[role="menuitemradio"]');
 
         // Show the respective menu
-        if (!isRadioButton && ['Space', 'ArrowRight'].includes(event.key)) {
+        if (!isRadioButton && [' ', 'ArrowRight'].includes(event.key)) {
           controls.showMenuPanel.call(this, type, true);
         } else {
           let target;
 
-          if (event.key !== 'Space') {
+          if (event.key !== ' ') {
             if (event.key === 'ArrowDown' || (isRadioButton && event.key === 'ArrowRight')) {
               target = menuItem.nextElementSibling;
 
@@ -504,7 +505,7 @@ const controls = {
       menuItem,
       'click keyup',
       (event) => {
-        if (is.keyboardEvent(event) && event.key !== 'Space') {
+        if (is.keyboardEvent(event) && event.key !== ' ') {
           return;
         }
 
@@ -676,7 +677,7 @@ const controls = {
     }
 
     // WebKit only
-    if (!browser.isWebkit) {
+    if (!browser.isWebKit && !browser.isIPadOS) {
       return;
     }
 
@@ -1105,7 +1106,7 @@ const controls = {
   },
 
   // Focus the first menu item in a given (or visible) menu
-  focusFirstMenuItem(pane, tabFocus = false) {
+  focusFirstMenuItem(pane, focusVisible = false) {
     if (this.elements.settings.popup.hidden) {
       return;
     }
@@ -1118,7 +1119,7 @@ const controls = {
 
     const firstItem = target.querySelector('[role^="menuitem"]');
 
-    setFocus.call(this, firstItem, tabFocus);
+    setFocus.call(this, firstItem, focusVisible);
   },
 
   // Show/hide menu
@@ -1195,7 +1196,7 @@ const controls = {
   },
 
   // Show a panel in the menu
-  showMenuPanel(type = '', tabFocus = false) {
+  showMenuPanel(type = '', focusVisible = false) {
     const target = this.elements.container.querySelector(`#plyr-settings-${this.id}-${type}`);
 
     // Nothing to show, bail
@@ -1246,7 +1247,7 @@ const controls = {
     toggleHidden(target, false);
 
     // Focus the first item
-    controls.focusFirstMenuItem.call(this, target, tabFocus);
+    controls.focusFirstMenuItem.call(this, target, focusVisible);
   },
 
   // Set the download URL
@@ -1385,7 +1386,7 @@ const controls = {
         // Volume range control
         // Ignored on iOS as it's handled globally
         // https://developer.apple.com/library/safari/documentation/AudioVideo/Conceptual/Using_HTML5_Audio_Video/Device-SpecificConsiderations/Device-SpecificConsiderations.html
-        if (control === 'volume' && !browser.isIos) {
+        if (control === 'volume' && !browser.isIos && !browser.isIPadOS) {
           // Set the attributes
           const attributes = {
             max: 1,
