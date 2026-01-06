@@ -3264,7 +3264,9 @@ typeof navigator === "object" && (function (global, factory) {
 
         // Handle Vimeo captions
         if (this.isVimeo) {
-          this.embed.enableTextTrack(language);
+          // Enable text track but don't render captions within the player
+          // Since we handle that ourselves
+          this.embed.enableTextTrack(language, null, false);
         }
 
         // Trigger event

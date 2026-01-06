@@ -3264,7 +3264,9 @@ typeof navigator === "object" && (function (global, factory) {
 
         // Handle Vimeo captions
         if (this.isVimeo) {
-          this.embed.enableTextTrack(language);
+          // Enable text track but don't render captions within the player
+          // Since we handle that ourselves
+          this.embed.enableTextTrack(language, null, false);
         }
 
         // Trigger event
@@ -9283,7 +9285,7 @@ typeof navigator === "object" && (function (global, factory) {
 
   // ==========================================================================
   // Plyr Polyfilled Build
-  // plyr.js v3.8.3
+  // plyr.js v3.8.4
   // https://github.com/sampotts/plyr
   // License: The MIT License (MIT)
   // ==========================================================================
