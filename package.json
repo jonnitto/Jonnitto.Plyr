@@ -10,7 +10,7 @@
     "conditional-file-append": "^1.0.0",
     "plyr": "^3.8.4",
     "rename-files": "0.0.2",
-    "replace-in-file": "^8.4.0"
+    "replace-in-file": "^9.0.0"
   },
   "scripts": {
     "private:styles": "rm -rf Resources/Private/Assets/Styles;mkdir -p Resources/Private/Assets/Styles;cp -R node_modules/plyr/src/sass/. Resources/Private/Assets/Styles",
@@ -26,5 +26,5 @@
     "postupdate": "pnpm run build",
     "test": "pnpm run build"
   },
-  "packageManager": "pnpm@10.30.2+sha512.36cdc707e7b7940a988c9c1ecf88d084f8514b5c3f085f53a2e244c2921d3b2545bc20dd4ebe1fc245feec463bb298aecea7a63ed1f7680b877dc6379d8d0cb4"
+  "packageManager": "pnpm@11.20.0+sha512.9a6f330a95b66446ea088faf1521405a8a01f07fde7124cc9958dfed52d4bb436737e65b08f85f37b46fcba375092558ac51262b816844b22f63406ed166bfee"
 }
